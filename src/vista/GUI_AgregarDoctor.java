@@ -7,13 +7,11 @@ package vista;
 
 import controlador.Conexion;
 import controlador.ControladorDoctor;
-import controlador.ControladorPadre;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import modelo.Doctor;
-import modelo.Padre;
 
 /**
  *
@@ -395,6 +393,7 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
         pa.setUsuario(txtusuario.getText());
         String valorPass = new String(txtcontraseña.getPassword());
         pa.setContraseña(valorPass);
+        pa.setIdusuario("1");
         ControladorDoctor ctrl = new ControladorDoctor();
         Conexion con = new Conexion();
 

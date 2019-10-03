@@ -26,7 +26,7 @@ public class ControladorDoctor extends Conexion {
         
         try {
 
-            ps = this.getCon().prepareStatement("INSERT INTO doctor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps = this.getCon().prepareStatement("INSERT INTO doctor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, null);
             ps.setString(2, pa.getPrimer_nombre());
             ps.setString(3, pa.getSegundo_nombre());
@@ -42,6 +42,7 @@ public class ControladorDoctor extends Conexion {
             ps.setString(13, pa.getUsuario());
             ps.setString(14, pa.getContraseña());
             ps.setString(15, pa.getIdentificacion());
+            ps.setString(16, pa.getIdusuario());
             ps.executeUpdate();
             return true;
 

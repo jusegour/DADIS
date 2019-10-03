@@ -128,6 +128,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
         combo_clinica = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txttelefono = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,7 +217,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
             }
         });
 
-        btnNuevo.setText("Agregar");
+        btnNuevo.setText("Vacunas");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -302,6 +303,8 @@ public class GUI_Doctor extends javax.swing.JFrame {
 
         jLabel5.setText("Telefono");
 
+        jButton1.setText("Agregar Registro de Vacuna");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -376,7 +379,9 @@ public class GUI_Doctor extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNuevo)
-                        .addGap(276, 276, 276))
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton1)
+                        .addGap(152, 152, 152))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -391,7 +396,8 @@ public class GUI_Doctor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo))
+                    .addComponent(btnNuevo)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -666,13 +672,6 @@ public class GUI_Doctor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        
-        GUI_AgregarDoctor ad = new GUI_AgregarDoctor();
-        ad.setVisible(true);
-        this.hide();
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void txtsapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsapellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsapellidoActionPerformed
@@ -749,6 +748,14 @@ public class GUI_Doctor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        GUI_Vacuna gv=new GUI_Vacuna();
+        gv.setVisible(true);
+        gv.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -794,6 +801,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo_sexo;
     private javax.swing.JComboBox<String> combobuscar2;
     private com.toedter.calendar.JDateChooser fecha_nacimiento;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

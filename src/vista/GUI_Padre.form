@@ -88,7 +88,9 @@
                           <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="btnConsultarV" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -170,6 +172,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnConsultarV" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -489,7 +492,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnNuevo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Agregar"/>
+            <Property name="text" type="java.lang.String" value="Hijos"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
@@ -642,6 +645,11 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="fecha_nacimiento">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnConsultarV">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultar Vacunas de Hijo"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

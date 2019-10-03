@@ -5,11 +5,18 @@
  */
 package modelo;
 
-
 public class Doctor {
-    
-    private String iddoctor,primer_nombre,segundo_nombre,primer_apellido,segundo_apellido,edad,
-            fecha_nacimiento,sexo,direccion,estrato,telefono,clinica,usuario,contraseña,identificacion;
+
+    private String iddoctor, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, edad,
+            fecha_nacimiento, sexo, direccion, estrato, telefono, clinica, usuario, contraseña, identificacion, idusuario;
+
+    public String getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(String idusuario) {
+        this.idusuario = idusuario;
+    }
 
     public String getIddoctor() {
         return iddoctor;
@@ -130,7 +137,5 @@ public class Doctor {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
-    
-    
+
 }

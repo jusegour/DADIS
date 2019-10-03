@@ -123,6 +123,7 @@ public class GUI_Padre extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
         fecha_nacimiento = new com.toedter.calendar.JDateChooser();
+        btnConsultarV = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -222,7 +223,7 @@ public class GUI_Padre extends javax.swing.JFrame {
             }
         });
 
-        btnNuevo.setText("Agregar");
+        btnNuevo.setText("Hijos");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -304,6 +305,8 @@ public class GUI_Padre extends javax.swing.JFrame {
 
         txtid.setEditable(false);
 
+        btnConsultarV.setText("Consultar Vacunas de Hijo");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -320,7 +323,9 @@ public class GUI_Padre extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNuevo)
-                        .addGap(276, 276, 276))))
+                        .addGap(66, 66, 66)
+                        .addComponent(btnConsultarV)
+                        .addGap(137, 137, 137))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,7 +388,8 @@ public class GUI_Padre extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo))
+                    .addComponent(btnNuevo)
+                    .addComponent(btnConsultarV))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -646,9 +652,10 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
-        GUI_AgregarPadre apa = new GUI_AgregarPadre();
-        apa.setVisible(true);
-        this.hide();
+       GUI_Hijo gh=new GUI_Hijo();
+       gh.setVisible(true);
+       gh.setLocationRelativeTo(null);
+       this.dispose();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void txtsapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsapellidoActionPerformed
@@ -764,6 +771,7 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnConsultarV;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;

@@ -39,7 +39,8 @@ public class ControladorPadre extends Conexion {
             ps.setString(12, pa.getEmail());
             ps.setString(13, pa.getUsuario());
             ps.setString(14, pa.getContraseña());
-            ps.setString(15, null);
+            ps.setString(15, pa.getIdusuario());
+            
             ps.executeUpdate();
             return true;
 

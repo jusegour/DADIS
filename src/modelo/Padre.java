@@ -21,6 +21,9 @@ public class Padre {
     private String email;
     private String usuario;
     private String contraseña;
+    private String idusuario;
+    
+    
     
     
     public Padre(){
@@ -40,6 +43,16 @@ public class Padre {
     contraseña="";
     
     }
+
+    public String getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(String idusuario) {
+        this.idusuario = idusuario;
+    }
+    
+    
 
     public int getIdpadre() {
         return idpadre;

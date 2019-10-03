@@ -5,15 +5,15 @@
  */
 package main;
 
-import modelo.*;
+
 import vista.*;
-import controlador.*;
+
 
 public class Arranque {
     
     public static void main(String args[]){
         
-    GUI_Padre p=new GUI_Padre();
+    GUI_Principal p=new GUI_Principal();
     p.setVisible(true);
     }
     
