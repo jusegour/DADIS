@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2019 a las 05:15:38
--- Versión del servidor: 10.3.16-MariaDB
--- Versión de PHP: 7.1.30
+-- Tiempo de generación: 04-10-2019 a las 17:05:38
+-- Versión del servidor: 5.5.19
+-- Versión de PHP: 7.1.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -66,10 +66,21 @@ CREATE TABLE `hijo` (
   `segundo_nombre` varchar(45) NOT NULL,
   `primer_apellido` varchar(45) NOT NULL,
   `segundo_apellido` varchar(45) NOT NULL,
+  `fecha_nacimiento` varchar(51) NOT NULL,
   `edad` varchar(45) NOT NULL,
   `direccion` varchar(45) NOT NULL,
-  `estrato` varchar(45) NOT NULL
+  `estrato` varchar(45) NOT NULL,
+  `sexo` varchar(51) NOT NULL,
+  `registro_civil` varchar(20) NOT NULL,
+  `idpadre` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `hijo`
+--
+
+INSERT INTO `hijo` (`idhijo`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `fecha_nacimiento`, `edad`, `direccion`, `estrato`, `sexo`, `registro_civil`, `idpadre`) VALUES
+(2, 'diego', 'armando', 'godoy', 'espinoza', '2019-oct-01', '19', 'Pozon', '1	', 'Masculino', '123456789', NULL);
 
 -- --------------------------------------------------------
 
@@ -210,7 +221,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT de la tabla `hijo`
 --
 ALTER TABLE `hijo`
-  MODIFY `idhijo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idhijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `padre`
