@@ -5,16 +5,17 @@
  */
 package main;
 
+import vista.Login;
 
-import vista.*;
-
-
+/**
+ *
+ * @author PC5
+ */
 public class Arranque {
     
     public static void main(String args[]){
-        
-    GUI_Principal p=new GUI_Principal();
-    p.setVisible(true);
+    Login l=new Login();
+    l.setVisible(true);
     }
     
 }

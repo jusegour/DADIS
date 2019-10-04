@@ -41,8 +41,10 @@ public class ControladorLogin extends Conexion {
                 if (resp == 0) {
                     ventana.dispose();
                     agregar.setVisible(true);
-                }else{
+                }else if(resp==1){
                System.exit(0);
+                }else{
+                
                 }
             }
 

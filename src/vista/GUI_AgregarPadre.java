@@ -66,7 +66,6 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         btnregistrar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         fecha_nacimiento = new com.toedter.calendar.JDateChooser();
-        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,13 +162,6 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
 
         fecha_nacimiento.setDateFormatString("yyyy-MMM-dd");
 
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,12 +194,10 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
                                                 .addComponent(txtsapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(6, 6, 6)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(btnVolver)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtpnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtpnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtdireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel18)
@@ -230,13 +220,14 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(jLabel1)))
                 .addGap(55, 55, 55))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnregistrar)
-                .addGap(184, 184, 184))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnsalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnsalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(236, 236, 236)
+                        .addComponent(btnregistrar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -305,11 +296,9 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnregistrar)
-                    .addComponent(btnVolver))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnregistrar)
+                .addGap(34, 34, 34)
                 .addComponent(btnsalir))
         );
 
@@ -365,13 +354,15 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         pa.setIdusuario("2");
         ControladorPadre ctrl = new ControladorPadre();
         Conexion con = new Conexion();
-        
+        Login l=new Login();
         try {
             con.conectarme();
             ctrl.setCon(con.getCon());
             ctrl.registrar(pa);
             JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
             limpiar();
+            l.setVisible(true);
+            this.dispose();
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -456,13 +447,6 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnsalirActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        GUI_Principal p=new GUI_Principal();
-        p.setVisible(true);
-        p.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -514,7 +498,6 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnregistrar;
     private javax.swing.JButton btnsalir;
     private javax.swing.JComboBox<String> combo_estrato;
