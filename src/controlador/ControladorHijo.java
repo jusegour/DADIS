@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 
 import java.util.ArrayList;
 import modelo.Hijo;
+import vista.GUI_Padre;
 
 public class ControladorHijo extends Conexion {
 
@@ -36,7 +37,7 @@ public class ControladorHijo extends Conexion {
             ps.setString(9, pa.getEstrato());
             ps.setString(10, pa.getSexo());
             ps.setString(11, pa.getIdentificacion());
-            ps.setString(12, null);
+            ps.setInt(12, GUI_Padre.idpadre);
             
             ps.executeUpdate();
             return true;
@@ -138,7 +139,8 @@ public class ControladorHijo extends Conexion {
         PreparedStatement ps = null;
         ArrayList<Hijo> lista = new ArrayList<Hijo>();
         try {
-            ps = this.getCon().prepareStatement("SELECT * FROM hijo");
+            ps = this.getCon().prepareStatement("SELECT * FROM hijo where idpadre=?");
+            ps.setInt(1, GUI_Padre.idpadre);
             rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(load(rs));

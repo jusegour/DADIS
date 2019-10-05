@@ -22,10 +22,10 @@ public class ControladorVacuna extends Conexion{
         
         try {
 
-            ps = this.getCon().prepareStatement("INSERT INTO vacuna VALUES(?,?,?)");
+            ps = this.getCon().prepareStatement("INSERT INTO vacuna VALUES(?,?)");
             ps.setString(1, null);
             ps.setString(2, pa.getNombre());
-            ps.setString(3, pa.getDosis());
+            
             
             
             ps.executeUpdate();
@@ -47,12 +47,12 @@ public class ControladorVacuna extends Conexion{
         PreparedStatement ps = null;
         Connection con = getCon();
 
-        String query = "UPDATE vacuna SET nombre=?,dosis=? WHERE idvacuna=?";
+        String query = "UPDATE vacuna SET nombre=? WHERE idvacuna=?";
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, pa.getNombre());
-            ps.setString(2, pa.getDosis());
-            ps.setInt(3, pa.getIdvacuna());
+            
+            ps.setInt(2, pa.getIdvacuna());
             
             ps.execute();
             return true;
@@ -100,7 +100,7 @@ public class ControladorVacuna extends Conexion{
         Vacuna pa = new Vacuna();
         pa.setIdvacuna(et.getInt(1));
         pa.setNombre(et.getString(2));
-        pa.setDosis(et.getString(3));
+        
         
 
         return pa;
@@ -144,9 +144,7 @@ public class ControladorVacuna extends Conexion{
             if (item == 1) {
                 sql = "SELECT * FROM vacuna WHERE nombre=?";
             }
-            if (item == 2) {
-                sql = "SELECT * FROM vacuna WHERE dosis=?";
-            }
+            
             
             ps = this.getCon().prepareStatement(sql);
             ps.setString(1, Parametro);

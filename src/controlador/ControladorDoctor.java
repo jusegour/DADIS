@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import modelo.Doctor;
 import modelo.Padre;
+import vista.Login;
 
 public class ControladorDoctor extends Conexion {
 
@@ -149,7 +150,8 @@ public class ControladorDoctor extends Conexion {
         PreparedStatement ps = null;
         ArrayList<Doctor> lista = new ArrayList<Doctor>();
         try {
-            ps = this.getCon().prepareStatement("SELECT * FROM doctor");
+            ps = this.getCon().prepareStatement("SELECT * FROM doctor where usuario=?");
+            ps.setString(1, Login.user);
             rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(load(rs));

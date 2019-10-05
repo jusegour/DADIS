@@ -22,7 +22,8 @@ public class ControladorLogin extends Conexion {
         int resultado = 0;
         String usuario = p.getUsuario();
         String pass = p.getContraseña();
-        String SQL = "SELECT usuario,contraseña FROM padre WHERE usuario='" + usuario + "' and contraseña='" + pass + "' ";
+        
+        String SQL = "SELECT usuario,contraseña,identificacion FROM padre WHERE usuario='" + usuario + "' and contraseña='" + pass + "'";
 
         try {
             ps = this.getCon().createStatement();

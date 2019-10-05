@@ -22,6 +22,8 @@ import modelo.Padre;
 public class GUI_Padre extends javax.swing.JFrame {
 
     ControladorPadre ctrl = new ControladorPadre();
+    Padre p=new Padre();
+    public static int idpadre;
 
     public GUI_Padre() {
         initComponents();
@@ -49,9 +51,13 @@ public class GUI_Padre extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
         }
+        idpadre=Integer.parseInt(tablaprograma.getValueAt(0, 0).toString());
+        System.out.println(idpadre);
     }
 
     public void mostrarprogramas() throws SQLException {
+        
+        
         String matriz[][] = new String[ctrl.listarpadre().size()][14];
         for (int i = 0; i < ctrl.listarpadre().size(); i++) {
             matriz[i][0] = String.valueOf(ctrl.listarpadre().get(i).getIdpadre());
@@ -71,7 +77,10 @@ public class GUI_Padre extends javax.swing.JFrame {
 
         }
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idPadre", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "edad", "direccion", "fecha_nacimiento", "estrato", "sexo", "identificacion", "email", "usuario", "contraseña"}));
+        
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -306,6 +315,11 @@ public class GUI_Padre extends javax.swing.JFrame {
         txtid.setEditable(false);
 
         btnConsultarV.setText("Consultar Vacunas de Hijo");
+        btnConsultarV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -733,6 +747,13 @@ public class GUI_Padre extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
+
+    private void btnConsultarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarVActionPerformed
+        GUI_ConsultarRegistro cr=new GUI_ConsultarRegistro();
+        cr.setVisible(true);
+        cr.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnConsultarVActionPerformed
 
     /**
      * @param args the command line arguments

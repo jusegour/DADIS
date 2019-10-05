@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 
 import java.util.ArrayList;
 import modelo.Padre;
+import vista.Login;
 
 public class ControladorPadre extends Conexion {
 
@@ -21,7 +22,6 @@ public class ControladorPadre extends Conexion {
 
         PreparedStatement ps = null;
 
-        
         try {
 
             ps = this.getCon().prepareStatement("INSERT INTO padre VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -40,7 +40,7 @@ public class ControladorPadre extends Conexion {
             ps.setString(13, pa.getUsuario());
             ps.setString(14, pa.getContraseña());
             ps.setString(15, pa.getIdusuario());
-            
+
             ps.executeUpdate();
             return true;
 
@@ -140,12 +140,13 @@ public class ControladorPadre extends Conexion {
     }
 
     public ArrayList<Padre> listarpadre() throws SQLException {
-
+        
         ResultSet rs = null;
         PreparedStatement ps = null;
         ArrayList<Padre> lista = new ArrayList<Padre>();
         try {
-            ps = this.getCon().prepareStatement("SELECT * FROM padre");
+            ps = this.getCon().prepareStatement("SELECT * FROM padre where usuario=?");
+            ps.setString(1, Login.user);
             rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(load(rs));
