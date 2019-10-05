@@ -121,6 +121,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
                     matriz[i][8] = ctrl.listarhijo().get(i).getEstrato();
                     matriz[i][9] = ctrl.listarhijo().get(i).getSexo();
                     matriz[i][10] = ctrl.listarhijo().get(i).getIdentificacion();
+                    matriz[i][11] = String.valueOf(ctrl.listarhijo().get(i).getIdpadre());
 
                 }
                 tabla_hijo.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion","idpadre"}));

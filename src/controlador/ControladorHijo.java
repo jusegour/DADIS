@@ -168,7 +168,7 @@ public class ControladorHijo extends Conexion {
 
         try {
             if (item == 1) {
-                sql = "SELECT * FROM hijo WHERE identificacion=?";
+                sql = "SELECT * FROM hijo WHERE registro_civil=?";
             }
             if (item == 2) {
                 sql = "SELECT * FROM hijo WHERE primer_nombre=?";
