@@ -7,11 +7,15 @@ package vista;
 
 import controlador.Conexion;
 import controlador.ControladorHijo;
+import controlador.ControladorRegistro_Vacuna;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Hijo;
+import modelo.RegistroVacuna;
 
 /**
  *
@@ -20,6 +24,9 @@ import modelo.Hijo;
 public class GUI_Hijo extends javax.swing.JFrame {
 
     ControladorHijo ctrl = new ControladorHijo();
+    ControladorRegistro_Vacuna rv = new ControladorRegistro_Vacuna();
+    RegistroVacuna h = new RegistroVacuna();
+    public static int idhijo;
 
     public GUI_Hijo() {
         initComponents();
@@ -42,9 +49,24 @@ public class GUI_Hijo extends javax.swing.JFrame {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
             mostrarprogramas();
+            idhijo = Integer.parseInt(tablaprograma.getValueAt(0, 0).toString());
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
         }
+        System.out.println(idhijo);
+        h.setIdhijo(String.valueOf(idhijo));
+        try{
+            cn.conectarme();
+            rv.setCon(cn.getCon());
+            rv.consultar(h);
+            
+        
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+
+        
 
     }
 
@@ -65,7 +87,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
             matriz[i][11] = String.valueOf(ctrl.listarhijo().get(i).getIdpadre());
 
         }
-        tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion","idpadre"}));
+        tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion", "idpadre"}));
     }
 
     @SuppressWarnings("unchecked")
@@ -461,7 +483,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
                     matriz[i][10] = ctrl.listarhijo().get(i).getIdentificacion();
 
                 }
-                tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion","idpadre"}));
+                tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion", "idpadre"}));
 
             } catch (SQLException e) {
                 System.out.println(e);

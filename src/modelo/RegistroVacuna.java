@@ -5,10 +5,17 @@
  */
 package modelo;
 
-
 public class RegistroVacuna {
-    
-    private String idpadre,idhijo,idvacuna,iddoctor,fecha_aplicacion,fecha_proxima;
+
+    private String idpadre, idhijo, idvacuna, iddoctor, fecha_aplicacion, fecha_proxima, idregistro;
+
+    public String getIdregistro() {
+        return idregistro;
+    }
+
+    public void setIdregistro(String idregistro) {
+        this.idregistro = idregistro;
+    }
 
     public String getIdpadre() {
         return idpadre;
@@ -57,7 +64,5 @@ public class RegistroVacuna {
     public void setFecha_proxima(String fecha_proxima) {
         this.fecha_proxima = fecha_proxima;
     }
-    
-    
-    
+
 }
