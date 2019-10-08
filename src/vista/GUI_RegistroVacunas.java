@@ -23,6 +23,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
 
     public GUI_RegistroVacunas() {
         initComponents();
+        
     }
 
     @SuppressWarnings("unchecked")

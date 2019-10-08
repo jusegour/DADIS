@@ -25,7 +25,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
     
     public GUI_Doctor() {
         initComponents();
-        
+        tablaprograma.setEnabled(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
         txtsnombre.setEditable(false);

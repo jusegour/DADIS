@@ -227,7 +227,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="PADRES"/>
+        <Property name="text" type="java.lang.String" value="HIJOS"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="combo_estrato">
@@ -253,7 +253,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Agregar Padre"/>
+        <Property name="text" type="java.lang.String" value="Agregar Hijo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtidentificacion">

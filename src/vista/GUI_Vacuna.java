@@ -26,7 +26,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
         txtid.setEnabled(false);
         txtnombre.setEditable(false);
         
-        
+        tablaprograma.setEnabled(false);
         Conexion cn = new Conexion();
         try {
             cn.conectarme();

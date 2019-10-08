@@ -8,11 +8,21 @@ package controlador;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import modelo.Doctor;
+import modelo.Hijo;
+import modelo.Padre;
 import modelo.RegistroVacuna;
+import modelo.Vacuna;
+import vista.GUI_Hijo;
 
 public class ControladorRegistro_Vacuna extends Conexion {
 
-    public static String idregistro, idhijo, idpadre, iddoctor, idvacuna, fecha_a, fecha_pro;
+    RegistroVacuna r = new RegistroVacuna();
+    Hijo h = new Hijo();
+    Vacuna v = new Vacuna();
+    Padre p = new Padre();
+    Doctor d = new Doctor();
 
     public boolean registrar(RegistroVacuna rg) throws SQLException {
 
@@ -43,33 +53,250 @@ public class ControladorRegistro_Vacuna extends Conexion {
 
     }
 
-    public boolean consultar(RegistroVacuna r) {
+    public RegistroVacuna loadregistro(ResultSet et) throws SQLException {
+        r.setIdregistro(String.valueOf(et.getInt(1)));
+        r.setFecha_aplicacion(et.getString(2));
+        r.setIdhijo(String.valueOf(et.getString(3)));
+        r.setIdpadre(String.valueOf(et.getInt(4)));
+        r.setIddoctor(String.valueOf(et.getInt(5)));
+        r.setIdvacuna(String.valueOf(et.getInt(6)));
+        r.setFecha_proxima(et.getString(7));
+
+        return r;
+
+    }
+
+    public void consultar() throws SQLException {
         ResultSet rs = null;
         PreparedStatement ps = null;
 
         try {
+            
             ps = this.getCon().prepareStatement("SELECT * FROM registro_vacunas WHERE idhijo=?");
-            ps.setString(1, r.getIdhijo());
+            ps.setInt(1, GUI_Hijo.idhijo);
             rs = ps.executeQuery();
             while (rs.next()) {
-                idregistro = String.valueOf(rs.getInt(1));
-                fecha_a = rs.getString(2);
-                idhijo = String.valueOf(rs.getInt(3));
-                idpadre = String.valueOf(rs.getInt(4));
-                iddoctor = String.valueOf(rs.getInt(5));
-                idvacuna = String.valueOf(rs.getInt(6));
-                fecha_pro = rs.getString(7);
+                loadregistro(rs);
 
             }
-           
-            return true;
 
         } catch (SQLException s) {
             System.out.println(s);
 
-            return false;
+        }
+
+    }
+
+    public Hijo loadhijo(ResultSet et) throws SQLException {
+        h.setIdhijo(et.getInt(1));
+        h.setPrimer_nombre(et.getString(2));
+        h.setPrimer_apellido(et.getString(3));
+        h.setIdentificacion(et.getString(4));
+
+        return h;
+
+    }
+
+    public ArrayList<Hijo> listarhijo() throws SQLException {
+
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ArrayList<Hijo> lista = new ArrayList<Hijo>();
+        try {
+            ps = this.getCon().prepareStatement("SELECT idhijo,primer_nombre,primer_apellido,registro_civil FROM hijo WHERE idhijo=? ");
+
+            ps.setInt(1, GUI_Hijo.idhijo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(loadhijo(rs));
+
+            }
+
+        } catch (SQLException Ignore) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
 
         }
+//        System.out.println(h.getPrimer_nombre());
+//        System.out.println(h.getPrimer_apellido());
+//        System.out.println(h.getIdentificacion());
+
+        return lista;
+
+    }
+
+    public Padre loadpadre(ResultSet et) throws SQLException {
+        p.setIdpadre(et.getInt(1));
+        p.setPrimer_nombre(et.getString(2));
+        p.setPrimer_apellido(et.getString(3));
+        p.setIdentificacion(et.getString(4));
+
+        return p;
+
+    }
+
+    public ArrayList<Padre> listarpadre() throws SQLException {
+
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ArrayList<Padre> lista = new ArrayList<Padre>();
+        try {
+            ps = this.getCon().prepareStatement("SELECT idpadre,primer_nombre,primer_apellido,identificacion FROM padre WHERE idpadre=? ");
+            consultar();
+            ps.setInt(1, Integer.parseInt(r.getIdpadre()));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(loadpadre(rs));
+
+            }
+
+        } catch (SQLException Ignore) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+
+        }
+//        System.out.println(p.getPrimer_nombre());
+//        System.out.println(p.getPrimer_apellido());
+//        System.out.println(p.getIdentificacion());
+        return lista;
+
+    }
+
+    public Doctor loaddoctor(ResultSet et) throws SQLException {
+        d.setIddoctor(String.valueOf(et.getInt(1)));
+        d.setPrimer_nombre(et.getString(2));
+        d.setPrimer_apellido(et.getString(3));
+        d.setIdentificacion(et.getString(4));
+        d.setClinica(et.getString(5));
+
+        return d;
+
+    }
+
+    public ArrayList<Doctor> listardoctor() throws SQLException {
+
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ArrayList<Doctor> lista = new ArrayList<Doctor>();
+        try {
+            ps = this.getCon().prepareStatement("SELECT iddoctor,primer_nombre,primer_apellido,identificacion,clinica FROM doctor WHERE iddoctor=? ");
+            consultar();
+            ps.setInt(1, Integer.parseInt(r.getIddoctor()));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(loaddoctor(rs));
+
+            }
+
+        } catch (SQLException Ignore) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+
+        }
+//        System.out.println(d.getPrimer_nombre());
+//        System.out.println(d.getPrimer_apellido());
+//        System.out.println(d.getIdentificacion());
+        return lista;
+
+    }
+
+    public Vacuna loadvacuna(ResultSet et) throws SQLException {
+        v.setIdvacuna(et.getInt(1));
+        v.setNombre(et.getString(2));
+
+        return v;
+
+    }
+
+    public ArrayList<Vacuna> listarvacuna() throws SQLException {
+
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ArrayList<Vacuna> lista = new ArrayList<Vacuna>();
+        try {
+            ps = this.getCon().prepareStatement("SELECT idvacuna,nombre FROM vacuna WHERE idvacuna=? ");
+            consultar();
+            ps.setInt(1, Integer.parseInt(r.getIdvacuna()));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(loadvacuna(rs));
+
+            }
+
+        } catch (SQLException Ignore) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+
+        }
+//        System.out.println(v.getNombre());
+        return lista;
+
+    }
+
+    public RegistroVacuna loadfechas(ResultSet et) throws SQLException {
+        r.setIdregistro(String.valueOf(et.getInt(1)));
+        r.setFecha_aplicacion(et.getString(2));
+        r.setFecha_proxima(et.getString(3));
+
+        return r;
+
+    }
+
+    public ArrayList<RegistroVacuna> listarfechas() throws SQLException {
+
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
+        try {
+            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima FROM registro_vacunas WHERE idregistro_vacunas=? ");
+            consultar();
+            ps.setInt(1, Integer.parseInt(r.getIdregistro()));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(loadfechas(rs));
+
+            }
+
+        } catch (SQLException Ignore) {
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+
+        }
+//        System.out.println(r.getFecha_aplicacion());
+//        System.out.println(r.getFecha_proxima());
+
+        return lista;
+
     }
 
 }

@@ -26,10 +26,14 @@ public class GUI_Hijo extends javax.swing.JFrame {
     ControladorHijo ctrl = new ControladorHijo();
     ControladorRegistro_Vacuna rv = new ControladorRegistro_Vacuna();
     RegistroVacuna h = new RegistroVacuna();
+    Conexion cn = new Conexion();
     public static int idhijo;
 
     public GUI_Hijo() {
+        
         initComponents();
+        tablaprograma.setEnabled(false);
+        btnRegistro.setEnabled(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
         txtsnombre.setEditable(false);
@@ -44,26 +48,18 @@ public class GUI_Hijo extends javax.swing.JFrame {
 
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
-        Conexion cn = new Conexion();
+        
         try {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
             mostrarprogramas();
-            idhijo = Integer.parseInt(tablaprograma.getValueAt(0, 0).toString());
+            
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
         }
-        System.out.println(idhijo);
-        h.setIdhijo(String.valueOf(idhijo));
-        try{
-            cn.conectarme();
-            rv.setCon(cn.getCon());
-            rv.consultar(h);
-            
         
-        }catch(SQLException e){
-            System.out.println(e);
-        }
+        
+        
         
 
         
@@ -88,6 +84,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
 
         }
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion", "idpadre"}));
+        System.out.println(ctrl.listarhijo().size());
     }
 
     @SuppressWarnings("unchecked")
@@ -129,6 +126,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
         fecha_nacimiento = new com.toedter.calendar.JDateChooser();
+        btnRegistro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,6 +196,9 @@ public class GUI_Hijo extends javax.swing.JFrame {
         tablaprograma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaprogramaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tablaprogramaMouseEntered(evt);
             }
         });
         jScrollPane1.setViewportView(tablaprograma);
@@ -293,6 +294,13 @@ public class GUI_Hijo extends javax.swing.JFrame {
 
         txtid.setEditable(false);
 
+        btnRegistro.setText("Ver Registro de Vacuna");
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -301,15 +309,15 @@ public class GUI_Hijo extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jLabel3)
+                        .addContainerGap(1018, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNuevo)
-                        .addGap(276, 276, 276))))
+                        .addGap(52, 52, 52)
+                        .addComponent(btnRegistro)
+                        .addGap(151, 151, 151))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,6 +365,10 @@ public class GUI_Hijo extends javax.swing.JFrame {
                     .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(264, 264, 264))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,18 +378,17 @@ public class GUI_Hijo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnRegistro))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnModificar)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel4)
-                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel18)))
+                    .addComponent(btnModificar)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18)
                     .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -516,7 +527,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     }//GEN-LAST:event_combobuscarActionPerformed
 
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
-        // TODO add your handling code here:
+        btnRegistro.setEnabled(true);
 
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);
@@ -543,6 +554,17 @@ public class GUI_Hijo extends javax.swing.JFrame {
         combo_estrato.setSelectedItem(tablaprograma.getValueAt(fila, 8));
         combo_sexo.setSelectedItem(tablaprograma.getValueAt(fila, 9));
         txtidentificacion.setText(tablaprograma.getValueAt(fila, 10).toString());
+        idhijo=Integer.parseInt(txtid.getText());
+        System.out.println(idhijo);
+        try{
+            cn.conectarme();
+            rv.setCon(cn.getCon());
+            rv.consultar();
+            
+        
+        }catch(SQLException e){
+            System.out.println(e);
+        }
 
 
     }//GEN-LAST:event_tablaprogramaMouseClicked
@@ -682,6 +704,17 @@ public class GUI_Hijo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
+    private void tablaprogramaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaprogramaMouseEntered
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        GUI_ConsultarRegistro cr=new GUI_ConsultarRegistro();
+        cr.setVisible(true);
+        cr.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnRegistroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -722,6 +755,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnRegistro;
     private javax.swing.JComboBox<String> combo_estrato;
     private javax.swing.JComboBox<String> combo_sexo;
     private javax.swing.JComboBox<String> combobuscar;

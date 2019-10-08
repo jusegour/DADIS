@@ -27,6 +27,7 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     public GUI_Padre() {
         initComponents();
+        tablaprograma.setEnabled(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
         txtsnombre.setEditable(false);
