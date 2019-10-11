@@ -32,7 +32,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
     }
 
     public void mostrarregistro() throws SQLException {
-        
+        int total=ctrl.listardoctor().size()+ctrl.listarhijo().size()+ctrl.listarpadre().size()+ctrl.listarvacuna().size()+ctrl.listarfechas().size();
         String matriz[][] = new String[ctrl.listarhijo().size()][18];
         for (int i = 0; i <ctrl.listarhijo().size(); i++) {
             matriz[i][0] = String.valueOf(ctrl.listarhijo().get(i).getIdhijo());

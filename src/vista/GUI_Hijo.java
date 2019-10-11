@@ -10,6 +10,7 @@ import controlador.ControladorHijo;
 import controlador.ControladorRegistro_Vacuna;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,9 +31,9 @@ public class GUI_Hijo extends javax.swing.JFrame {
     public static int idhijo;
 
     public GUI_Hijo() {
-        
+
         initComponents();
-        tablaprograma.setEnabled(false);
+
         btnRegistro.setEnabled(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
@@ -48,21 +49,15 @@ public class GUI_Hijo extends javax.swing.JFrame {
 
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
-        
+
         try {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
             mostrarprogramas();
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
         }
-        
-        
-        
-        
-
-        
 
     }
 
@@ -554,15 +549,30 @@ public class GUI_Hijo extends javax.swing.JFrame {
         combo_estrato.setSelectedItem(tablaprograma.getValueAt(fila, 8));
         combo_sexo.setSelectedItem(tablaprograma.getValueAt(fila, 9));
         txtidentificacion.setText(tablaprograma.getValueAt(fila, 10).toString());
-        idhijo=Integer.parseInt(txtid.getText());
+        idhijo = Integer.parseInt(txtid.getText());
         System.out.println(idhijo);
-        try{
+        
+        try {
             cn.conectarme();
             rv.setCon(cn.getCon());
-            rv.consultar();
             
-        
-        }catch(SQLException e){
+            String matriz[][]=new String[rv.consultar().size()][7];
+            for (int i = 0; i < rv.consultar().size(); i++) {
+                matriz[i][0]=rv.consultar().get(i).getIdregistro();
+                matriz[i][1]=rv.consultar().get(i).getFecha_aplicacion();
+                matriz[i][2]=rv.consultar().get(i).getIdhijo();
+                matriz[i][3]=rv.consultar().get(i).getIdpadre();
+                matriz[i][4]=rv.consultar().get(i).getIddoctor();
+                matriz[i][5]=rv.consultar().get(i).getIdvacuna();
+                matriz[i][6]=rv.consultar().get(i).getFecha_proxima();
+            }
+            
+            for (int i = 0; i < matriz.length; i++) {
+                System.out.println(Arrays.toString(matriz[i]));
+            }
+            
+
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -709,7 +719,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaprogramaMouseEntered
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        GUI_ConsultarRegistro cr=new GUI_ConsultarRegistro();
+        GUI_ConsultarRegistro cr = new GUI_ConsultarRegistro();
         cr.setVisible(true);
         cr.setLocationRelativeTo(null);
         this.dispose();

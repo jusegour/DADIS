@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import modelo.Doctor;
 import modelo.Hijo;
 import modelo.Padre;
@@ -23,6 +24,8 @@ public class ControladorRegistro_Vacuna extends Conexion {
     Vacuna v = new Vacuna();
     Padre p = new Padre();
     Doctor d = new Doctor();
+
+   
 
     public boolean registrar(RegistroVacuna rg) throws SQLException {
 
@@ -66,24 +69,27 @@ public class ControladorRegistro_Vacuna extends Conexion {
 
     }
 
-    public void consultar() throws SQLException {
+    public ArrayList<RegistroVacuna> consultar() throws SQLException {
         ResultSet rs = null;
         PreparedStatement ps = null;
 
+        ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         try {
-            
-            ps = this.getCon().prepareStatement("SELECT * FROM registro_vacunas WHERE idhijo=?");
+
+            ps = this.getCon().prepareStatement("SELECT * FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
             ps.setInt(1, GUI_Hijo.idhijo);
             rs = ps.executeQuery();
             while (rs.next()) {
-                loadregistro(rs);
-
+                lista.add(loadregistro(rs));
             }
+            
 
         } catch (SQLException s) {
             System.out.println(s);
 
         }
+
+        return lista;
 
     }
 
