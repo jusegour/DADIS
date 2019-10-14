@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2019 a las 17:05:38
--- Versión del servidor: 5.5.19
--- Versión de PHP: 7.1.28
+-- Tiempo de generación: 14-10-2019 a las 23:22:39
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.1.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,7 +44,7 @@ CREATE TABLE `doctor` (
   `usuario` varchar(45) NOT NULL,
   `contraseña` varchar(45) NOT NULL,
   `identificacion` varchar(45) NOT NULL,
-  `idusuario` varchar(45) NOT NULL
+  `idusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -52,7 +52,8 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`iddoctor`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `edad`, `fecha_nacimiento`, `sexo`, `direccion`, `estrato`, `telefono`, `clinica`, `usuario`, `contraseña`, `identificacion`, `idusuario`) VALUES
-(3, 'Rosmery', 'U', 'Uribe', 'Ardila', '54', '2019-oct-01', 'Masculino', 'asdasdasd', '2', '3217758511', 'CLINICA MADRE BERNARDA', 'rosme', '123456', '45483917', '1');
+(3, 'Rosmery', 'U', 'Uribe', 'Ardila', '54', '2019-oct-01', 'Masculino', 'asdasdasd', '2', '3217758511', 'CLINICA MADRE BERNARDA', 'rosme', '123456', '45483917', 1),
+(4, 'diego', 'armando', 'godoy', 'espinoza', '19', '2019-oct-01', 'Masculino', 'Pozon', '1	', '321456789', 'CLINICA DEL NORTE', 'diegoarm', '123456789', '123456789', 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +73,7 @@ CREATE TABLE `hijo` (
   `estrato` varchar(45) NOT NULL,
   `sexo` varchar(51) NOT NULL,
   `registro_civil` varchar(20) NOT NULL,
-  `idpadre` int(11) DEFAULT NULL
+  `idpadre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -80,7 +81,9 @@ CREATE TABLE `hijo` (
 --
 
 INSERT INTO `hijo` (`idhijo`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `fecha_nacimiento`, `edad`, `direccion`, `estrato`, `sexo`, `registro_civil`, `idpadre`) VALUES
-(2, 'diego', 'armando', 'godoy', 'espinoza', '2019-oct-01', '19', 'Pozon', '1	', 'Masculino', '123456789', NULL);
+(3, 'rafael', 'andres', 'caro ', 'rivera', '2019-oct-02', '18', 'Pozon', '1	', 'Masculino', '123456789', 5),
+(4, 'luis', 'daniel', 'ortega', 'velez', '2019-oct-01', '18', 'Las Gaviotas', '2', 'Masculino', '123456789', 2),
+(5, 'Raul', 'Antonio', 'Gonzalez', 'Perez', '2001-dic-21', '4', 'Pozon', '1	', 'Masculino', '123456789', 2);
 
 -- --------------------------------------------------------
 
@@ -132,6 +135,15 @@ CREATE TABLE `registro_vacunas` (
   `fecha_proxima` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `registro_vacunas`
+--
+
+INSERT INTO `registro_vacunas` (`idregistro_vacunas`, `Fecha`, `idhijo`, `idpadre`, `iddoctor`, `idvacuna`, `fecha_proxima`) VALUES
+(4, '1/9/2019', 4, 2, 3, 2, '1/9/2019'),
+(6, '1/9/2019', 5, 2, 3, 2, '15/9/2019'),
+(7, '1/5/2019', 5, 2, 3, 1, '1/6/2019');
+
 -- --------------------------------------------------------
 
 --
@@ -159,9 +171,19 @@ INSERT INTO `tipo_usuario` (`idtipo_usuario`, `nombre`) VALUES
 
 CREATE TABLE `vacuna` (
   `idvacuna` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `dosis` varchar(45) NOT NULL
+  `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `vacuna`
+--
+
+INSERT INTO `vacuna` (`idvacuna`, `nombre`) VALUES
+(1, 'DTap'),
+(2, 'Hepatitis B'),
+(3, 'Poliomielitis'),
+(4, 'Hib'),
+(5, 'Neumocócita');
 
 --
 -- Índices para tablas volcadas
@@ -177,7 +199,8 @@ ALTER TABLE `doctor`
 -- Indices de la tabla `hijo`
 --
 ALTER TABLE `hijo`
-  ADD PRIMARY KEY (`idhijo`);
+  ADD PRIMARY KEY (`idhijo`),
+  ADD KEY `idpadre` (`idpadre`);
 
 --
 -- Indices de la tabla `padre`
@@ -190,10 +213,10 @@ ALTER TABLE `padre`
 --
 ALTER TABLE `registro_vacunas`
   ADD PRIMARY KEY (`idregistro_vacunas`),
-  ADD KEY `idhijo_idx` (`idhijo`),
-  ADD KEY `iddoctor_idx` (`iddoctor`),
-  ADD KEY `idpadre_idx` (`idpadre`),
-  ADD KEY `idvacuna_idx` (`idvacuna`);
+  ADD KEY `idhijo` (`idhijo`),
+  ADD KEY `idpadre` (`idpadre`),
+  ADD KEY `iddoctor` (`iddoctor`),
+  ADD KEY `idvacuna` (`idvacuna`);
 
 --
 -- Indices de la tabla `tipo_usuario`
@@ -215,13 +238,13 @@ ALTER TABLE `vacuna`
 -- AUTO_INCREMENT de la tabla `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `iddoctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `iddoctor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `hijo`
 --
 ALTER TABLE `hijo`
-  MODIFY `idhijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idhijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `padre`
@@ -233,7 +256,7 @@ ALTER TABLE `padre`
 -- AUTO_INCREMENT de la tabla `registro_vacunas`
 --
 ALTER TABLE `registro_vacunas`
-  MODIFY `idregistro_vacunas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idregistro_vacunas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
@@ -245,11 +268,17 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `vacuna`
 --
 ALTER TABLE `vacuna`
-  MODIFY `idvacuna` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idvacuna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `hijo`
+--
+ALTER TABLE `hijo`
+  ADD CONSTRAINT `hijo_ibfk_1` FOREIGN KEY (`idpadre`) REFERENCES `padre` (`idpadre`);
 
 --
 -- Filtros para la tabla `registro_vacunas`
