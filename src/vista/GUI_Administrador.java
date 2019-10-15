@@ -45,10 +45,25 @@ public class GUI_Administrador extends javax.swing.JFrame {
         });
 
         btnPadres.setText("Padres");
+        btnPadres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPadresActionPerformed(evt);
+            }
+        });
 
         btnDoctores.setText("Doctores");
+        btnDoctores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoctoresActionPerformed(evt);
+            }
+        });
 
         btnVacunas.setText("Vacunas");
+        btnVacunas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVacunasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,14 +73,15 @@ public class GUI_Administrador extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnHijos)
+                            .addComponent(btnDoctores))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDoctores)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnVacunas))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnHijos)
-                                .addGap(76, 76, 76)
+                                .addGap(56, 56, 56)
                                 .addComponent(btnPadres))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
@@ -92,8 +108,35 @@ public class GUI_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHijosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHijosActionPerformed
-        // TODO add your handling code here:
+        GUI_AdminHijo h=new GUI_AdminHijo();
+        h.setVisible(true);
+        h.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnHijosActionPerformed
+
+    private void btnPadresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPadresActionPerformed
+        // TODO add your handling code here:
+        GUI_AdminPadre p=new GUI_AdminPadre();
+        p.setVisible(true);
+        p.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnPadresActionPerformed
+
+    private void btnDoctoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctoresActionPerformed
+        // TODO add your handling code here:
+        GUI_AdminDoctor d=new GUI_AdminDoctor();
+        d.setVisible(true);
+        d.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnDoctoresActionPerformed
+
+    private void btnVacunasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVacunasActionPerformed
+        // TODO add your handling code here:
+        GUI_AdminVacuna v=new GUI_AdminVacuna();
+        v.setVisible(true);
+        v.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnVacunasActionPerformed
 
     /**
      * @param args the command line arguments
