@@ -18,7 +18,7 @@ import modelo.Padre;
  * @author PC5
  */
 public class Login extends javax.swing.JFrame {
-    
+
     public static String user;
 
     public Login() {
@@ -83,7 +83,7 @@ public class Login extends javax.swing.JFrame {
         combo_usuario.setBackground(new java.awt.Color(0, 0, 51));
         combo_usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         combo_usuario.setForeground(new java.awt.Color(255, 255, 255));
-        combo_usuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Doctor", "Padre" }));
+        combo_usuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Doctor", "Padre", "Administrador" }));
         combo_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_usuarioActionPerformed(evt);
@@ -138,7 +138,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtpasswordActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
+
         user = txtusuario.getText();
         if (txtusuario.getText().isEmpty() || txtpassword.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "NO DEJE CAMPOS VACIOS");
@@ -154,15 +154,15 @@ public class Login extends javax.swing.JFrame {
                 String pass = new String(txtpassword.getPassword());
                 p.setContraseña(pass);
                 p.setIdentificacion(user);
-                
+
                 ControladorLogin cl = new ControladorLogin();
                 Conexion cn = new Conexion();
-                
+
                 try {
                     cn.conectarme();
                     cl.setCon(cn.getCon());
                     cl.validadPadre(p, ventana, gp, gap);
-                    
+
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
@@ -173,19 +173,30 @@ public class Login extends javax.swing.JFrame {
                 p.setUsuario(txtusuario.getText());
                 String pass = new String(txtpassword.getPassword());
                 p.setContraseña(pass);
-                
+
                 ControladorLogin cl = new ControladorLogin();
                 Conexion cn = new Conexion();
-                
+
                 try {
                     cn.conectarme();
                     cl.setCon(cn.getCon());
                     cl.validadDoctor(p, ventana, gd);
-                    
+
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-                
+
+            } else if (combo_usuario.getSelectedIndex() == 3) {
+                String pass = new String(txtpassword.getPassword());
+                if (txtusuario.getText().equalsIgnoreCase("root") && pass.equalsIgnoreCase("root")) {
+                    JOptionPane.showMessageDialog(null, "Acceso Concedido");
+                    GUI_Administrador adm = new GUI_Administrador();
+                    adm.setVisible(true);
+                    adm.setLocationRelativeTo(null);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione Tipo de Usuario");
             }
