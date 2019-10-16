@@ -25,6 +25,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     public GUI_AgregarRegistro() {
         initComponents();
+        
         spin_dia.setValue(1);
         dia_prox.setValue(1);
         spin_dia.setMinimum(1);

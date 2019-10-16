@@ -142,7 +142,7 @@ public class ControladorAdministrador extends Conexion {
         ArrayList<Hijo> lista = new ArrayList<Hijo>();
         try {
             ps = this.getCon().prepareStatement("SELECT * FROM hijo");
-            ps.setInt(1, GUI_Padre.idpadre);
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(load(rs));
@@ -389,12 +389,11 @@ public class ControladorAdministrador extends Conexion {
         }
         return lista;
     }
-    
+
     public boolean registrar(Doctor pa) throws SQLException {
 
         PreparedStatement ps = null;
 
-        
         try {
 
             ps = this.getCon().prepareStatement("INSERT INTO doctor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -521,7 +520,7 @@ public class ControladorAdministrador extends Conexion {
         ArrayList<Doctor> lista = new ArrayList<Doctor>();
         try {
             ps = this.getCon().prepareStatement("SELECT * FROM doctor");
-            
+
             rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(loaddoctor(rs));
@@ -580,19 +579,17 @@ public class ControladorAdministrador extends Conexion {
         }
         return lista;
     }
+
     public boolean registrar(Vacuna pa) throws SQLException {
 
         PreparedStatement ps = null;
 
-        
         try {
 
             ps = this.getCon().prepareStatement("INSERT INTO vacuna VALUES(?,?)");
             ps.setString(1, null);
             ps.setString(2, pa.getNombre());
-            
-            
-            
+
             ps.executeUpdate();
             return true;
 
@@ -616,9 +613,9 @@ public class ControladorAdministrador extends Conexion {
         try {
             ps = con.prepareStatement(query);
             ps.setString(1, pa.getNombre());
-            
+
             ps.setInt(2, pa.getIdvacuna());
-            
+
             ps.execute();
             return true;
 
@@ -665,8 +662,6 @@ public class ControladorAdministrador extends Conexion {
         Vacuna pa = new Vacuna();
         pa.setIdvacuna(et.getInt(1));
         pa.setNombre(et.getString(2));
-        
-        
 
         return pa;
     }
@@ -709,8 +704,7 @@ public class ControladorAdministrador extends Conexion {
             if (item == 1) {
                 sql = "SELECT * FROM vacuna WHERE nombre=?";
             }
-            
-            
+
             ps = this.getCon().prepareStatement(sql);
             ps.setString(1, Parametro);
             rs = ps.executeQuery();

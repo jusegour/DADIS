@@ -17,7 +17,7 @@ public class CargarCombos extends Conexion {
         PreparedStatement pst = null;
         ResultSet result = null;
 
-        String SSQL = "SELECT idhijo,primer_nombre,primer_apellido FROM hijo ORDER BY idhijo ASC";
+        String SSQL = "SELECT idhijo,primer_nombre,primer_apellido,idpadre FROM hijo ORDER BY idhijo ASC";
 
         try {
             pst = this.getCon().prepareStatement(SSQL);

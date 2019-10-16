@@ -153,7 +153,7 @@ public class Login extends javax.swing.JFrame {
                 p.setUsuario(txtusuario.getText());
                 String pass = new String(txtpassword.getPassword());
                 p.setContraseña(pass);
-                p.setIdentificacion(user);
+                
 
                 ControladorLogin cl = new ControladorLogin();
                 Conexion cn = new Conexion();

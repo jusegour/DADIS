@@ -25,6 +25,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
             mostrarregistro();
+            
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());

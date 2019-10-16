@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.Hijo;
 import vista.GUI_Padre;
 
@@ -22,7 +23,6 @@ public class ControladorHijo extends Conexion {
 
         PreparedStatement ps = null;
 
-        
         try {
 
             ps = this.getCon().prepareStatement("INSERT INTO hijo VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -38,7 +38,7 @@ public class ControladorHijo extends Conexion {
             ps.setString(10, pa.getSexo());
             ps.setString(11, pa.getIdentificacion());
             ps.setInt(12, GUI_Padre.idpadre);
-            
+
             ps.executeUpdate();
             return true;
 
@@ -142,11 +142,12 @@ public class ControladorHijo extends Conexion {
             ps = this.getCon().prepareStatement("SELECT * FROM hijo where idpadre=?");
             ps.setInt(1, GUI_Padre.idpadre);
             rs = ps.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 lista.add(load(rs));
 
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron registros");
             }
-
         } catch (SQLException Ignore) {
 
         } finally {
@@ -201,4 +202,3 @@ public class ControladorHijo extends Conexion {
     }
 
 }
-

@@ -24,6 +24,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
     public GUI_AdminDoctor() {
         initComponents();
+        btnRegistro.setEnabled(false);
         tablaprograma.setEnabled(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);

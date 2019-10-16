@@ -53,7 +53,7 @@ public class GUI_Padre extends javax.swing.JFrame {
             System.out.println("Error: " + e.toString());
         }
         idpadre=Integer.parseInt(tablaprograma.getValueAt(0, 0).toString());
-        System.out.println(idpadre);
+        
     }
 
     public void mostrarprogramas() throws SQLException {

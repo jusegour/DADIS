@@ -496,7 +496,7 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
     }//GEN-LAST:event_combobuscarActionPerformed
 
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
-        btnRegistro.setEnabled(true);
+        
 
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);

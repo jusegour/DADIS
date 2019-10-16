@@ -28,6 +28,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     ControladorRegistro_Vacuna rv = new ControladorRegistro_Vacuna();
     RegistroVacuna h = new RegistroVacuna();
     Conexion cn = new Conexion();
+    Hijo hijo=new Hijo();
     public static int idhijo;
 
     public GUI_Hijo() {
@@ -549,7 +550,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
         combo_estrato.setSelectedItem(tablaprograma.getValueAt(fila, 8));
         combo_sexo.setSelectedItem(tablaprograma.getValueAt(fila, 9));
         txtidentificacion.setText(tablaprograma.getValueAt(fila, 10).toString());
-        idhijo = Integer.parseInt(txtid.getText());
+        
         System.out.println(idhijo);
         
         try {
