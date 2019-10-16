@@ -7,6 +7,7 @@ package vista;
 
 import controlador.CargarCombos;
 import controlador.Conexion;
+import controlador.ControladorLogin;
 import controlador.ControladorRegistro_Vacuna;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -253,7 +254,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
         rg.setIdhijo(String.valueOf(cadenahijo[0]));
         rg.setIdpadre(String.valueOf(cadenapadre[0]));
-        rg.setIddoctor(String.valueOf(GUI_Doctor.iddoctor));
+        rg.setIddoctor(String.valueOf(ControladorLogin.iddoctor));
         rg.setIdvacuna(String.valueOf(cadenavacuna[0]));
         rg.setFecha_aplicacion(spin_dia.getValue() + "/" + mes.getMonth() + "/" + anio.getYear());
         rg.setFecha_proxima(dia_prox.getValue() + "/" + mes_prox.getMonth() + "/" + anio_prox.getYear());

@@ -327,7 +327,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         try {
             ps = this.getCon().prepareStatement("SELECT iddoctor,primer_nombre,primer_apellido,identificacion,clinica FROM doctor WHERE iddoctor=? ");
             consultar();
-            ps.setInt(1, GUI_Doctor.iddoctor);
+            ps.setInt(1, ControladorLogin.iddoctor);
             rs = ps.executeQuery();
             while (rs.next()) {
                 lista.add(loaddoctor(rs));

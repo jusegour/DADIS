@@ -15,6 +15,7 @@ import modelo.Doctor;
 import modelo.Padre;
 
 public class ControladorLogin extends Conexion {
+    public static int iddoctor,idpadre;
 
     public void validadPadre(Padre p, JFrame ventana, JFrame padre, JFrame agregar) {
         Statement ps = null;
@@ -23,13 +24,14 @@ public class ControladorLogin extends Conexion {
         String usuario = p.getUsuario();
         String pass = p.getContraseña();
         
-        String SQL = "SELECT usuario,contraseña FROM padre WHERE usuario='" + usuario + "' and contraseña='" + pass + "'";
+        String SQL = "SELECT usuario,contraseña,idpadre FROM padre WHERE usuario='" + usuario + "' and contraseña='" + pass + "'";
 
         try {
             ps = this.getCon().createStatement();
             rs = ps.executeQuery(SQL);
 
             if (rs.next()) {
+                idpadre=rs.getInt(3);
                 resultado = 1;
                 if (resultado == 1) {
                     JOptionPane.showMessageDialog(null, "BIENVENIDO");
@@ -61,13 +63,14 @@ public class ControladorLogin extends Conexion {
         int resultado = 0;
         String usuario = p.getUsuario();
         String pass = p.getContraseña();
-        String SQL = "SELECT usuario,contraseña FROM doctor WHERE usuario='" + usuario + "' and contraseña='" + pass + "' ";
+        String SQL = "SELECT usuario,contraseña,iddoctor FROM doctor WHERE usuario='" + usuario + "' and contraseña='" + pass + "' ";
 
         try {
             ps = this.getCon().createStatement();
             rs = ps.executeQuery(SQL);
 
             if (rs.next()) {
+                iddoctor=rs.getInt(3);
                 resultado = 1;
                 if (resultado == 1) {
                     JOptionPane.showMessageDialog(null, "BIENVENIDO");

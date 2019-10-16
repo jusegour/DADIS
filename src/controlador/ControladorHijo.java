@@ -140,7 +140,7 @@ public class ControladorHijo extends Conexion {
         ArrayList<Hijo> lista = new ArrayList<Hijo>();
         try {
             ps = this.getCon().prepareStatement("SELECT * FROM hijo where idpadre=?");
-            ps.setInt(1, GUI_Padre.idpadre);
+            ps.setInt(1, ControladorLogin.idpadre);
             rs = ps.executeQuery();
             if (rs.next()) {
                 lista.add(load(rs));

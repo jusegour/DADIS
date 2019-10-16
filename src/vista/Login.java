@@ -148,7 +148,7 @@ public class Login extends javax.swing.JFrame {
             if (combo_usuario.getSelectedIndex() == 2) {
                 JFrame ventana = this;
                 Padre p = new Padre();
-                GUI_Padre gp = new GUI_Padre();
+                GUI_MenuPadre gp = new GUI_MenuPadre();
                 GUI_AgregarPadre gap = new GUI_AgregarPadre();
                 p.setUsuario(txtusuario.getText());
                 String pass = new String(txtpassword.getPassword());
@@ -162,13 +162,14 @@ public class Login extends javax.swing.JFrame {
                     cn.conectarme();
                     cl.setCon(cn.getCon());
                     cl.validadPadre(p, ventana, gp, gap);
+                    user=txtusuario.getText();
 
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
             } else if (combo_usuario.getSelectedIndex() == 1) {
                 JFrame ventana = this;
-                GUI_Doctor gd = new GUI_Doctor();
+                GUI_MenuDoctor gd = new GUI_MenuDoctor();
                 Doctor p = new Doctor();
                 p.setUsuario(txtusuario.getText());
                 String pass = new String(txtpassword.getPassword());
@@ -181,6 +182,7 @@ public class Login extends javax.swing.JFrame {
                     cn.conectarme();
                     cl.setCon(cn.getCon());
                     cl.validadDoctor(p, ventana, gd);
+                    user=txtusuario.getText();
 
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
@@ -190,6 +192,7 @@ public class Login extends javax.swing.JFrame {
                 String pass = new String(txtpassword.getPassword());
                 if (txtusuario.getText().equalsIgnoreCase("root") && pass.equalsIgnoreCase("root")) {
                     JOptionPane.showMessageDialog(null, "Acceso Concedido");
+                    user=txtusuario.getText();
                     GUI_Administrador adm = new GUI_Administrador();
                     adm.setVisible(true);
                     adm.setLocationRelativeTo(null);

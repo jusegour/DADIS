@@ -104,7 +104,6 @@ public class GUI_Padre extends javax.swing.JFrame {
         tablaprograma = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnNuevo = new javax.swing.JButton();
         txtsapellido = new javax.swing.JTextField();
         txtsnombre = new javax.swing.JTextField();
         txtpapellido = new javax.swing.JTextField();
@@ -133,7 +132,7 @@ public class GUI_Padre extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
         fecha_nacimiento = new com.toedter.calendar.JDateChooser();
-        btnConsultarV = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,13 +232,6 @@ public class GUI_Padre extends javax.swing.JFrame {
             }
         });
 
-        btnNuevo.setText("Hijos");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
         txtsapellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtsapellidoActionPerformed(evt);
@@ -315,13 +307,6 @@ public class GUI_Padre extends javax.swing.JFrame {
 
         txtid.setEditable(false);
 
-        btnConsultarV.setText("Consultar Vacunas de Hijo");
-        btnConsultarV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarVActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -336,11 +321,7 @@ public class GUI_Padre extends javax.swing.JFrame {
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNuevo)
-                        .addGap(66, 66, 66)
-                        .addComponent(btnConsultarV)
-                        .addGap(137, 137, 137))))
+                        .addGap(137, 774, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,10 +382,7 @@ public class GUI_Padre extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnConsultarV))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -480,6 +458,13 @@ public class GUI_Padre extends javax.swing.JFrame {
                 .addContainerGap(87, Short.MAX_VALUE))
         );
 
+        btnMenu.setText("Volver al Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -489,7 +474,10 @@ public class GUI_Padre extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(btnMenu)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -501,7 +489,9 @@ public class GUI_Padre extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnMenu)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -665,14 +655,6 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
-       GUI_Hijo gh=new GUI_Hijo();
-       gh.setVisible(true);
-       gh.setLocationRelativeTo(null);
-       this.dispose();
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void txtsapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsapellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtsapellidoActionPerformed
@@ -749,12 +731,13 @@ public class GUI_Padre extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
-    private void btnConsultarVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarVActionPerformed
-        GUI_ConsultarRegistro cr=new GUI_ConsultarRegistro();
-        cr.setVisible(true);
-        cr.setLocationRelativeTo(null);
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        // TODO add your handling code here:
+        GUI_MenuPadre mp=new GUI_MenuPadre();
+        mp.setVisible(true);
+        mp.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnConsultarVActionPerformed
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -793,10 +776,9 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnConsultarV;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> combo_estrato;
     private javax.swing.JComboBox<String> combo_sexo;
     private javax.swing.JComboBox<String> combobuscar;

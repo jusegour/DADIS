@@ -101,7 +101,6 @@ public class GUI_Doctor extends javax.swing.JFrame {
         tablaprograma = new javax.swing.JTable();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnNuevo = new javax.swing.JButton();
         txtsapellido = new javax.swing.JTextField();
         txtsnombre = new javax.swing.JTextField();
         txtpapellido = new javax.swing.JTextField();
@@ -132,7 +131,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
         combo_clinica = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txttelefono = new javax.swing.JTextField();
-        btnRegistro = new javax.swing.JButton();
+        btnmenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,13 +220,6 @@ public class GUI_Doctor extends javax.swing.JFrame {
             }
         });
 
-        btnNuevo.setText("Vacunas");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
         txtsapellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtsapellidoActionPerformed(evt);
@@ -307,10 +299,10 @@ public class GUI_Doctor extends javax.swing.JFrame {
 
         jLabel5.setText("Telefono");
 
-        btnRegistro.setText("Registro Vacunas");
-        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+        btnmenu.setText("Volver al Menu");
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistroActionPerformed(evt);
+                btnmenuActionPerformed(evt);
             }
         });
 
@@ -391,11 +383,11 @@ public class GUI_Doctor extends javax.swing.JFrame {
                         .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNuevo)
-                        .addGap(137, 137, 137)
-                        .addComponent(btnRegistro)
-                        .addGap(160, 160, 160))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnmenu)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,10 +395,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnRegistro))
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -483,7 +472,9 @@ public class GUI_Doctor extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txttelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnmenu)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -755,20 +746,13 @@ public class GUI_Doctor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
-        GUI_Vacuna gv = new GUI_Vacuna();
-        gv.setVisible(true);
-        gv.setLocationRelativeTo(null);
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+        // TODO add your handling code here:
+        GUI_MenuDoctor md=new GUI_MenuDoctor();
+        md.setVisible(true);
+        md.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        GUI_RegistroVacunas rv = new GUI_RegistroVacunas();
-        rv.setVisible(true);
-        rv.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnRegistroActionPerformed
+    }//GEN-LAST:event_btnmenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -809,8 +793,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar2;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnRegistro;
+    private javax.swing.JButton btnmenu;
     private javax.swing.JComboBox<String> combo_clinica;
     private javax.swing.JComboBox<String> combo_estrato;
     private javax.swing.JComboBox<String> combo_sexo;

@@ -68,7 +68,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtid = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnmenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,10 +175,10 @@ ControladorVacuna ctrl=new ControladorVacuna();
 
         txtid.setEditable(false);
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnmenu.setText("Volver al menu");
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnmenuActionPerformed(evt);
             }
         });
 
@@ -220,7 +220,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jButton1)
+                .addComponent(btnmenu)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -250,7 +250,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
                             .addComponent(jLabel10)
                             .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnmenu)
                 .addGap(20, 20, 20))
         );
 
@@ -395,12 +395,12 @@ ControladorVacuna ctrl=new ControladorVacuna();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       GUI_Doctor gd=new GUI_Doctor();
+    private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
+       GUI_MenuDoctor gd=new GUI_MenuDoctor();
        gd.setVisible(true);
        gd.setLocationRelativeTo(null);
        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnmenuActionPerformed
 
    public void limpiartabla() {
         DefaultTableModel df = (DefaultTableModel) tablaprograma.getModel();
@@ -456,8 +456,8 @@ ControladorVacuna ctrl=new ControladorVacuna();
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnmenu;
     private javax.swing.JComboBox<String> combobuscar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
