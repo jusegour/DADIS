@@ -10,8 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import modelo.Padre;
+import vista.GUI_EnvioAviso;
 
 public class CargarCombos extends Conexion {
+    
+    
 
     public void consultar_hijos(JComboBox hijos) throws SQLException {
         PreparedStatement pst = null;
@@ -22,6 +26,8 @@ public class CargarCombos extends Conexion {
         try {
             pst = this.getCon().prepareStatement(SSQL);
             result = pst.executeQuery();
+            
+            
             hijos.addItem("Seleccione Hijo");
             while (result.next()) {
 

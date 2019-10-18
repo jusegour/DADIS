@@ -32,6 +32,7 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
         btnvacunas = new javax.swing.JButton();
         btnconsultar = new javax.swing.JButton();
         btnagregar = new javax.swing.JButton();
+        btnAviso = new javax.swing.JButton();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,8 +78,18 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
         });
         getContentPane().add(btnagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
 
+        btnAviso.setFont(new java.awt.Font("Times New Roman", 3, 14)); // NOI18N
+        btnAviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/email.png"))); // NOI18N
+        btnAviso.setText("Enviar Aviso");
+        btnAviso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvisoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
+
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/blue-wallpaper-24.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 355));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,6 +125,14 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
         ar.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnagregarActionPerformed
+
+    private void btnAvisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvisoActionPerformed
+        GUI_EnvioAviso e=new GUI_EnvioAviso();
+        e.setVisible(true);
+        e.setLocationRelativeTo(null);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnAvisoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +170,7 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAviso;
     private javax.swing.JButton btnagregar;
     private javax.swing.JButton btnconsultar;
     private javax.swing.JButton btninformacion;
