@@ -83,6 +83,7 @@
                                   <Component id="txtcontraseña" alignment="0" max="32767" attributes="0"/>
                                   <Component id="combo_estrato" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                   <Component id="fecha_nacimiento" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -183,19 +184,21 @@
                           <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                           <Component id="txtemail" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtusuario" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtcontraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtusuario" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtcontraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="btnregistrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="btnsalir" min="-2" max="-2" attributes="0"/>
@@ -375,6 +378,14 @@
     <Component class="com.toedter.calendar.JDateChooser" name="fecha_nacimiento">
       <Properties>
         <Property name="dateFormatString" type="java.lang.String" value="yyyy-MMM-dd"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="cc" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="*Debe ser Gmail"/>
       </Properties>
     </Component>
   </SubComponents>

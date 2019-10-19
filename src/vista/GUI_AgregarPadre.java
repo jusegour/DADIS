@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import modelo.Padre;
+import controlador.ValidarEmail;
 
 /**
  *
@@ -66,6 +67,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         btnregistrar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         fecha_nacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +164,9 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
 
         fecha_nacimiento.setDateFormatString("yyyy-MMM-dd");
 
+        jLabel3.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel3.setText("*Debe ser Gmail");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,7 +220,8 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
                                     .addComponent(txtusuario)
                                     .addComponent(txtcontraseña)
                                     .addComponent(combo_estrato, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel1)))
@@ -288,15 +294,17 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel21)
                             .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel19)
-                            .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addComponent(btnregistrar)
                 .addGap(34, 34, 34)
                 .addComponent(btnsalir))
@@ -310,7 +318,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     }//GEN-LAST:event_txtsapellidoActionPerformed
 
     public void limpiar() {
-        
+
         txtpnombre.setText("");
         txtsnombre.setText("");
         txtpapellido.setText("");;
@@ -325,13 +333,27 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     }
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Padre pa = new Padre();
+        ValidarEmail v = new ValidarEmail();
+        
+        
+        if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
+                || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || txtidentificacion.getText().isEmpty() || txtemail.getText().isEmpty()
+                || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "No deje campos vacios");
+            
+        }else if(combo_estrato.getSelectedIndex()==0 || combo_sexo.getSelectedIndex()==0){
+        JOptionPane.showMessageDialog(null, "Sexo o Estrato incorrectos");
+        }else if(!v.esEmail(txtemail.getText())){
+        JOptionPane.showMessageDialog(null, "Correo invalido");
+        }else{
         pa.setPrimer_nombre(txtpnombre.getText());
         pa.setSegundo_nombre(txtsnombre.getText());
         pa.setPrimer_apellido(txtpapellido.getText());
         pa.setSegundo_apellido(txtsapellido.getText());
         pa.setEdad(Integer.parseInt(txtedad.getText()));
         pa.setDireccion(txtdireccion.getText());
-        String fecha="";
+        String fecha = "";
 
         try {
             String formato = fecha_nacimiento.getDateFormatString();
@@ -354,8 +376,11 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         pa.setIdusuario("2");
         ControladorPadre ctrl = new ControladorPadre();
         Conexion con = new Conexion();
-        Login l=new Login();
+        Login l = new Login();
         try {
+            if (!v.esEmail(txtemail.getText())) {
+                JOptionPane.showMessageDialog(null, "Correo Invalido");
+            }
             con.conectarme();
             ctrl.setCon(con.getCon());
             ctrl.registrar(pa);
@@ -363,9 +388,10 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
             limpiar();
             l.setVisible(true);
             this.dispose();
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
+        }
         }
 
     }//GEN-LAST:event_btnregistrarActionPerformed
@@ -517,6 +543,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField txtcontraseña;
     private javax.swing.JTextField txtdireccion;

@@ -115,10 +115,11 @@ public class ControladorAviso extends Conexion {
     public void consultarfechas(int i) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select fecha_proxima from registro_vacunas where idhijo=?";
+        String sql = "select fecha_proxima from registro_vacunas where idhijo=? and Aviso=?";
         try {
             ps = this.getCon().prepareStatement(sql);
             ps.setInt(1, i);
+            ps.setString(2, "No");
             rs = ps.executeQuery();
             if (rs.next()) {
                 fecha = rs.getString(1);

@@ -366,6 +366,7 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Doctor pa = new Doctor();
+       
         pa.setPrimer_nombre(txtpnombre.getText());
         pa.setSegundo_nombre(txtsnombre.getText());
         pa.setPrimer_apellido(txtpapellido.getText());
@@ -374,6 +375,8 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
         pa.setDireccion(txtdireccion.getText());
         pa.setTelefono(txttelefono.getText());
         String fecha = "";
+        
+        
 
         try {
             String formato = fecha_nacimiento.getDateFormatString();
