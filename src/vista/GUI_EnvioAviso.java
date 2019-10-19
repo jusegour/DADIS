@@ -167,6 +167,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
         a.setDestinatario(txtemail.getText());
         a.setMensaje(txtmensaje.getText());
         ca.enviar(a);
+        ca.cambiarestado(idhijo);
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void combo_hijosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_hijosItemStateChanged

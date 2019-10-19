@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2019 a las 23:22:39
+-- Tiempo de generación: 19-10-2019 a las 21:30:07
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.1.30
 
@@ -114,10 +114,11 @@ CREATE TABLE `padre` (
 --
 
 INSERT INTO `padre` (`idpadre`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `edad`, `direccion`, `fecha_nacimiento`, `estrato`, `sexo`, `identificacion`, `email`, `usuario`, `contraseña`, `idusuario`) VALUES
-(2, 'aaaaaa', 'asfasf', 'asfasf', 'asfasf', '123123', 'asfasf', 'Fri Oct 04 16:23:06 COT 2019', '2', 'Femenino', '1123123', 'SDASDFASF', 'juanse', '123456', '2'),
-(3, 'asfas', 'asfa', 'asfaasf', 'asfasf', '12', 'asfasf', '2019-oct-02', '1	', 'Masculino', '123123123', 'sfsafsa', 'asfasf', 'asfASGA', '2'),
-(4, 'fjfhjghj', 'fgfgfgjfg', 'fgjfgjfg', 'fgjfgj', '123', 'dfgdsfgsdfg', '2019-oct-01', '2', 'Masculino', '123123123', 'sdagsdgsd', 'dsfsdf', '123456', '2'),
-(5, 'Wilder', 'Jose', 'Gomez', 'Uribe', '22', 'Barrio Pozon', '1997-may-11', '1	', 'Masculino', '123456789', 'wilder@gmail.com', 'wilder', '123456', '2');
+(2, 'aaaaaa', 'asfasf', 'asfasf', 'asfasf', '123123', 'asfasf', 'Fri Oct 04 16:23:06 COT 2019', '2', 'Femenino', '1123123', 'jusegour2015@gmail.com', 'juanse', '123456', '2'),
+(3, 'asfas', 'asfa', 'asfaasf', 'asfasf', '12', 'asfasf', '2019-oct-02', '1	', 'Masculino', '123123123', 'rafakrox@gmail.com', 'asfasf', 'asfASGA', '2'),
+(4, 'fjfhjghj', 'fgfgfgjfg', 'fgjfgjfg', 'fgjfgj', '123', 'dfgdsfgsdfg', '2019-oct-01', '2', 'Masculino', '123123123', 'diegoarmand1971@gmail.com', 'dsfsdf', '123456', '2'),
+(5, 'Wilder', 'Jose', 'Gomez', 'Uribe', '22', 'Barrio Pozon', '1997-may-11', '1	', 'Masculino', '123456789', 'wilderuribe52@gmail.com', 'wilder', '123456', '2'),
+(6, 'asdasddsa', 'gsdgsdg', 'dfh', 'dfhf', '123', 'asdsgsg', '2019-oct-01', '2', 'Masculino', '12312312412', 'ASDsdg', 'adsffg', 'sfgsh', '2');
 
 -- --------------------------------------------------------
 
@@ -132,17 +133,21 @@ CREATE TABLE `registro_vacunas` (
   `idpadre` int(11) NOT NULL,
   `iddoctor` int(11) NOT NULL,
   `idvacuna` int(11) NOT NULL,
-  `fecha_proxima` varchar(45) NOT NULL
+  `fecha_proxima` varchar(45) NOT NULL,
+  `Aviso` varchar(45) NOT NULL DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `registro_vacunas`
 --
 
-INSERT INTO `registro_vacunas` (`idregistro_vacunas`, `Fecha`, `idhijo`, `idpadre`, `iddoctor`, `idvacuna`, `fecha_proxima`) VALUES
-(4, '1/9/2019', 4, 2, 3, 2, '1/9/2019'),
-(6, '1/9/2019', 5, 2, 3, 2, '15/9/2019'),
-(7, '1/5/2019', 5, 2, 3, 1, '1/6/2019');
+INSERT INTO `registro_vacunas` (`idregistro_vacunas`, `Fecha`, `idhijo`, `idpadre`, `iddoctor`, `idvacuna`, `fecha_proxima`, `Aviso`) VALUES
+(4, '1/9/2019', 4, 2, 3, 2, '1/9/2019', 'Si'),
+(6, '1/9/2019', 5, 2, 3, 2, '15/9/2019', 'Si'),
+(7, '1/5/2019', 5, 2, 3, 1, '1/6/2019', 'No'),
+(9, '1/9/2019', 3, 5, 3, 2, '12/9/2019', 'Si'),
+(13, '1/10/2019', 3, 5, 3, 3, '31/10/2019', 'No'),
+(14, '1/12/2019', 4, 2, 3, 1, '31/12/2019', 'No');
 
 -- --------------------------------------------------------
 
@@ -250,13 +255,13 @@ ALTER TABLE `hijo`
 -- AUTO_INCREMENT de la tabla `padre`
 --
 ALTER TABLE `padre`
-  MODIFY `idpadre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idpadre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `registro_vacunas`
 --
 ALTER TABLE `registro_vacunas`
-  MODIFY `idregistro_vacunas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idregistro_vacunas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

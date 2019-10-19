@@ -14,8 +14,8 @@ import modelo.Padre;
 import vista.GUI_EnvioAviso;
 
 public class CargarCombos extends Conexion {
-    
-    
+
+    public static int idpadre;
 
     public void consultar_hijos(JComboBox hijos) throws SQLException {
         PreparedStatement pst = null;
@@ -26,8 +26,7 @@ public class CargarCombos extends Conexion {
         try {
             pst = this.getCon().prepareStatement(SSQL);
             result = pst.executeQuery();
-            
-            
+
             hijos.addItem("Seleccione Hijo");
             while (result.next()) {
 
@@ -46,19 +45,20 @@ public class CargarCombos extends Conexion {
 
     }
 
-    public void consultar_padres(JComboBox padres) throws SQLException {
+    public void consultar_padres(int idhijo) throws SQLException {
         PreparedStatement pst = null;
         ResultSet result = null;
 
-        String SSQL = "SELECT idpadre,primer_nombre,primer_apellido FROM padre ORDER BY idpadre ASC";
+        String SSQL = "SELECT idpadre FROM hijo where idhijo=?";
 
         try {
             pst = this.getCon().prepareStatement(SSQL);
+            pst.setInt(1, idhijo);
             result = pst.executeQuery();
-            padres.addItem("Seleccione padre");
-            while (result.next()) {
 
-                padres.addItem(String.valueOf(result.getInt("idpadre") + " " + result.getString("primer_nombre") + " " + result.getString("primer_apellido")));
+            if (result.next()) {
+
+                idpadre = result.getInt(1);
 
             }
 

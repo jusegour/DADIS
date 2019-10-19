@@ -26,7 +26,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     public GUI_AgregarRegistro() {
         initComponents();
-        
+
         spin_dia.setValue(1);
         dia_prox.setValue(1);
         spin_dia.setMinimum(1);
@@ -41,7 +41,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             con.conectarme();
             cc.setCon(con.getCon());
             cc.consultar_hijos(combo_hijos);
-            cc.consultar_padres(combo_padres);
+
             cc.consultar_vacunas(combo_vacunas);
         } catch (SQLException ex) {
             Logger.getLogger(GUI_AgregarRegistro.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,11 +59,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         combo_hijos = new javax.swing.JComboBox<>();
-        combo_padres = new javax.swing.JComboBox<>();
         combo_vacunas = new javax.swing.JComboBox<>();
         spin_dia = new com.toedter.components.JSpinField();
         anio = new com.toedter.calendar.JYearChooser();
@@ -84,8 +82,6 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Seleccione un Hijo");
-
-        jLabel2.setText("Seleccione un Padre");
 
         jLabel3.setText("Seleccione la vacuna aplicada");
 
@@ -135,13 +131,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                                 .addGap(57, 57, 57)
                                 .addComponent(jLabel9))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(combo_hijos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(combo_padres, 0, 255, Short.MAX_VALUE)))
+                                .addComponent(jLabel1)
+                                .addGap(60, 60, 60)
+                                .addComponent(combo_hijos, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -170,9 +162,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addGap(118, 118, 118)
                                         .addComponent(jLabel7))))))
+                    .addComponent(btnVolver)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVolver)
-                        .addGap(136, 136, 136)
+                        .addGap(200, 200, 200)
                         .addComponent(btnRegistrar)))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
@@ -180,18 +172,13 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(combo_hijos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(combo_hijos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel2))
-                            .addComponent(combo_padres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(combo_vacunas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,12 +210,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                     .addComponent(dia_prox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(anio_prox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRegistrar)
-                        .addContainerGap())
-                    .addComponent(btnVolver, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnRegistrar)
+                .addGap(27, 27, 27)
+                .addComponent(btnVolver))
         );
 
         pack();
@@ -237,27 +222,30 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         //SACAR EL id
-        String hijo=combo_hijos.getSelectedItem().toString();
-        char cadenahijo[]=hijo.toCharArray();
+        String hijo = combo_hijos.getSelectedItem().toString();
+        char cadenahijo[] = hijo.toCharArray();
         System.out.println(cadenahijo[0]);
-        String padre=combo_padres.getSelectedItem().toString();
-        char cadenapadre[]=padre.toCharArray();
-        System.out.println(cadenapadre[0]);
-        String vacuna=combo_vacunas.getSelectedItem().toString();
-        char cadenavacuna[]=vacuna.toCharArray();
+        int idhijo = Integer.parseInt(String.valueOf(cadenahijo[0]));
+        try {
+            con.conectarme();
+            cc.setCon(con.getCon());
+            cc.consultar_padres(idhijo);
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_AgregarRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String vacuna = combo_vacunas.getSelectedItem().toString();
+        char cadenavacuna[] = vacuna.toCharArray();
         System.out.println(cadenavacuna[0]);
-        
-        
-        
+
         RegistroVacuna rg = new RegistroVacuna();
         Conexion con = new Conexion();
         ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
         rg.setIdhijo(String.valueOf(cadenahijo[0]));
-        rg.setIdpadre(String.valueOf(cadenapadre[0]));
+        rg.setIdpadre(String.valueOf(CargarCombos.idpadre));
         rg.setIddoctor(String.valueOf(ControladorLogin.iddoctor));
         rg.setIdvacuna(String.valueOf(cadenavacuna[0]));
-        rg.setFecha_aplicacion(spin_dia.getValue() + "/" + mes.getMonth() + "/" + anio.getYear());
-        rg.setFecha_proxima(dia_prox.getValue() + "/" + mes_prox.getMonth() + "/" + anio_prox.getYear());
+        rg.setFecha_aplicacion(spin_dia.getValue() + "/" + (mes.getMonth()+1) + "/" + anio.getYear());
+        rg.setFecha_proxima(dia_prox.getValue() + "/" + (mes_prox.getMonth()+1) + "/" + anio_prox.getYear());
         try {
             con.conectarme();
             ctrl.setCon(con.getCon());
@@ -270,10 +258,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-       GUI_RegistroVacunas rv=new GUI_RegistroVacunas();
-       rv.setVisible(true);
-       rv.setLocationRelativeTo(null);
-       this.dispose();
+        GUI_RegistroVacunas rv = new GUI_RegistroVacunas();
+        rv.setVisible(true);
+        rv.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
@@ -317,13 +305,11 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> combo_hijos;
-    private javax.swing.JComboBox<String> combo_padres;
     private javax.swing.JComboBox<String> combo_vacunas;
     private com.toedter.components.JSpinField dia_prox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

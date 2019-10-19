@@ -36,7 +36,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
 
         try {
 
-            ps = this.getCon().prepareStatement("INSERT INTO registro_vacunas VALUES(?,?,?,?,?,?,?)");
+            ps = this.getCon().prepareStatement("INSERT INTO registro_vacunas VALUES(?,?,?,?,?,?,?,?)");
             ps.setString(1, null);
             ps.setString(2, rg.getFecha_aplicacion());
             ps.setString(3, rg.getIdhijo());
@@ -44,6 +44,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
             ps.setString(5, rg.getIddoctor());
             ps.setString(6, rg.getIdvacuna());
             ps.setString(7, rg.getFecha_proxima());
+            ps.setString(8, "No");
 
             ps.executeUpdate();
             return true;

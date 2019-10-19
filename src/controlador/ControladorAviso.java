@@ -128,5 +128,24 @@ public class ControladorAviso extends Conexion {
             Logger.getLogger(ControladorAviso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public boolean cambiarestado(int idhijo){
+    PreparedStatement ps=null;
+    String sql="update registro_vacunas set Aviso=? where idhijo=? and fecha_proxima=?";
+        try {
+            ps=this.getCon().prepareStatement(sql);
+            ps.setString(1, "Si");
+            ps.setInt(2, idhijo );
+            ps.setString(3, ControladorAviso.fecha);
+            
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorAviso.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    
+    
+    }
 
 }
