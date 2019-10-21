@@ -6,6 +6,13 @@
 package modelo;
 
 public class Vacuna {
+    
+    public Vacuna(){}
+    
+    public Vacuna(int idvacuna,String nombre){
+    this.idvacuna=idvacuna;
+    this.nombre=nombre;
+    }
 
     private int idvacuna;
     private String nombre, dosis;

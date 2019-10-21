@@ -43,6 +43,12 @@ public class Padre {
     contraseña="";
     
     }
+    public Padre(int idpadre,String pnombre,String papellido,String identificacion){
+    this.idpadre=idpadre;
+    this.primer_nombre=pnombre;
+    this.primer_apellido=papellido;
+    this.identificacion=identificacion;
+    }
 
     public String getIdusuario() {
         return idusuario;

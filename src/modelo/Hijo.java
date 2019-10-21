@@ -11,6 +11,15 @@ public class Hijo {
     private int idhijo,idpadre;
     private String primer_nombre,segundo_nombre,primer_apellido,segundo_apellido,fecha_nacimiento,edad,direccion,estrato,sexo,identificacion;
 
+    public Hijo(){
+    
+    }
+    public Hijo(int idhijo,String pnombre,String papellido,String rc){
+    this.idhijo=idhijo;
+    this.primer_nombre=pnombre;
+    this.primer_apellido=papellido;
+    this.identificacion=rc;
+    }
     public String getSexo() {
         return sexo;
     }

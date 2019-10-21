@@ -539,6 +539,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
         btnRegistro.setEnabled(true);
         idhijo = Integer.parseInt(tablaprograma.getValueAt(0, 0).toString());
+        
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);
         txtpapellido.setEditable(true);
@@ -585,6 +586,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
             for (int i = 0; i < matriz.length; i++) {
                 System.out.println(Arrays.toString(matriz[i]));
             }
+            
             
         } catch (SQLException e) {
             System.out.println(e);

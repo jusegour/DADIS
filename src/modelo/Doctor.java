@@ -6,6 +6,15 @@
 package modelo;
 
 public class Doctor {
+    
+    public Doctor(){}
+    
+    public Doctor(int iddoctor,String pnombre,String papellido,String identificacion){
+    this.iddoctor=String.valueOf(iddoctor);
+    this.primer_nombre=pnombre;
+    this.primer_apellido=papellido;
+    this.identificacion=identificacion;
+    }
 
     private String iddoctor, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, edad,
             fecha_nacimiento, sexo, direccion, estrato, telefono, clinica, usuario, contraseña, identificacion, idusuario;
