@@ -255,20 +255,20 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
             matriz[i][1] = ctrlv.listarhijod().get(i).getPrimer_nombre();
             matriz[i][2] = ctrlv.listarhijod().get(i).getPrimer_apellido();
             matriz[i][3] = ctrlv.listarhijod().get(i).getIdentificacion();
-            matriz[i][4] = String.valueOf(ctrlv.listarpadre().get(i).getIdpadre());
-            matriz[i][5] = ctrlv.listarpadre().get(i).getPrimer_nombre();
-            matriz[i][6] = ctrlv.listarpadre().get(i).getPrimer_apellido();
-            matriz[i][7] = ctrlv.listarpadre().get(i).getIdentificacion();
-            matriz[i][8] = ctrlv.listardoctor().get(i).getIddoctor();
-            matriz[i][9] = ctrlv.listardoctor().get(i).getPrimer_nombre();
-            matriz[i][10] = ctrlv.listardoctor().get(i).getPrimer_apellido();
-            matriz[i][11] = ctrlv.listardoctor().get(i).getIdentificacion();
-            matriz[i][12] = ctrlv.listardoctor().get(i).getClinica();
-            matriz[i][13] = String.valueOf(ctrlv.listarvacuna().get(i).getIdvacuna());
-            matriz[i][14] = ctrlv.listarvacuna().get(i).getNombre();
-            matriz[i][15] = ctrlv.listarfechas().get(i).getIdregistro();
-            matriz[i][16] = ctrlv.listarfechas().get(i).getFecha_aplicacion();
-            matriz[i][17] = ctrlv.listarfechas().get(i).getFecha_proxima();
+            matriz[i][4] = String.valueOf(ctrlv.listarpadred().get(i).getIdpadre());
+            matriz[i][5] = ctrlv.listarpadred().get(i).getPrimer_nombre();
+            matriz[i][6] = ctrlv.listarpadred().get(i).getPrimer_apellido();
+            matriz[i][7] = ctrlv.listarpadred().get(i).getIdentificacion();
+            matriz[i][8] = ctrlv.listardoctord().get(i).getIddoctor();
+            matriz[i][9] = ctrlv.listardoctord().get(i).getPrimer_nombre();
+            matriz[i][10] = ctrlv.listardoctord().get(i).getPrimer_apellido();
+            matriz[i][11] = ctrlv.listardoctord().get(i).getIdentificacion();
+            matriz[i][12] = ctrlv.listardoctord().get(i).getClinica();
+            matriz[i][13] = String.valueOf(ctrlv.listarvacunad().get(i).getIdvacuna());
+            matriz[i][14] = ctrlv.listarvacunad().get(i).getNombre();
+            matriz[i][15] = ctrlv.listarfechasd().get(i).getIdregistro();
+            matriz[i][16] = ctrlv.listarfechasd().get(i).getFecha_aplicacion();
+            matriz[i][17] = ctrlv.listarfechasd().get(i).getFecha_proxima();
 
         }
 

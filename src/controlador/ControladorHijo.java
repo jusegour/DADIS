@@ -142,11 +142,9 @@ public class ControladorHijo extends Conexion {
             ps = this.getCon().prepareStatement("SELECT * FROM hijo where idpadre=?");
             ps.setInt(1, ControladorLogin.idpadre);
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 lista.add(load(rs));
 
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontraron registros");
             }
         } catch (SQLException Ignore) {
 

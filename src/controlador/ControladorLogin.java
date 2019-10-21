@@ -32,6 +32,7 @@ public class ControladorLogin extends Conexion {
 
             if (rs.next()) {
                 idpadre=rs.getInt(3);
+                
                 resultado = 1;
                 if (resultado == 1) {
                     JOptionPane.showMessageDialog(null, "BIENVENIDO");
