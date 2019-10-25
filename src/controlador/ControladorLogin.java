@@ -16,7 +16,7 @@ import modelo.Padre;
 
 public class ControladorLogin extends Conexion {
     public static int iddoctor,idpadre;
-
+    public static String nombredoctor,apellidodoctor,nombrepadre,apellidopadre;
     public void validadPadre(Padre p, JFrame ventana, JFrame padre, JFrame agregar) {
         Statement ps = null;
         ResultSet rs = null;
@@ -24,7 +24,7 @@ public class ControladorLogin extends Conexion {
         String usuario = p.getUsuario();
         String pass = p.getContraseña();
         
-        String SQL = "SELECT usuario,contraseña,idpadre FROM padre WHERE usuario='" + usuario + "' and contraseña='" + pass + "'";
+        String SQL = "SELECT usuario,contraseña,idpadre,primer_nombre,primer_apellido FROM padre WHERE usuario='" + usuario + "' and contraseña='" + pass + "'";
 
         try {
             ps = this.getCon().createStatement();
@@ -32,7 +32,8 @@ public class ControladorLogin extends Conexion {
 
             if (rs.next()) {
                 idpadre=rs.getInt(3);
-                
+                nombrepadre=rs.getString(4);
+                apellidopadre=rs.getString(5);
                 resultado = 1;
                 if (resultado == 1) {
                     JOptionPane.showMessageDialog(null, "BIENVENIDO");
@@ -64,7 +65,7 @@ public class ControladorLogin extends Conexion {
         int resultado = 0;
         String usuario = p.getUsuario();
         String pass = p.getContraseña();
-        String SQL = "SELECT usuario,contraseña,iddoctor FROM doctor WHERE usuario='" + usuario + "' and contraseña='" + pass + "' ";
+        String SQL = "SELECT usuario,contraseña,iddoctor,primer_nombre,primer_apellido FROM doctor WHERE usuario='" + usuario + "' and contraseña='" + pass + "' ";
 
         try {
             ps = this.getCon().createStatement();
@@ -72,6 +73,8 @@ public class ControladorLogin extends Conexion {
 
             if (rs.next()) {
                 iddoctor=rs.getInt(3);
+                nombredoctor=rs.getString(4);
+                apellidodoctor=rs.getString(5);
                 resultado = 1;
                 if (resultado == 1) {
                     JOptionPane.showMessageDialog(null, "BIENVENIDO");

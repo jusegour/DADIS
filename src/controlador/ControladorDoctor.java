@@ -5,13 +5,19 @@
  */
 package controlador;
 
-
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import modelo.Doctor;
 import modelo.Padre;
 import vista.Login;
@@ -20,14 +26,13 @@ public class ControladorDoctor extends Conexion {
 
     Conexion cone = new Conexion();
 
-    public boolean registrar(Doctor pa) throws SQLException {
+    public boolean registrar(Doctor pa, FileInputStream f, int longitud) throws SQLException {
 
         PreparedStatement ps = null;
 
-        
         try {
 
-            ps = this.getCon().prepareStatement("INSERT INTO doctor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps = this.getCon().prepareStatement("INSERT INTO doctor VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, null);
             ps.setString(2, pa.getPrimer_nombre());
             ps.setString(3, pa.getSegundo_nombre());
@@ -44,6 +49,7 @@ public class ControladorDoctor extends Conexion {
             ps.setString(14, pa.getContraseña());
             ps.setString(15, pa.getIdentificacion());
             ps.setString(16, pa.getIdusuario());
+            ps.setBlob(17, f, longitud);
             ps.executeUpdate();
             return true;
 
@@ -211,7 +217,29 @@ public class ControladorDoctor extends Conexion {
         return lista;
     }
 
+    public Image getFoto(int id) throws IOException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT foto from doctor where iddoctor=?";
+        Image icono = null;
+        InputStream is = null;
 
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                is=rs.getBinaryStream(1);
+                BufferedImage bi=ImageIO.read(is);
+                icono=(bi);
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return icono;
+
+    }
 
 }
