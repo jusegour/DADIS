@@ -22,6 +22,7 @@ public class GUI_AgregarVacuna extends javax.swing.JFrame {
      */
     public GUI_AgregarVacuna() {
         initComponents();
+        this.setResizable(false);
     }
 
     public void limpiar(){
@@ -72,7 +73,7 @@ public class GUI_AgregarVacuna extends javax.swing.JFrame {
         getContentPane().add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 161, -1, -1));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 200));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -123,7 +124,7 @@ public class GUI_AgregarVacuna extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

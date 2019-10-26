@@ -7,9 +7,15 @@ package vista;
 
 import controlador.Conexion;
 import controlador.ControladorLogin;
+import de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import modelo.Doctor;
 import modelo.Padre;
 
@@ -19,10 +25,12 @@ import modelo.Padre;
  */
 public class Login extends javax.swing.JFrame {
 
-    public static String user,tipousuario;
+    public static String user, tipousuario;
 
-    public Login() {
+    public Login() throws ParseException, UnsupportedLookAndFeelException {
+        
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -102,7 +110,7 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 160, -1));
 
-        btnIngresar.setBackground(new java.awt.Color(0, 0, 51));
+        btnIngresar.setBackground(new java.awt.Color(0, 0, 102));
         btnIngresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Iniciar Sesion");
@@ -165,7 +173,6 @@ public class Login extends javax.swing.JFrame {
                 p.setUsuario(txtusuario.getText());
                 String pass = new String(txtpassword.getPassword());
                 p.setContraseña(pass);
-                
 
                 ControladorLogin cl = new ControladorLogin();
                 Conexion cn = new Conexion();
@@ -174,7 +181,7 @@ public class Login extends javax.swing.JFrame {
                     cn.conectarme();
                     cl.setCon(cn.getCon());
                     cl.validadPadre(p, ventana, gp, gap);
-                    user=txtusuario.getText();
+                    user = txtusuario.getText();
 
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
@@ -194,7 +201,7 @@ public class Login extends javax.swing.JFrame {
                     cn.conectarme();
                     cl.setCon(cn.getCon());
                     cl.validadDoctor(p, ventana, gd);
-                    user=txtusuario.getText();
+                    user = txtusuario.getText();
 
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, e);
@@ -204,7 +211,7 @@ public class Login extends javax.swing.JFrame {
                 String pass = new String(txtpassword.getPassword());
                 if (txtusuario.getText().equalsIgnoreCase("root") && pass.equalsIgnoreCase("root")) {
                     JOptionPane.showMessageDialog(null, "Acceso Concedido");
-                    user=txtusuario.getText();
+                    user = txtusuario.getText();
                     GUI_Administrador adm = new GUI_Administrador();
                     adm.setVisible(true);
                     adm.setLocationRelativeTo(null);
@@ -216,7 +223,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione Tipo de Usuario");
             }
         }
-        tipousuario=combo_usuario.getSelectedItem().toString();
+        tipousuario = combo_usuario.getSelectedItem().toString();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -224,7 +231,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        GUI_AgregarPadre ap=new GUI_AgregarPadre();
+        GUI_AgregarPadre ap = new GUI_AgregarPadre();
         ap.setVisible(true);
         ap.setLocationRelativeTo(null);
         this.dispose();
@@ -241,7 +248,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -260,7 +267,13 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

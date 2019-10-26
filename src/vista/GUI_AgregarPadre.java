@@ -17,6 +17,9 @@ import java.awt.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
@@ -29,6 +32,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     int longitudbytes;
     public GUI_AgregarPadre() {
         initComponents();
+        this.setResizable(false);
 
     }
 
@@ -285,7 +289,14 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         pa.setIdusuario("2");
         ControladorPadre ctrl = new ControladorPadre();
         Conexion con = new Conexion();
-        Login l = new Login();
+        Login l=null;
+            try {
+                l = new Login();
+            } catch (ParseException ex) {
+                Logger.getLogger(GUI_AgregarPadre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(GUI_AgregarPadre.class.getName()).log(Level.SEVERE, null, ex);
+            }
         try {
             if (!v.esEmail(txtemail.getText())) {
                 JOptionPane.showMessageDialog(null, "Correo Invalido");
@@ -378,11 +389,17 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        // TODO add your handling code here:
-        Login l=new Login();
-        l.setVisible(true);
-        l.setLocationRelativeTo(null);
-        this.dispose();
+        try {
+            // TODO add your handling code here:
+            Login l=new Login();
+            l.setVisible(true);
+            l.setLocationRelativeTo(null);
+            this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(GUI_AgregarPadre.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(GUI_AgregarPadre.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnsalirActionPerformed
 
    
@@ -425,7 +442,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -440,21 +457,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI_AgregarPadre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+       
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

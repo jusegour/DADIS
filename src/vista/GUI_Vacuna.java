@@ -23,10 +23,11 @@ public class GUI_Vacuna extends javax.swing.JFrame {
 ControladorVacuna ctrl=new ControladorVacuna();
     public GUI_Vacuna() {
         initComponents();
+        this.setResizable(false);
         txtid.setEnabled(false);
         txtnombre.setEditable(false);
         
-        tablaprograma.setEnabled(false);
+        
         Conexion cn = new Conexion();
         try {
             cn.conectarme();
@@ -182,7 +183,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
         jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 490));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 630, 510));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         jPanel1.add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -60, 630, 560));
@@ -336,7 +337,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

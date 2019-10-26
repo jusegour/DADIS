@@ -29,7 +29,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     public GUI_AgregarRegistro() {
         initComponents();
-        
+        this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombredoctor + " " + ControladorLogin.apellidodoctor);
         try {
             con.conectarme();
@@ -214,7 +214,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        GUI_RegistroVacunas rv = new GUI_RegistroVacunas();
+        GUI_MenuDoctor rv = new GUI_MenuDoctor();
         rv.setVisible(true);
         rv.setLocationRelativeTo(null);
         this.dispose();
@@ -231,7 +231,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

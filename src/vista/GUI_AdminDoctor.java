@@ -24,8 +24,8 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
     public GUI_AdminDoctor() {
         initComponents();
-        
-        tablaprograma.setEnabled(false);
+        this.setResizable(false);
+
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
         txtsnombre.setEditable(false);
@@ -44,6 +44,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
         Conexion cn = new Conexion();
+        //En esta linea llamamos al metodo que nos va a cargar todos los registros de doctores
         try {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
@@ -52,7 +53,8 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
             System.out.println("Error: " + e.toString());
         }
     }
-    
+
+    //Metodo para listar todos los doctores registrados
     public void mostrarprogramas() throws SQLException {
         String matriz[][] = new String[ctrl.listardoctor().size()][15];
         for (int i = 0; i < ctrl.listardoctor().size(); i++) {
@@ -71,7 +73,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
             matriz[i][12] = ctrl.listardoctor().get(i).getUsuario();
             matriz[i][13] = ctrl.listardoctor().get(i).getContraseña();
             matriz[i][14] = ctrl.listardoctor().get(i).getIdentificacion();
-            
+
         }
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"iddoctor", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "edad", "fecha_nacimiento", "sexo", "direccion", "estrato", "telefono", "clinica", "usuario", "contraseña", "identificacion"}));
     }
@@ -371,7 +373,9 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
         } else {
 
             Conexion cn = new Conexion();
-
+            /*En esta linea seteamos el arraylist que contiene la busqueda
+            en una matriz,esta sera implementada al modelo de la tabla(Jtable)
+             */
             try {
                 cn.conectarme();
                 ctrl.setCon(cn.getCon());
@@ -408,8 +412,8 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_combobuscar2ActionPerformed
 
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
-        // TODO add your handling code here:
 
+        //Habilitamos todos los campos de texto
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);
         txtpapellido.setEditable(true);
@@ -426,8 +430,9 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
         txttelefono.setEditable(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
-
+        //Seleccionamos la fila 
         int fila = tablaprograma.getSelectedRow();
+        //Le asignamos valor a los textfields segun el campo
         txtid.setText(tablaprograma.getValueAt(fila, 0).toString());
         txtpnombre.setText(tablaprograma.getValueAt(fila, 1).toString());
         txtsnombre.setText(tablaprograma.getValueAt(fila, 2).toString());
@@ -447,6 +452,11 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaprogramaMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        /*En este metodo, todos los datos seran seteados a un objeto
+        y este objeto es enviado a la funcion(Modificar), para realizar
+        los cambios
+         */
+
         Doctor pa = new Doctor();
         ControladorAdministrador cp = new ControladorAdministrador();
         Conexion cn = new Conexion();
@@ -484,6 +494,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        //Aqui solo seteamos el id, y es enviado a la funcion Eliminar
         Doctor pa = new Doctor();
         ControladorAdministrador ctrl = new ControladorAdministrador();
         Conexion cn = new Conexion();
@@ -508,6 +519,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtsapellidoActionPerformed
 
     private void txtsapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsapellidoKeyTyped
+        //Metodo para validar el campo
         char validar = evt.getKeyChar();
 
         if (Character.isDigit(validar)) {
@@ -520,6 +532,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtsapellidoKeyTyped
 
     private void txtsnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsnombreKeyTyped
+        //Metodo para validar el campo
         char validar = evt.getKeyChar();
 
         if (Character.isDigit(validar)) {
@@ -532,6 +545,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtsnombreKeyTyped
 
     private void txtpapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpapellidoKeyTyped
+        //Metodo para validar el campo
         char validar = evt.getKeyChar();
 
         if (Character.isDigit(validar)) {
@@ -544,6 +558,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtpapellidoKeyTyped
 
     private void txtedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtedadKeyTyped
+        //Metodo para validar el campo
         char validar = evt.getKeyChar();
 
         if (Character.isLetter(validar)) {
@@ -553,9 +568,12 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+
+
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
+        //Metodo para validar el campo
         char validar = evt.getKeyChar();
 
         if (Character.isDigit(validar)) {
@@ -568,6 +586,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtpnombreKeyTyped
 
     private void txtidentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentificacionKeyTyped
+        //Metodo para validar el campo
         char validar = evt.getKeyChar();
 
         if (Character.isLetter(validar)) {
@@ -604,6 +623,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
         txtusuario.setText("");
         txtcontraseña.setText("");
     }
+
     /**
      * @param args the command line arguments
      */
@@ -615,7 +635,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

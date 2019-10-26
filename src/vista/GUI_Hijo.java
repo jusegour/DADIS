@@ -34,7 +34,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     public GUI_Hijo() {
         
         initComponents();
-        
+        this.setResizable(false);
         btnRegistro.setEnabled(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
@@ -620,7 +620,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

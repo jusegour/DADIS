@@ -25,6 +25,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
 
     public GUI_ConsultarRegistro() {
         initComponents();
+        this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombrepadre + " " + ControladorLogin.apellidopadre);
         try {
             cn.conectarme();
@@ -161,7 +162,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

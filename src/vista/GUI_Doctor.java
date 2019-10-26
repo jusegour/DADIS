@@ -30,6 +30,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
 
     public GUI_Doctor() {
         initComponents();
+        this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombredoctor + " " + ControladorLogin.apellidodoctor);
         try {
             c.conectarme();
@@ -145,11 +146,11 @@ public class GUI_Doctor extends javax.swing.JFrame {
         txttelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        btnmenu = new javax.swing.JButton();
         lblnombre = new javax.swing.JLabel();
         lblfoto = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
-        btnmenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -303,13 +304,21 @@ public class GUI_Doctor extends javax.swing.JFrame {
         jPanel5.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 520, 103, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 710));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1220, 670));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1210, 700));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 1210, 670));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnmenu.setText("Volver al Menu");
+        btnmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, -1, -1));
 
         lblnombre.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         lblnombre.setText("Dr");
@@ -320,20 +329,12 @@ public class GUI_Doctor extends javax.swing.JFrame {
         jPanel1.add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 160, 200));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 260, 760));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 260, 700));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 710));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 670));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1470, 700));
-
-        btnmenu.setText("Volver al Menu");
-        btnmenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenuActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, -1, -1));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1470, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -536,7 +537,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

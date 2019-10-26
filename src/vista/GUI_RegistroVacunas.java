@@ -35,7 +35,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
 
     public GUI_RegistroVacunas() {
         initComponents();
-        
+        this.setResizable(false);
         lblnombre.setText(lblnombre.getText()+" "+ControladorLogin.nombredoctor+" "+ControladorLogin.apellidodoctor);
         try{
         cn.conectarme();
@@ -89,6 +89,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel5 = new javax.swing.JLabel();
         lblnombre = new javax.swing.JLabel();
         lblfoto = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -109,10 +110,15 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Registro General de Vacunas");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+
         lblnombre.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         lblnombre.setText("Dr");
         getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 240, 30));
-        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 260));
+        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 200, 260));
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -330,6 +336,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

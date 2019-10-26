@@ -24,7 +24,7 @@ public class GUI_AdminPadre extends javax.swing.JFrame {
 
     public GUI_AdminPadre() {
         initComponents();
-        tablaprograma.setEnabled(false);
+        this.setResizable(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
         txtsnombre.setEditable(false);
@@ -572,7 +572,7 @@ public class GUI_AdminPadre extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

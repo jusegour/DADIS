@@ -5,6 +5,10 @@
  */
 package main;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
 import vista.Login;
 
 
@@ -16,9 +20,15 @@ import vista.Login;
 public class Arranque {
 
     public static void main(String args[]) {
-       Login l=new Login();
-       l.setVisible(true);
-       l.setLocationRelativeTo(null);
+        try {
+            Login l=new Login();
+            l.setVisible(true);
+            l.setLocationRelativeTo(null);
+        } catch (ParseException ex) {
+            Logger.getLogger(Arranque.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Arranque.class.getName()).log(Level.SEVERE, null, ex);
+        }
               
        
 

@@ -24,6 +24,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
      */
     public GUI_AgregarHijo() {
         initComponents();
+        this.setResizable(false);
     }
 
     public void limpiar() {
@@ -324,7 +325,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

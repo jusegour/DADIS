@@ -24,6 +24,7 @@ public class GUI_AdminVacuna extends javax.swing.JFrame {
 
     public GUI_AdminVacuna() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
         txtid.setEnabled(false);
         txtnombre.setEditable(false);

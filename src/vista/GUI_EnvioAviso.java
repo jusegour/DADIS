@@ -38,6 +38,8 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
     public GUI_EnvioAviso() {
         initComponents();
+        this.setResizable(false);
+        txtmensaje.setLineWrap(true);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombredoctor + " " + ControladorLogin.apellidodoctor);
         try {
             con.conectarme();
@@ -205,7 +207,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

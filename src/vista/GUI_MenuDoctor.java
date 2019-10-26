@@ -5,6 +5,11 @@
  */
 package vista;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author JUAN S. GOMEZ URIBE
@@ -16,6 +21,7 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
      */
     public GUI_MenuDoctor() {
         initComponents();
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -33,6 +39,8 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
         btnconsultar = new javax.swing.JButton();
         btnagregar = new javax.swing.JButton();
         btnAviso = new javax.swing.JButton();
+        lblinstrucciones = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,8 +96,27 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
         });
         getContentPane().add(btnAviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
 
+        lblinstrucciones.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblinstrucciones.setForeground(new java.awt.Color(255, 255, 255));
+        lblinstrucciones.setText("Presione aqui para ver las Instrucciones");
+        lblinstrucciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblinstrucciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblinstruccionesMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblinstrucciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 290, 30));
+
+        btnVolver.setText("Volver al Login");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/blue-wallpaper-24.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -134,6 +161,27 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAvisoActionPerformed
 
+    private void lblinstruccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblinstruccionesMouseClicked
+        InstruccionDoctor ins=new InstruccionDoctor();
+        ins.setVisible(true);
+        ins.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_lblinstruccionesMouseClicked
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Login l=null;
+        try {
+            l = new Login();
+        } catch (ParseException ex) {
+            Logger.getLogger(GUI_MenuDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(GUI_MenuDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        l.setVisible(true);
+        l.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -145,7 +193,7 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -171,10 +219,12 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAviso;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnagregar;
     private javax.swing.JButton btnconsultar;
     private javax.swing.JButton btninformacion;
     private javax.swing.JButton btnvacunas;
     private javax.swing.JLabel lblfondo;
+    private javax.swing.JLabel lblinstrucciones;
     // End of variables declaration//GEN-END:variables
 }

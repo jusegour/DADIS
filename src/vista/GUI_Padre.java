@@ -31,6 +31,7 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     public GUI_Padre() {
         initComponents();
+        this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombrepadre + " " + ControladorLogin.apellidopadre);
         try {
             con.conectarme();
@@ -205,7 +206,7 @@ public class GUI_Padre extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 590, -1, -1));
+        jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, -1, -1));
 
         txtsapellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,9 +312,9 @@ public class GUI_Padre extends javax.swing.JFrame {
         jPanel1.add(fecha_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 300, -1, -1));
 
         fondopanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        jPanel1.add(fondopanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 680));
+        jPanel1.add(fondopanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 600));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1110, 680));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 1110, 600));
 
         btnMenu.setText("Volver al Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -321,7 +322,7 @@ public class GUI_Padre extends javax.swing.JFrame {
                 btnMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, -1, -1));
+        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, -1));
         getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 150, 200));
 
         lblnombre.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -329,11 +330,11 @@ public class GUI_Padre extends javax.swing.JFrame {
         getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 230, 30));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 250, 780));
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 250, 640));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 250, 700));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 250, 600));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 710));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -528,7 +529,7 @@ public class GUI_Padre extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
