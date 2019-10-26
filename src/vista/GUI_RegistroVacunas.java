@@ -237,7 +237,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
             cn.conectarme();
             ctrlv.setCon(cn.getCon());
 
-            String matriz[][] = new String[ctrlv.consultard().size()][7];
+            String matriz[][] = new String[ctrlv.consultard().size()][8];
             for (int i = 0; i < ctrlv.consultard().size(); i++) {
                 matriz[i][0] = ctrlv.consultard().get(i).getIdregistro();
                 matriz[i][1] = ctrlv.consultard().get(i).getFecha_aplicacion();
@@ -246,6 +246,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
                 matriz[i][4] = ctrlv.consultard().get(i).getIddoctor();
                 matriz[i][5] = ctrlv.consultard().get(i).getIdvacuna();
                 matriz[i][6] = ctrlv.consultard().get(i).getFecha_proxima();
+                matriz[i][7]=ctrlv.consultard().get(i).getDosis();
             }
 
             for (int i = 0; i < matriz.length; i++) {
@@ -267,7 +268,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
 
 
     public void mostrarregistro() throws SQLException {
-        String matriz[][] = new String[ctrlv.consultard().size()][18];
+        String matriz[][] = new String[ctrlv.consultard().size()][19];
         for (int i = 0; i < ctrlv.consultard().size(); i++) {
             matriz[i][0] = String.valueOf(ctrlv.listarhijod().get(i).getIdhijo());
             matriz[i][1] = ctrlv.listarhijod().get(i).getPrimer_nombre();
@@ -287,10 +288,11 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
             matriz[i][15] = ctrlv.listarfechasd().get(i).getIdregistro();
             matriz[i][16] = ctrlv.listarfechasd().get(i).getFecha_aplicacion();
             matriz[i][17] = ctrlv.listarfechasd().get(i).getFecha_proxima();
+            matriz[i][18]=ctrlv.listarfechasd().get(i).getDosis();
 
         }
 
-        tabla_registro.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idhijo", "Nombre-Hijo", "Apellido-Hijo", "Registro Civil", "idpadre", "Nombre-Padre", "Apellido-Padre", "CC-Padre", "iddoctor", "Nombre-Doctor", "Apellido-Doctor", "CC-Doctor", "Clinica", "idvacuna", "Vacuna aplicada", "idregistro", "Fecha aplicacion", "Fecha proxima"}));
+        tabla_registro.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idhijo", "Nombre-Hijo", "Apellido-Hijo", "Registro Civil", "idpadre", "Nombre-Padre", "Apellido-Padre", "CC-Padre", "iddoctor", "Nombre-Doctor", "Apellido-Doctor", "CC-Doctor", "Clinica", "idvacuna", "Vacuna aplicada", "idregistro", "Fecha aplicacion", "Fecha proxima","Dosis"}));
 
     }
 

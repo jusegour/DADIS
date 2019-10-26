@@ -38,7 +38,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
 
         try {
 
-            ps = this.getCon().prepareStatement("INSERT INTO registro_vacunas VALUES(?,?,?,?,?,?,?,?)");
+            ps = this.getCon().prepareStatement("INSERT INTO registro_vacunas VALUES(?,?,?,?,?,?,?,?,?)");
             ps.setString(1, null);
             ps.setString(2, rg.getFecha_aplicacion());
             ps.setString(3, rg.getIdhijo());
@@ -47,7 +47,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
             ps.setString(6, rg.getIdvacuna());
             ps.setString(7, rg.getFecha_proxima());
             ps.setString(8, "No");
-
+            ps.setString(9, rg.getDosis());
             ps.executeUpdate();
             return true;
 
@@ -69,7 +69,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         try {
 
-            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
+            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima,dosis FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
             ps.setInt(1, GUI_Hijo.idhijo);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -80,8 +80,9 @@ public class ControladorRegistro_Vacuna extends Conexion {
                 int iddoctor = rs.getInt(5);
                 int idvacuna = rs.getInt(6);
                 String fecha_aplicacion = rs.getString(7);
+                String dosis=rs.getString(8);
 
-                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion);
+                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion,dosis);
 
                 lista.add(re);
 
@@ -103,7 +104,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         try {
 
-            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
+            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima,dosis FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
             ps.setInt(1, GUI_RegistroVacunas.idhijo);
             rs = ps.executeQuery();
 
@@ -115,8 +116,9 @@ public class ControladorRegistro_Vacuna extends Conexion {
                 int iddoctor = rs.getInt(5);
                 int idvacuna = rs.getInt(6);
                 String fecha_aplicacion = rs.getString(7);
+                String dosis=rs.getString(8);
 
-                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion);
+                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion,dosis);
 
                 lista.add(re);
                 GUI_RegistroVacunas.lblregistros.setText("");
@@ -448,7 +450,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         for (int i = 0; i < consultar().size(); i++) {
             try {
-                ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima FROM registro_vacunas WHERE idregistro_vacunas=? ");
+                ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima,dosis FROM registro_vacunas WHERE idregistro_vacunas=? ");
                 consultar();
                 ps.setInt(1, Integer.parseInt(consultar().get(i).getIdregistro()));
                 rs = ps.executeQuery();
@@ -456,7 +458,8 @@ public class ControladorRegistro_Vacuna extends Conexion {
                     int idregistro = rs.getInt(1);
                     String fecha = rs.getString(2);
                     String fecha_proxima = rs.getString(3);
-                    r = new RegistroVacuna(idregistro, fecha, fecha_proxima);
+                    String dosis=rs.getString(4);
+                    r = new RegistroVacuna(idregistro, fecha, fecha_proxima,dosis);
                     lista.add(r);
 
                 }
@@ -487,14 +490,14 @@ public class ControladorRegistro_Vacuna extends Conexion {
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         for (int i = 0; i < consultard().size(); i++) {
             try {
-                ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima FROM registro_vacunas WHERE idregistro_vacunas=? ");
+                ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima,dosis FROM registro_vacunas WHERE idregistro_vacunas=? ");
                 consultar();
                 ps.setInt(1, Integer.parseInt(consultard().get(i).getIdregistro()));
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     int idreg = rs.getInt(1);
-                    String fecha_ap = rs.getString(2), fecha_pro = rs.getString(3);
-                    r = new RegistroVacuna(idreg, fecha_ap, fecha_pro);
+                    String fecha_ap = rs.getString(2), fecha_pro = rs.getString(3),dosis=rs.getString(4);
+                    r = new RegistroVacuna(idreg, fecha_ap, fecha_pro,dosis);
                     lista.add(r);
 
                 }

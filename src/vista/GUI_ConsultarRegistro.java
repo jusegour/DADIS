@@ -55,7 +55,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
 
     public void mostrarregistro() throws SQLException {
 
-        String matriz[][] = new String[ctrl.consultar().size()][18];
+        String matriz[][] = new String[ctrl.consultar().size()][19];
         for (int i = 0; i <ctrl.consultar().size(); i++) {
             matriz[i][0] = String.valueOf(ctrl.listarhijo().get(i).getIdhijo());
             matriz[i][1] = ctrl.listarhijo().get(i).getPrimer_nombre();
@@ -75,10 +75,11 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
             matriz[i][15] = ctrl.listarfechas().get(i).getIdregistro();
             matriz[i][16] = ctrl.listarfechas().get(i).getFecha_aplicacion();
             matriz[i][17] = ctrl.listarfechas().get(i).getFecha_proxima();
+            matriz[i][18]=ctrl.listarfechas().get(i).getDosis();
 
         }
 
-        tabla_hijo.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idhijo", "Nombre-Hijo", "Apellido-Hijo", "Registro Civil", "idpadre", "Nombre-Padre", "Apellido-Padre", "CC-Padre", "iddoctor", "Nombre-Doctor", "Apellido-Doctor", "CC-Doctor", "Clinica", "idvacuna", "Vacuna aplicada", "idregistro", "Fecha aplicacion", "Fecha proxima"}));
+        tabla_hijo.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idhijo", "Nombre-Hijo", "Apellido-Hijo", "Registro Civil", "idpadre", "Nombre-Padre", "Apellido-Padre", "CC-Padre", "iddoctor", "Nombre-Doctor", "Apellido-Doctor", "CC-Doctor", "Clinica", "idvacuna", "Vacuna aplicada", "idregistro", "Fecha aplicacion", "Fecha proxima","Dosis"}));
 
     }
 

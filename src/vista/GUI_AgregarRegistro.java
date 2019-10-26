@@ -95,8 +95,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         dia_prox = new com.toedter.components.JSpinField();
         anio_prox = new com.toedter.calendar.JYearChooser();
         mes_prox = new com.toedter.calendar.JMonthChooser();
+        txtdosis = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
         lblfoto = new javax.swing.JLabel();
         lblnombre = new javax.swing.JLabel();
@@ -112,38 +114,39 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
 
         jLabel4.setText("Fecha de Aplicacion");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, -1, -1));
 
         getContentPane().add(combo_hijos, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 255, -1));
 
         getContentPane().add(combo_vacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 182, -1));
-        getContentPane().add(spin_dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 45, -1));
-        getContentPane().add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 150, 63, -1));
-        getContentPane().add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+        getContentPane().add(spin_dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 45, -1));
+        getContentPane().add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 63, -1));
+        getContentPane().add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 190, -1, -1));
 
         jLabel5.setText("Dia");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, -1, -1));
 
         jLabel6.setText("Mes");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, -1, -1));
 
         jLabel7.setText("Año");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 130, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, -1, -1));
 
         jLabel8.setText("Dia");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
         jLabel9.setText("Mes");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 190, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, -1, -1));
 
         jLabel10.setText("Año");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, -1, -1));
 
         jLabel11.setText("Fecha Proxima Vacuna");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 210, -1, -1));
-        getContentPane().add(dia_prox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 210, 47, -1));
-        getContentPane().add(anio_prox, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 63, -1));
-        getContentPane().add(mes_prox, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
+        getContentPane().add(dia_prox, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 47, -1));
+        getContentPane().add(anio_prox, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 250, 63, -1));
+        getContentPane().add(mes_prox, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 250, -1, -1));
+        getContentPane().add(txtdosis, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 180, -1));
 
         btnRegistrar.setText("Agregar Registro");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +154,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +163,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+
+        jLabel12.setText("Dosis");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 630, 460));
@@ -202,6 +208,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         rg.setIdvacuna(String.valueOf(cadenavacuna[0]));
         rg.setFecha_aplicacion(spin_dia.getValue() + "/" + (mes.getMonth()+1) + "/" + anio.getYear());
         rg.setFecha_proxima(dia_prox.getValue() + "/" + (mes_prox.getMonth()+1) + "/" + anio_prox.getYear());
+        rg.setDosis(txtdosis.getText());
         try {
             con.conectarme();
             ctrl.setCon(con.getCon());
@@ -266,6 +273,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -280,5 +288,6 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private com.toedter.calendar.JMonthChooser mes;
     private com.toedter.calendar.JMonthChooser mes_prox;
     private com.toedter.components.JSpinField spin_dia;
+    private javax.swing.JTextField txtdosis;
     // End of variables declaration//GEN-END:variables
 }

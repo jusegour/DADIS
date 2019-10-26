@@ -7,9 +7,11 @@ package modelo;
 
 public class RegistroVacuna {
 
-    private String idpadre, idhijo, idvacuna, iddoctor, fecha_aplicacion, fecha_proxima, idregistro;
+    private String idpadre, idhijo, idvacuna, iddoctor, fecha_aplicacion, fecha_proxima, idregistro,dosis;
+
     
-    public RegistroVacuna(int idreg,String fecha,int idhijo,int idpadre,int iddoctor,int idvacuna,String fecha_aplicacion){
+    
+    public RegistroVacuna(int idreg,String fecha,int idhijo,int idpadre,int iddoctor,int idvacuna,String fecha_aplicacion,String dosis){
     this.idregistro=String.valueOf(idreg);
     this.fecha_aplicacion=fecha;
     this.idhijo=String.valueOf(idhijo);
@@ -17,14 +19,24 @@ public class RegistroVacuna {
     this.iddoctor=String.valueOf(iddoctor);
     this.idvacuna=String.valueOf(idvacuna);
     this.fecha_proxima=fecha_aplicacion;
+    this.dosis=dosis;
     }
     public RegistroVacuna(){
     
     }
-    public RegistroVacuna(int idreg,String fecha,String fecha_ap){
+    public RegistroVacuna(int idreg,String fecha,String fecha_ap,String dosis){
     this.idregistro=String.valueOf(idreg);
     this.fecha_aplicacion=fecha;
     this.fecha_proxima=fecha_ap;
+    this.dosis=dosis;
+    }
+    
+    public String getDosis() {
+        return dosis;
+    }
+
+    public void setDosis(String dosis) {
+        this.dosis = dosis;
     }
 
     public String getIdregistro() {
