@@ -167,6 +167,8 @@ CREATE TABLE `registro_vacunas` (
   `iddoctor` int(11) NOT NULL,
   `idvacuna` int(11) NOT NULL,
   `fecha_proxima` varchar(45) NOT NULL,
+  `Aviso` varchar(45) NOT NULL,
+  `Dosis` varchar(45) NOT NULL,
   PRIMARY KEY (`idregistro_vacunas`),
   KEY `idhijo` (`idhijo`),
   KEY `idpadre` (`idpadre`),
@@ -176,7 +178,7 @@ CREATE TABLE `registro_vacunas` (
   CONSTRAINT `idhijo` FOREIGN KEY (`idhijo`) REFERENCES `hijo` (`idhijo`) ON DELETE CASCADE,
   CONSTRAINT `idpadre` FOREIGN KEY (`idpadre`) REFERENCES `padre` (`idpadre`) ON DELETE CASCADE,
   CONSTRAINT `idvacuna` FOREIGN KEY (`idvacuna`) REFERENCES `vacuna` (`idvacuna`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +187,7 @@ CREATE TABLE `registro_vacunas` (
 
 LOCK TABLES `registro_vacunas` WRITE;
 /*!40000 ALTER TABLE `registro_vacunas` DISABLE KEYS */;
-INSERT INTO `registro_vacunas` VALUES (4,'1/9/2019',4,2,3,2,'1/9/2019'),(6,'1/9/2019',5,2,3,2,'15/9/2019'),(7,'1/5/2019',5,2,3,1,'1/6/2019'),(15,'1/9/2019',3,5,3,3,'10/9/2019'),(16,'1/7/2019',3,5,3,3,'25/7/2019');
+INSERT INTO `registro_vacunas` VALUES (17,'1/10/2019',3,5,6,1,'20/7/2019','No','Primera');
 /*!40000 ALTER TABLE `registro_vacunas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,4 +248,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-25  1:02:27
+-- Dump completed on 2019-10-26 14:39:53
