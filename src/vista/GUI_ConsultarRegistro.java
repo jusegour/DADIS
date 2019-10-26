@@ -6,8 +6,12 @@
 package vista;
 
 import controlador.Conexion;
+import controlador.ControladorLogin;
+import controlador.ControladorPadre;
 import controlador.ControladorRegistro_Vacuna;
+import java.awt.Image;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,9 +21,25 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
 
     ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
     Conexion cn = new Conexion();
+    ControladorPadre ctrlp=new ControladorPadre();
 
     public GUI_ConsultarRegistro() {
         initComponents();
+        lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombrepadre + " " + ControladorLogin.apellidopadre);
+        try {
+            cn.conectarme();
+            ctrlp.setCon(cn.getCon());
+            Image foto = ctrlp.getFoto(ControladorLogin.idpadre).getScaledInstance(lblfoto.getWidth(), lblfoto.getHeight(), Image.SCALE_DEFAULT);
+            ImageIcon icono = new ImageIcon(foto);
+            if (icono != null) {
+                lblfoto.setIcon(icono);
+            } else {
+                lblfoto.setIcon(null);
+            }
+            lblfoto.updateUI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         tabla_hijo.setEnabled(false);
         try {
             cn.conectarme();
@@ -69,8 +89,13 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
         tabla_hijo = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        lblfoto = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla_hijo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,12 +107,15 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla_hijo);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 1340, 249));
+
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, -1));
 
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -95,30 +123,18 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
+        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 160));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(132, 132, 132)
-                        .addComponent(jButton2)))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)))
-        );
+        lblnombre.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        lblnombre.setText("Sr");
+        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 190, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 220, 250));
+
+        lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,7 +188,11 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblfondo;
+    private javax.swing.JLabel lblfoto;
+    private javax.swing.JLabel lblnombre;
     private javax.swing.JTable tabla_hijo;
     // End of variables declaration//GEN-END:variables
 }

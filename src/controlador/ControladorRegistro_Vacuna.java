@@ -119,7 +119,11 @@ public class ControladorRegistro_Vacuna extends Conexion {
                 re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion);
 
                 lista.add(re);
-                GUI_RegistroVacunas.lblreg.setText("");
+                GUI_RegistroVacunas.lblregistros.setText("");
+                
+            }
+            if (!rs.next()) {
+                GUI_RegistroVacunas.lblregistros.setText("No se encontraron registros");
             }
 
         } catch (SQLException s) {

@@ -19,7 +19,7 @@ import modelo.Padre;
  */
 public class Login extends javax.swing.JFrame {
 
-    public static String user;
+    public static String user,tipousuario;
 
     public Login() {
         initComponents();
@@ -45,6 +45,7 @@ public class Login extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
+        btnRegistrarse = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -122,6 +123,17 @@ public class Login extends javax.swing.JFrame {
         txtusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtusuario.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 160, -1));
+
+        btnRegistrarse.setBackground(new java.awt.Color(0, 0, 204));
+        btnRegistrarse.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegistrarse.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarse.setText("Registrarse(Como padre)");
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/blue-wallpaper-24.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 660));
@@ -204,11 +216,19 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione Tipo de Usuario");
             }
         }
+        tipousuario=combo_usuario.getSelectedItem().toString();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        GUI_AgregarPadre ap=new GUI_AgregarPadre();
+        ap.setVisible(true);
+        ap.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,6 +267,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnRegistrarse;
     private javax.swing.JComboBox<String> combo_usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

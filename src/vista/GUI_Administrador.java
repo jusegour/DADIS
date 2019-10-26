@@ -32,77 +32,58 @@ public class GUI_Administrador extends javax.swing.JFrame {
         btnPadres = new javax.swing.JButton();
         btnDoctores = new javax.swing.JButton();
         btnVacunas = new javax.swing.JButton();
+        lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("¿Donde desea entrar?");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 24, -1, -1));
 
+        btnHijos.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnHijos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/4043250-avatar-child-girl-kid_113270.png"))); // NOI18N
         btnHijos.setText("Hijos");
         btnHijos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHijosActionPerformed(evt);
             }
         });
+        getContentPane().add(btnHijos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
+        btnPadres.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnPadres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/dad-avatar_114341.png"))); // NOI18N
         btnPadres.setText("Padres");
         btnPadres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPadresActionPerformed(evt);
             }
         });
+        getContentPane().add(btnPadres, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
 
+        btnDoctores.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnDoctores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Doctor_Male_icon-icons.com_75051.png"))); // NOI18N
         btnDoctores.setText("Doctores");
         btnDoctores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDoctoresActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDoctores, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
+        btnVacunas.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnVacunas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/18_113669.png"))); // NOI18N
         btnVacunas.setText("Vacunas");
         btnVacunas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVacunasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnHijos)
-                            .addComponent(btnDoctores))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnVacunas))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(btnPadres))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jLabel1)))
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPadres)
-                    .addComponent(btnHijos))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDoctores)
-                    .addComponent(btnVacunas))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
+        lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/blue-wallpaper-24.jpg"))); // NOI18N
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,5 +160,6 @@ public class GUI_Administrador extends javax.swing.JFrame {
     private javax.swing.JButton btnPadres;
     private javax.swing.JButton btnVacunas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblfondo;
     // End of variables declaration//GEN-END:variables
 }

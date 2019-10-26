@@ -37,7 +37,7 @@ public class ControladorHijo extends Conexion {
             ps.setString(9, pa.getEstrato());
             ps.setString(10, pa.getSexo());
             ps.setString(11, pa.getIdentificacion());
-            ps.setInt(12, GUI_Padre.idpadre);
+            ps.setInt(12, ControladorLogin.idpadre);
 
             ps.executeUpdate();
             return true;
