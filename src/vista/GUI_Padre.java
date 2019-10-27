@@ -40,10 +40,11 @@ public class GUI_Padre extends javax.swing.JFrame {
             ImageIcon icono = new ImageIcon(foto);
             if (icono != null) {
                 lblfoto.setIcon(icono);
+                lblfoto.updateUI();
             } else {
-                lblfoto.setIcon(null);
+                lblfoto.updateUI();
             }
-            lblfoto.updateUI();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -323,6 +324,9 @@ public class GUI_Padre extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, -1));
+
+        lblfoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padre (2).png"))); // NOI18N
         getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 150, 200));
 
         lblnombre.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N

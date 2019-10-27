@@ -7,7 +7,7 @@ package vista;
 
 import controlador.Conexion;
 import controlador.ControladorLogin;
-import de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;

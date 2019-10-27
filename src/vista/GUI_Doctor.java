@@ -39,10 +39,11 @@ public class GUI_Doctor extends javax.swing.JFrame {
             ImageIcon icono = new ImageIcon(foto);
             if (icono != null) {
                 lblfoto.setIcon(icono);
+                lblfoto.updateUI();
             } else {
-                lblfoto.setIcon(null);
+                lblfoto.updateUI();
             }
-            lblfoto.updateUI();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -325,6 +326,8 @@ public class GUI_Doctor extends javax.swing.JFrame {
         jPanel1.add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 181, -1));
 
         lblfoto.setBackground(new java.awt.Color(255, 255, 255));
+        lblfoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padre (2).png"))); // NOI18N
         lblfoto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 160, 200));
 

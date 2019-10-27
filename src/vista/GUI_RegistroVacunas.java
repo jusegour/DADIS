@@ -44,10 +44,11 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
         ImageIcon icono=new ImageIcon(foto);
             if (icono!=null) {
                 lblfoto.setIcon(icono);
+                lblfoto.updateUI();
             }else{
-            lblfoto.setIcon(null);
-            }
             lblfoto.updateUI();
+            }
+            
         }catch(Exception e){
         e.printStackTrace();
         }
@@ -117,7 +118,10 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
 
         lblnombre.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         lblnombre.setText("Dr");
-        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 240, 30));
+        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 240, 30));
+
+        lblfoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padre (2).png"))); // NOI18N
         getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 200, 260));
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));

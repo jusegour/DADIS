@@ -38,10 +38,11 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             ImageIcon icono = new ImageIcon(foto);
             if (icono != null) {
                 lblfoto.setIcon(icono);
-            } else {
-                lblfoto.setIcon(null);
-            }
+                lblfoto.updateUI();
+            }else{
             lblfoto.updateUI();
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -169,11 +170,13 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 630, 460));
-        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 170, 190));
+
+        lblfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padre (2).png"))); // NOI18N
+        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 130, 150));
 
         lblnombre.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblnombre.setText("Dr");
-        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 160, 20));
+        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 160, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 460));

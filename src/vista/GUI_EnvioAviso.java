@@ -26,13 +26,13 @@ import modelo.Padre;
  */
 public class GUI_EnvioAviso extends javax.swing.JFrame {
 
-    public static int idhijo,idpadre;
+    public static int idhijo, idpadre;
     Hijo h = new Hijo();
 
     CargarCombos cc = new CargarCombos();
     Conexion con = new Conexion();
     ControladorAviso ca = new ControladorAviso();
-    ControladorDoctor ctrld=new ControladorDoctor();
+    ControladorDoctor ctrld = new ControladorDoctor();
     Aviso a = new Aviso();
     Padre p = new Padre();
 
@@ -48,20 +48,21 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
             ImageIcon icono = new ImageIcon(foto);
             if (icono != null) {
                 lblfoto.setIcon(icono);
+                lblfoto.updateUI();
             } else {
-                lblfoto.setIcon(null);
+                lblfoto.updateUI();
             }
-            lblfoto.updateUI();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         txtemail.setEditable(false);
-        try{
+        try {
             con.conectarme();
             cc.setCon(con.getCon());
             cc.consultar_hijos(combo_hijos);
-        
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -139,6 +140,9 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, -1, -1));
+
+        lblfoto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padre (2).png"))); // NOI18N
         getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 140, 190));
 
         lblnombre.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -155,22 +159,22 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void combo_hijosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_hijosItemStateChanged
-        if (combo_hijos.getSelectedIndex()>0) {
-            try{
+        if (combo_hijos.getSelectedIndex() > 0) {
+            try {
                 con.conectarme();
                 ca.setCon(con.getCon());
                 char cadena[];
-                cadena=combo_hijos.getSelectedItem().toString().toCharArray();
-                idhijo=Integer.parseInt(String.valueOf(cadena[0]));
+                cadena = combo_hijos.getSelectedItem().toString().toCharArray();
+                idhijo = Integer.parseInt(String.valueOf(cadena[0]));
                 ca.sacarpadre(idhijo);
                 ca.consultaremail(idpadre);
                 txtemail.setText(ControladorAviso.email);
                 ca.consultarhijo(idhijo);
                 ca.consultarfechas(idhijo);
-                txtmensaje.setText("Le informamos que "+ControladorAviso.nombrehijo.toUpperCase()+" "
-                    + ""+ControladorAviso.apellidohijo.toUpperCase()+", identificado con RC. "+ControladorAviso.registrocivil+
-                    ". Tendra su proxima vacuna el dia: "+ControladorAviso.fecha);
-            }catch(SQLException e){
+                txtmensaje.setText("Le informamos que " + ControladorAviso.nombrehijo.toUpperCase() + " "
+                        + "" + ControladorAviso.apellidohijo.toUpperCase() + ", identificado con RC. " + ControladorAviso.registrocivil
+                        + ". Tendra su proxima vacuna el dia: " + ControladorAviso.fecha);
+            } catch (SQLException e) {
                 System.out.println(e);
             }
         }
@@ -185,7 +189,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
         // TODO add your handling code here:
-        GUI_MenuDoctor gm=new GUI_MenuDoctor();
+        GUI_MenuDoctor gm = new GUI_MenuDoctor();
         gm.setVisible(true);
         gm.setLocationRelativeTo(null);
         this.dispose();

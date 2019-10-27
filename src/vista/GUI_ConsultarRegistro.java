@@ -21,7 +21,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
 
     ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
     Conexion cn = new Conexion();
-    ControladorPadre ctrlp=new ControladorPadre();
+    ControladorPadre ctrlp = new ControladorPadre();
 
     public GUI_ConsultarRegistro() {
         initComponents();
@@ -34,10 +34,11 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
             ImageIcon icono = new ImageIcon(foto);
             if (icono != null) {
                 lblfoto.setIcon(icono);
+                lblfoto.updateUI();
             } else {
-                lblfoto.setIcon(null);
+                lblfoto.updateUI();
             }
-            lblfoto.updateUI();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,7 +47,6 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
             mostrarregistro();
-            
 
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
@@ -56,7 +56,7 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
     public void mostrarregistro() throws SQLException {
 
         String matriz[][] = new String[ctrl.consultar().size()][19];
-        for (int i = 0; i <ctrl.consultar().size(); i++) {
+        for (int i = 0; i < ctrl.consultar().size(); i++) {
             matriz[i][0] = String.valueOf(ctrl.listarhijo().get(i).getIdhijo());
             matriz[i][1] = ctrl.listarhijo().get(i).getPrimer_nombre();
             matriz[i][2] = ctrl.listarhijo().get(i).getPrimer_apellido();
@@ -75,11 +75,11 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
             matriz[i][15] = ctrl.listarfechas().get(i).getIdregistro();
             matriz[i][16] = ctrl.listarfechas().get(i).getFecha_aplicacion();
             matriz[i][17] = ctrl.listarfechas().get(i).getFecha_proxima();
-            matriz[i][18]=ctrl.listarfechas().get(i).getDosis();
+            matriz[i][18] = ctrl.listarfechas().get(i).getDosis();
 
         }
 
-        tabla_hijo.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idhijo", "Nombre-Hijo", "Apellido-Hijo", "Registro Civil", "idpadre", "Nombre-Padre", "Apellido-Padre", "CC-Padre", "iddoctor", "Nombre-Doctor", "Apellido-Doctor", "CC-Doctor", "Clinica", "idvacuna", "Vacuna aplicada", "idregistro", "Fecha aplicacion", "Fecha proxima","Dosis"}));
+        tabla_hijo.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idhijo", "Nombre-Hijo", "Apellido-Hijo", "Registro Civil", "idpadre", "Nombre-Padre", "Apellido-Padre", "CC-Padre", "iddoctor", "Nombre-Doctor", "Apellido-Doctor", "CC-Doctor", "Clinica", "idvacuna", "Vacuna aplicada", "idregistro", "Fecha aplicacion", "Fecha proxima", "Dosis"}));
 
     }
 
@@ -126,6 +126,8 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
+
+        lblfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/padre (2).png"))); // NOI18N
         getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 160));
 
         lblnombre.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
