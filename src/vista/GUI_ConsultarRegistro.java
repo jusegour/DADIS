@@ -22,9 +22,10 @@ public class GUI_ConsultarRegistro extends javax.swing.JFrame {
     ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
     Conexion cn = new Conexion();
     ControladorPadre ctrlp = new ControladorPadre();
-
+private static final ImageIcon icono = new ImageIcon(GUI_ConsultarRegistro.class.getResource("/imagenes/jeringa.png"));
     public GUI_ConsultarRegistro() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombrepadre + " " + ControladorLogin.apellidopadre);
         try {

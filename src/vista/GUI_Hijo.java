@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Hijo;
@@ -31,9 +32,11 @@ public class GUI_Hijo extends javax.swing.JFrame {
     Hijo hijo = new Hijo();
     public static int idhijo;
 
+    private static final ImageIcon icono = new ImageIcon(GUI_Hijo.class.getResource("/imagenes/jeringa.png"));
     public GUI_Hijo() {
 
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         btnRegistro.setEnabled(false);
         txtid.setEditable(false);

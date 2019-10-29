@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -27,10 +28,12 @@ import modelo.Padre;
 public class Login extends javax.swing.JFrame {
 
     public static String user, tipousuario;
+    private static final ImageIcon icono = new ImageIcon(Login.class.getResource("/imagenes/jeringa.png"));
 
     public Login() throws ParseException, UnsupportedLookAndFeelException {
 
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }

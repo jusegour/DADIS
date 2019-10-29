@@ -28,9 +28,10 @@ public class GUI_Padre extends javax.swing.JFrame {
     Conexion con = new Conexion();
     Padre p = new Padre();
     public static int idpadre;
-
+private static final ImageIcon icono = new ImageIcon(GUI_Padre.class.getResource("/imagenes/jeringa.png"));
     public GUI_Padre() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombrepadre + " " + ControladorLogin.apellidopadre);
         try {

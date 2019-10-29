@@ -27,9 +27,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     ControladorDoctor ctrl = new ControladorDoctor();
     Conexion con = new Conexion();
     CargarCombos cc = new CargarCombos();
-
+    private static final ImageIcon icono = new ImageIcon(GUI_AgregarRegistro.class.getResource("/imagenes/jeringa.png"));
     public GUI_AgregarRegistro() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombredoctor + " " + ControladorLogin.apellidodoctor);
         try {

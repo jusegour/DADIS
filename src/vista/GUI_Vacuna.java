@@ -10,6 +10,7 @@ import controlador.ControladorHijo;
 import controlador.ControladorVacuna;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Hijo;
@@ -22,12 +23,14 @@ import modelo.Vacuna;
 public class GUI_Vacuna extends javax.swing.JFrame {
 
     ControladorVacuna ctrl = new ControladorVacuna();
-
+    private static final ImageIcon icono = new ImageIcon(GUI_Vacuna.class.getResource("/imagenes/jeringa.png"));
     public GUI_Vacuna() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         txtid.setEnabled(false);
         txtnombre.setEditable(false);
+        
 
         Conexion cn = new Conexion();
         try {

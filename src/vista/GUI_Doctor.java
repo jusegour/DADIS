@@ -27,9 +27,10 @@ public class GUI_Doctor extends javax.swing.JFrame {
     public static int iddoctor;
     ControladorDoctor ctrl = new ControladorDoctor();
     Conexion c = new Conexion();
-
+private static final ImageIcon icono = new ImageIcon(GUI_Doctor.class.getResource("/imagenes/jeringa.png"));
     public GUI_Doctor() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombredoctor + " " + ControladorLogin.apellidodoctor);
         try {

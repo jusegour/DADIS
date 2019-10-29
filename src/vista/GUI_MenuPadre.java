@@ -8,6 +8,7 @@ package vista;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -16,11 +17,10 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class GUI_MenuPadre extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI_MenuPadre
-     */
+    private static final ImageIcon icono = new ImageIcon(GUI_MenuPadre.class.getResource("/imagenes/jeringa.png"));
     public GUI_MenuPadre() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }

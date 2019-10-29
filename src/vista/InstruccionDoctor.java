@@ -5,17 +5,18 @@
  */
 package vista;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author JUAN S. GOMEZ URIBE
  */
 public class InstruccionDoctor extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InstruccionDoctor
-     */
+    private static final ImageIcon icono = new ImageIcon(InstruccionDoctor.class.getResource("/imagenes/jeringa.png"));
     public InstruccionDoctor() {
         initComponents();
+        this.setIconImage(icono.getImage());
         txtinstruccion.setLineWrap(true);
         txtinstruccion.setEditable(false);
     }

@@ -5,6 +5,7 @@
  */
 package vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
@@ -14,11 +15,10 @@ import javax.swing.text.StyleConstants;
  */
 public class InstruccionPadre extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Instruccion
-     */
+    private static final ImageIcon icono = new ImageIcon(InstruccionPadre.class.getResource("/imagenes/jeringa.png"));
     public InstruccionPadre() {
         initComponents();
+        this.setIconImage(icono.getImage());
         txtinstruccion.setLineWrap(true);
         txtinstruccion.setEditable(false);
         

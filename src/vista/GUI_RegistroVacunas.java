@@ -31,11 +31,12 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
     ControladorAdministrador ctrl = new ControladorAdministrador();
     ControladorDoctor cd=new ControladorDoctor();
     public static int idhijo, idpadre;
-    
+    private static final ImageIcon icono = new ImageIcon(GUI_RegistroVacunas.class.getResource("/imagenes/jeringa.png"));
     Conexion cn = new Conexion();
 
     public GUI_RegistroVacunas() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         lblnombre.setText(lblnombre.getText()+" "+ControladorLogin.nombredoctor+" "+ControladorLogin.apellidodoctor);
         try{

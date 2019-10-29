@@ -8,6 +8,7 @@ package vista;
 import controlador.Conexion;
 import controlador.ControladorVacuna;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Vacuna;
 
@@ -17,11 +18,10 @@ import modelo.Vacuna;
  */
 public class GUI_AgregarVacuna extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI_AgregarVacuna
-     */
+    private static final ImageIcon icono = new ImageIcon(GUI_AgregarVacuna.class.getResource("/imagenes/jeringa.png"));
     public GUI_AgregarVacuna() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
     }
 

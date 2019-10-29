@@ -32,9 +32,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     public static int idhijo, idpadre;
     Hijo h = new Hijo();
 
-    private Timer tiempo;
-    int contador;
-    public final static int TWO_SECONDS = 5;
+    private static final ImageIcon icono = new ImageIcon(GUI_EnvioAviso.class.getResource("/imagenes/jeringa.png"));
 
     CargarCombos cc = new CargarCombos();
     Conexion con = new Conexion();
@@ -45,6 +43,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
     public GUI_EnvioAviso() {
         initComponents();
+        this.setIconImage(icono.getImage());
         lblaviso.setVisible(false);
         btnEnviar.setEnabled(false);
         this.setResizable(false);
