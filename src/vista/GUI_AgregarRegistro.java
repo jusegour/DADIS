@@ -70,6 +70,16 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     }
 
+    public boolean isNumeric(String n) {
+        try {
+            Integer.parseInt(n);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,7 +197,6 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
-        
         if (combo_hijos.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un hijo");
         } else if (combo_vacunas.getSelectedIndex() == 0) {
@@ -197,9 +206,15 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         } else {
             //SACAR EL id
             String hijo = combo_hijos.getSelectedItem().toString();
-            char cadenahijo[] = hijo.toCharArray();
-            System.out.println(cadenahijo[0]);
-            int idhijo = Integer.parseInt(String.valueOf(cadenahijo[0]));
+            String id = "";
+            for (int i = 0; i < hijo.length(); i++) {
+                if (isNumeric(String.valueOf(hijo.charAt(i)))) {
+                    id += hijo.charAt(i);
+                }
+            }
+            System.out.println(id);
+
+            int idhijo = Integer.parseInt(id);
             try {
                 con.conectarme();
                 cc.setCon(con.getCon());
@@ -208,16 +223,21 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                 Logger.getLogger(GUI_AgregarRegistro.class.getName()).log(Level.SEVERE, null, ex);
             }
             String vacuna = combo_vacunas.getSelectedItem().toString();
-            char cadenavacuna[] = vacuna.toCharArray();
-            System.out.println(cadenavacuna[0]);
+            String idv = "";
+            for (int i = 0; i < vacuna.length(); i++) {
+                if (isNumeric(String.valueOf(vacuna.charAt(i)))) {
+                    idv += vacuna.charAt(i);
+                }
+            }
+            System.out.println(idv);
 
             RegistroVacuna rg = new RegistroVacuna();
             Conexion con = new Conexion();
             ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
-            rg.setIdhijo(String.valueOf(cadenahijo[0]));
+            rg.setIdhijo(id);
             rg.setIdpadre(String.valueOf(CargarCombos.idpadre));
             rg.setIddoctor(String.valueOf(ControladorLogin.iddoctor));
-            rg.setIdvacuna(String.valueOf(cadenavacuna[0]));
+            rg.setIdvacuna(idv);
             rg.setFecha_aplicacion(spin_dia.getValue() + "/" + (mes.getMonth() + 1) + "/" + anio.getYear());
             rg.setFecha_proxima(dia_prox.getValue() + "/" + (mes_prox.getMonth() + 1) + "/" + anio_prox.getYear());
             rg.setDosis(txtdosis.getText());
