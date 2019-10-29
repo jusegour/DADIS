@@ -25,10 +25,11 @@ public class GUI_AgregarVacuna extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public void limpiar(){
-    txtnombre.setText("");
-    
+    public void limpiar() {
+        txtnombre.setText("");
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -80,36 +81,40 @@ public class GUI_AgregarVacuna extends javax.swing.JFrame {
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Vacuna pa = new Vacuna();
-        pa.setNombre(txtnombre.getText());
-       
-        
+
         ControladorVacuna ctrl = new ControladorVacuna();
         Conexion con = new Conexion();
 
-        try {
-            con.conectarme();
-            ctrl.setCon(con.getCon());
-            ctrl.registrar(pa);
-            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
-            limpiar();
+        if (txtnombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Digite el nombre");
+        } else {
+            pa.setNombre(txtnombre.getText());
+            try {
+                con.conectarme();
+                ctrl.setCon(con.getCon());
+                ctrl.registrar(pa);
+                JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
+                limpiar();
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
+
     }//GEN-LAST:event_btnregistrarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
-        
+
         if (Login.tipousuario.equalsIgnoreCase("administrador")) {
-            GUI_AdminVacuna av=new GUI_AdminVacuna();
+            GUI_AdminVacuna av = new GUI_AdminVacuna();
             av.setVisible(true);
             av.setLocationRelativeTo(null);
             this.dispose();
-        }else{
-        GUI_Vacuna p = new GUI_Vacuna();
-        this.dispose();
-        p.setVisible(true);
-        p.setLocationRelativeTo(null);
+        } else {
+            GUI_Vacuna p = new GUI_Vacuna();
+            this.dispose();
+            p.setVisible(true);
+            p.setLocationRelativeTo(null);
         }
     }//GEN-LAST:event_btnsalirActionPerformed
 

@@ -54,18 +54,21 @@ public class ControladorAviso extends Conexion {
             t.connect(emisor, contrasenia);
             t.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
             t.close();
-            JOptionPane.showMessageDialog(null, "Correo enviado exitosamente");
+            JOptionPane.showMessageDialog(null, "Enviado Correctamente");
+            
 
         } catch (AddressException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (MessagingException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
     }
-    
-    public void sacarpadre(int i) throws SQLException{
-    PreparedStatement ps = null;
+
+    public void sacarpadre(int i) throws SQLException {
+        PreparedStatement ps = null;
         ResultSet rs = null;
         String SQL = "SELECT idpadre from hijo where idhijo=?";
         ps = this.getCon().prepareStatement(SQL);
@@ -102,19 +105,20 @@ public class ControladorAviso extends Conexion {
                 nombrehijo = rs.getString(1);
                 apellidohijo = rs.getString(2);
                 registrocivil = rs.getString(3);
-                
+
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAviso.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
 
     }
 
-    public void consultarfechas(int i) {
+    public String consultarfechas(int i) {
         PreparedStatement ps = null;
         ResultSet rs = null;
+        String respuesta="";
         String sql = "select fecha_proxima from registro_vacunas where idhijo=? and Aviso=?";
         try {
             ps = this.getCon().prepareStatement(sql);
@@ -123,29 +127,32 @@ public class ControladorAviso extends Conexion {
             rs = ps.executeQuery();
             if (rs.next()) {
                 fecha = rs.getString(1);
+                
+            } else {
+               respuesta="Este niño tiene sus vacunas al dia"; 
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAviso.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return respuesta;
     }
-    
-    public boolean cambiarestado(int idhijo){
-    PreparedStatement ps=null;
-    String sql="update registro_vacunas set Aviso=? where idhijo=? and fecha_proxima=?";
+
+    public boolean cambiarestado(int idhijo) {
+        PreparedStatement ps = null;
+        String sql = "update registro_vacunas set Aviso=? where idhijo=? and fecha_proxima=?";
         try {
-            ps=this.getCon().prepareStatement(sql);
+            ps = this.getCon().prepareStatement(sql);
             ps.setString(1, "Si");
-            ps.setInt(2, idhijo );
+            ps.setInt(2, idhijo);
             ps.setString(3, ControladorAviso.fecha);
-            
+
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAviso.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    
-    
+
     }
 
 }

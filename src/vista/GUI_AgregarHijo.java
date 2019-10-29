@@ -10,6 +10,7 @@ import controlador.ControladorHijo;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Hijo;
 
@@ -19,11 +20,10 @@ import modelo.Hijo;
  */
 public class GUI_AgregarHijo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI_AgregarHijo
-     */
+    private static final ImageIcon icono = new ImageIcon(GUI_AgregarHijo.class.getResource("/imagenes/jeringa.png"));
     public GUI_AgregarHijo() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
     }
 
@@ -240,6 +240,13 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+
+        if (validar < '0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length() == 2) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
@@ -264,46 +271,62 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length()==10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Hijo pa = new Hijo();
-        pa.setPrimer_nombre(txtpnombre.getText());
-        pa.setSegundo_nombre(txtsnombre.getText());
-        pa.setPrimer_apellido(txtpapellido.getText());
-        pa.setSegundo_apellido(txtsapellido.getText());
-        pa.setEdad(txtedad.getText());
-        pa.setDireccion(txtdireccion.getText());
-        String fecha = "";
 
-        try {
-            String formato = fecha_nacimiento.getDateFormatString();
-            Date date = fecha_nacimiento.getDate();
-            SimpleDateFormat sdf = new SimpleDateFormat(formato);
-            fecha = String.valueOf(sdf.format(date));
+        if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty()
+                || txtsapellido.getText().isEmpty() || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty()
+                || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0 || txtidentificacion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Al menos elija una FECHA DE NACIMIENTO VALIDA ", "Error..!!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            pa.setPrimer_nombre(txtpnombre.getText());
+            pa.setSegundo_nombre(txtsnombre.getText());
+            pa.setPrimer_apellido(txtpapellido.getText());
+            pa.setSegundo_apellido(txtsapellido.getText());
+            pa.setEdad(txtedad.getText());
+            pa.setDireccion(txtdireccion.getText());
+            String fecha = "";
 
+            try {
+                String formato = fecha_nacimiento.getDateFormatString();
+                Date date = fecha_nacimiento.getDate();
+                SimpleDateFormat sdf = new SimpleDateFormat(formato);
+                fecha = String.valueOf(sdf.format(date));
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Al menos elija una FECHA DE NACIMIENTO VALIDA ", "Error..!!", JOptionPane.ERROR_MESSAGE);
+
+            }
+            pa.setFecha_nacimiento(fecha);
+            pa.setEstrato(combo_estrato.getSelectedItem().toString());
+            pa.setSexo(combo_sexo.getSelectedItem().toString());
+            pa.setIdentificacion(txtidentificacion.getText());
+
+            ControladorHijo ctrl = new ControladorHijo();
+            Conexion con = new Conexion();
+
+            try {
+                con.conectarme();
+                ctrl.setCon(con.getCon());
+                ctrl.registrar(pa);
+                JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
+                limpiar();
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
-        pa.setFecha_nacimiento(fecha);
-        pa.setEstrato(combo_estrato.getSelectedItem().toString());
-        pa.setSexo(combo_sexo.getSelectedItem().toString());
-        pa.setIdentificacion(txtidentificacion.getText());
 
-        ControladorHijo ctrl = new ControladorHijo();
-        Conexion con = new Conexion();
-
-        try {
-            con.conectarme();
-            ctrl.setCon(con.getCon());
-            ctrl.registrar(pa);
-            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
-            limpiar();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
     }//GEN-LAST:event_btnregistrarActionPerformed
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed

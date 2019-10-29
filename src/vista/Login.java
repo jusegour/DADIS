@@ -7,6 +7,7 @@ package vista;
 
 import controlador.Conexion;
 import controlador.ControladorLogin;
+import java.awt.event.KeyEvent;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -28,7 +29,7 @@ public class Login extends javax.swing.JFrame {
     public static String user, tipousuario;
 
     public Login() throws ParseException, UnsupportedLookAndFeelException {
-        
+
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -106,6 +107,11 @@ public class Login extends javax.swing.JFrame {
         txtpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtpasswordActionPerformed(evt);
+            }
+        });
+        txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpasswordKeyPressed(evt);
             }
         });
         getContentPane().add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 510, 160, -1));
@@ -236,6 +242,76 @@ public class Login extends javax.swing.JFrame {
         ap.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+    private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            user = txtusuario.getText();
+            if (txtusuario.getText().isEmpty() || txtpassword.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "NO DEJE CAMPOS VACIOS");
+            } else if (txtusuario.getText().isEmpty() && txtpassword.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No deje campos vacios");
+            } else {
+                if (combo_usuario.getSelectedIndex() == 2) {
+                    JFrame ventana = this;
+                    Padre p = new Padre();
+                    GUI_MenuPadre gp = new GUI_MenuPadre();
+                    GUI_AgregarPadre gap = new GUI_AgregarPadre();
+                    p.setUsuario(txtusuario.getText());
+                    String pass = new String(txtpassword.getPassword());
+                    p.setContraseña(pass);
+
+                    ControladorLogin cl = new ControladorLogin();
+                    Conexion cn = new Conexion();
+
+                    try {
+                        cn.conectarme();
+                        cl.setCon(cn.getCon());
+                        cl.validadPadre(p, ventana, gp, gap);
+                        user = txtusuario.getText();
+
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+                } else if (combo_usuario.getSelectedIndex() == 1) {
+                    JFrame ventana = this;
+                    GUI_MenuDoctor gd = new GUI_MenuDoctor();
+                    Doctor p = new Doctor();
+                    p.setUsuario(txtusuario.getText());
+                    String pass = new String(txtpassword.getPassword());
+                    p.setContraseña(pass);
+
+                    ControladorLogin cl = new ControladorLogin();
+                    Conexion cn = new Conexion();
+
+                    try {
+                        cn.conectarme();
+                        cl.setCon(cn.getCon());
+                        cl.validadDoctor(p, ventana, gd);
+                        user = txtusuario.getText();
+
+                    } catch (SQLException e) {
+                        JOptionPane.showMessageDialog(null, e);
+                    }
+
+                } else if (combo_usuario.getSelectedIndex() == 3) {
+                    String pass = new String(txtpassword.getPassword());
+                    if (txtusuario.getText().equalsIgnoreCase("root") && pass.equalsIgnoreCase("root")) {
+                        JOptionPane.showMessageDialog(null, "Acceso Concedido");
+                        user = txtusuario.getText();
+                        GUI_Administrador adm = new GUI_Administrador();
+                        adm.setVisible(true);
+                        adm.setLocationRelativeTo(null);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione Tipo de Usuario");
+                }
+            }
+            tipousuario = combo_usuario.getSelectedItem().toString();
+        }
+    }//GEN-LAST:event_txtpasswordKeyPressed
 
     /**
      * @param args the command line arguments

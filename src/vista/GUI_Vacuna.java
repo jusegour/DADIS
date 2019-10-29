@@ -20,14 +20,15 @@ import modelo.Vacuna;
  * @author JUAN S. GOMEZ URIBE
  */
 public class GUI_Vacuna extends javax.swing.JFrame {
-ControladorVacuna ctrl=new ControladorVacuna();
+
+    ControladorVacuna ctrl = new ControladorVacuna();
+
     public GUI_Vacuna() {
         initComponents();
         this.setResizable(false);
         txtid.setEnabled(false);
         txtnombre.setEditable(false);
-        
-        
+
         Conexion cn = new Conexion();
         try {
             cn.conectarme();
@@ -37,8 +38,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
             System.out.println("Error: " + e.toString());
         }
     }
-    
-    
+
     public void mostrarprogramas() throws SQLException {
         String matriz[][] = new String[ctrl.listarvacuna().size()][3];
         for (int i = 0; i < ctrl.listarvacuna().size(); i++) {
@@ -48,6 +48,7 @@ ControladorVacuna ctrl=new ControladorVacuna();
         }
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idvacuna", "Nombre"}));
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -216,6 +217,10 @@ ControladorVacuna ctrl=new ControladorVacuna();
         Vacuna pa = new Vacuna();
         ControladorVacuna ctrl = new ControladorVacuna();
         Conexion cn = new Conexion();
+        
+        if (txtid.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Vacuna no seleccionada");
+        }else{
         pa.setIdvacuna(Integer.parseInt(txtid.getText()));
         try {
             cn.conectarme();
@@ -230,37 +235,41 @@ ControladorVacuna ctrl=new ControladorVacuna();
             JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ELIMINAR: " + ex.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
             ex.printStackTrace();
         }
+        }
+        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         Vacuna pa = new Vacuna();
         ControladorVacuna cp = new ControladorVacuna();
         Conexion cn = new Conexion();
-        pa.setIdvacuna(Integer.parseInt(txtid.getText()));
-        pa.setNombre(txtnombre.getText());
-        
+        if (txtnombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Digite el nombre");
+        } else {
+            pa.setIdvacuna(Integer.parseInt(txtid.getText()));
+            pa.setNombre(txtnombre.getText());
 
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
 
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
         // TODO add your handling code here:
-        
 
-        
         txtnombre.setEditable(true);
 
         btnModificar.setEnabled(true);
@@ -269,8 +278,8 @@ ControladorVacuna ctrl=new ControladorVacuna();
         int fila = tablaprograma.getSelectedRow();
         txtid.setText(tablaprograma.getValueAt(fila, 0).toString());
         txtnombre.setText(tablaprograma.getValueAt(fila, 1).toString());
-        
-        
+
+
     }//GEN-LAST:event_tablaprogramaMouseClicked
 
     private void combobuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobuscarActionPerformed
@@ -293,8 +302,6 @@ ControladorVacuna ctrl=new ControladorVacuna();
                 for (int i = 0; i < lista.size(); i++) {
                     matriz[i][0] = String.valueOf(ctrl.listarvacuna().get(i).getIdvacuna());
                     matriz[i][1] = ctrl.listarvacuna().get(i).getNombre();
-                    
-                    
 
                 }
                 tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idVacuna", "Nombre"}));
@@ -306,13 +313,13 @@ ControladorVacuna ctrl=new ControladorVacuna();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
-       GUI_MenuDoctor gd=new GUI_MenuDoctor();
-       gd.setVisible(true);
-       gd.setLocationRelativeTo(null);
-       this.dispose();
+        GUI_MenuDoctor gd = new GUI_MenuDoctor();
+        gd.setVisible(true);
+        gd.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnmenuActionPerformed
 
-   public void limpiartabla() {
+    public void limpiartabla() {
         DefaultTableModel df = (DefaultTableModel) tablaprograma.getModel();
         int a = tablaprograma.getRowCount() - 1;
         for (int i = a; i >= 0; i--) {
@@ -323,12 +330,9 @@ ControladorVacuna ctrl=new ControladorVacuna();
     public void limpiar() {
         txtid.setText("");
         txtnombre.setText("");
-        
-        
-
-        
 
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

@@ -10,6 +10,7 @@ import controlador.ControladorAdministrador;
 import controlador.ControladorVacuna;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Vacuna;
@@ -21,15 +22,16 @@ import modelo.Vacuna;
 public class GUI_AdminVacuna extends javax.swing.JFrame {
 
     ControladorAdministrador ctrl = new ControladorAdministrador();
+    private static final ImageIcon icono = new ImageIcon(GUI_AdminVacuna.class.getResource("/imagenes/jeringa.png"));
 
     public GUI_AdminVacuna() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         txtid.setEnabled(false);
         txtnombre.setEditable(false);
 
-        
         Conexion cn = new Conexion();
         try {
             cn.conectarme();
@@ -252,23 +254,28 @@ public class GUI_AdminVacuna extends javax.swing.JFrame {
         Vacuna pa = new Vacuna();
         ControladorAdministrador cp = new ControladorAdministrador();
         Conexion cn = new Conexion();
-        pa.setIdvacuna(Integer.parseInt(txtid.getText()));
-        pa.setNombre(txtnombre.getText());
+        if (txtid.getText().isEmpty() || txtnombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
+        } else {
+            pa.setIdvacuna(Integer.parseInt(txtid.getText()));
+            pa.setNombre(txtnombre.getText());
 
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
 
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

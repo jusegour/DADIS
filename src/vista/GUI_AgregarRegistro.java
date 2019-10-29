@@ -23,7 +23,8 @@ import modelo.RegistroVacuna;
  * @author PC5
  */
 public class GUI_AgregarRegistro extends javax.swing.JFrame {
-    ControladorDoctor ctrl=new ControladorDoctor();
+
+    ControladorDoctor ctrl = new ControladorDoctor();
     Conexion con = new Conexion();
     CargarCombos cc = new CargarCombos();
 
@@ -39,10 +40,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             if (icono != null) {
                 lblfoto.setIcon(icono);
                 lblfoto.updateUI();
-            }else{
-            lblfoto.updateUI();
+            } else {
+                lblfoto.updateUI();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,11 +53,11 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         spin_dia.setMinimum(1);
         spin_dia.setMaximum(31);
         anio.setMinimum(2019);
-        anio.setMaximum(2019);
+
         dia_prox.setMinimum(1);
         dia_prox.setMaximum(31);
         anio_prox.setMinimum(2019);
-        anio_prox.setMaximum(2019);
+
         try {
             con.conectarme();
             cc.setCon(con.getCon());
@@ -109,7 +110,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Seleccione un Hijo");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, -1, -1));
 
         jLabel3.setText("Seleccione la vacuna aplicada");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
@@ -166,7 +167,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         jLabel12.setText("Dosis");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 630, 460));
@@ -186,41 +187,51 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
-        //SACAR EL id
-        String hijo = combo_hijos.getSelectedItem().toString();
-        char cadenahijo[] = hijo.toCharArray();
-        System.out.println(cadenahijo[0]);
-        int idhijo = Integer.parseInt(String.valueOf(cadenahijo[0]));
-        try {
-            con.conectarme();
-            cc.setCon(con.getCon());
-            cc.consultar_padres(idhijo);
-        } catch (SQLException ex) {
-            Logger.getLogger(GUI_AgregarRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        
+        if (combo_hijos.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione un hijo");
+        } else if (combo_vacunas.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Seleccione una vacuna");
+        } else if (txtdosis.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Digite la dosis");
+        } else {
+            //SACAR EL id
+            String hijo = combo_hijos.getSelectedItem().toString();
+            char cadenahijo[] = hijo.toCharArray();
+            System.out.println(cadenahijo[0]);
+            int idhijo = Integer.parseInt(String.valueOf(cadenahijo[0]));
+            try {
+                con.conectarme();
+                cc.setCon(con.getCon());
+                cc.consultar_padres(idhijo);
+            } catch (SQLException ex) {
+                Logger.getLogger(GUI_AgregarRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String vacuna = combo_vacunas.getSelectedItem().toString();
+            char cadenavacuna[] = vacuna.toCharArray();
+            System.out.println(cadenavacuna[0]);
+
+            RegistroVacuna rg = new RegistroVacuna();
+            Conexion con = new Conexion();
+            ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
+            rg.setIdhijo(String.valueOf(cadenahijo[0]));
+            rg.setIdpadre(String.valueOf(CargarCombos.idpadre));
+            rg.setIddoctor(String.valueOf(ControladorLogin.iddoctor));
+            rg.setIdvacuna(String.valueOf(cadenavacuna[0]));
+            rg.setFecha_aplicacion(spin_dia.getValue() + "/" + (mes.getMonth() + 1) + "/" + anio.getYear());
+            rg.setFecha_proxima(dia_prox.getValue() + "/" + (mes_prox.getMonth() + 1) + "/" + anio_prox.getYear());
+            rg.setDosis(txtdosis.getText());
+            try {
+                con.conectarme();
+                ctrl.setCon(con.getCon());
+                ctrl.registrar(rg);
+
+                JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
+            } catch (SQLException e) {
+                System.out.println(e.toString());
+            }
         }
-        String vacuna = combo_vacunas.getSelectedItem().toString();
-        char cadenavacuna[] = vacuna.toCharArray();
-        System.out.println(cadenavacuna[0]);
 
-        RegistroVacuna rg = new RegistroVacuna();
-        Conexion con = new Conexion();
-        ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
-        rg.setIdhijo(String.valueOf(cadenahijo[0]));
-        rg.setIdpadre(String.valueOf(CargarCombos.idpadre));
-        rg.setIddoctor(String.valueOf(ControladorLogin.iddoctor));
-        rg.setIdvacuna(String.valueOf(cadenavacuna[0]));
-        rg.setFecha_aplicacion(spin_dia.getValue() + "/" + (mes.getMonth()+1) + "/" + anio.getYear());
-        rg.setFecha_proxima(dia_prox.getValue() + "/" + (mes_prox.getMonth()+1) + "/" + anio_prox.getYear());
-        rg.setDosis(txtdosis.getText());
-        try {
-            con.conectarme();
-            ctrl.setCon(con.getCon());
-            ctrl.registrar(rg);
-
-            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
-        } catch (SQLException e) {
-
-        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

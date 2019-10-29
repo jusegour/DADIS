@@ -10,6 +10,7 @@ import controlador.ControladorAdministrador;
 import controlador.ControladorPadre;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Padre;
@@ -21,9 +22,12 @@ import modelo.Padre;
 public class GUI_AdminPadre extends javax.swing.JFrame {
 
     ControladorAdministrador ctrl = new ControladorAdministrador();
+    private static final ImageIcon icono = new ImageIcon(GUI_AdminPadre.class.getResource("/imagenes/jeringa.png"));
+    
 
     public GUI_AdminPadre() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
@@ -411,36 +415,45 @@ public class GUI_AdminPadre extends javax.swing.JFrame {
         Padre pa = new Padre();
         ControladorAdministrador cp = new ControladorAdministrador();
         Conexion cn = new Conexion();
-        pa.setIdpadre(Integer.parseInt(txtid.getText()));
-        pa.setPrimer_nombre(txtpnombre.getText());
-        pa.setSegundo_nombre(txtsnombre.getText());
-        pa.setPrimer_apellido(txtpapellido.getText());
-        pa.setSegundo_apellido(txtsapellido.getText());
-        pa.setEdad(Integer.parseInt(txtedad.getText()));
-        pa.setDireccion(txtdireccion.getText());
-        pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
-        pa.setEstrato(combo_estrato.getSelectedItem().toString());
-        pa.setSexo(combo_sexo.getSelectedItem().toString());
-        pa.setIdentificacion(txtidentificacion.getText());
-        pa.setEmail(txtemail.getText());
-        pa.setUsuario(txtusuario.getText());
-        String valorPass = new String(txtcontraseña.getPassword());
-        pa.setContraseña(valorPass);
 
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
+        if (txtid.getText().isEmpty() || txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
+                || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0
+                || txtidentificacion.getText().isEmpty() || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            pa.setIdpadre(Integer.parseInt(txtid.getText()));
+            pa.setPrimer_nombre(txtpnombre.getText());
+            pa.setSegundo_nombre(txtsnombre.getText());
+            pa.setPrimer_apellido(txtpapellido.getText());
+            pa.setSegundo_apellido(txtsapellido.getText());
+            pa.setEdad(Integer.parseInt(txtedad.getText()));
+            pa.setDireccion(txtdireccion.getText());
+            pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
+            pa.setEstrato(combo_estrato.getSelectedItem().toString());
+            pa.setSexo(combo_sexo.getSelectedItem().toString());
+            pa.setIdentificacion(txtidentificacion.getText());
+            pa.setEmail(txtemail.getText());
+            pa.setUsuario(txtusuario.getText());
+            String valorPass = new String(txtcontraseña.getPassword());
+            pa.setContraseña(valorPass);
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
+
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     public void limpiartabla() {
@@ -535,6 +548,13 @@ public class GUI_AdminPadre extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+
+        if (validar < '0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length() == 2) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
@@ -558,6 +578,13 @@ public class GUI_AdminPadre extends javax.swing.JFrame {
             evt.consume();
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+
+        if (validar < '0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length() == 10) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 

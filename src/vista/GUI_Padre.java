@@ -25,8 +25,8 @@ import modelo.Padre;
 public class GUI_Padre extends javax.swing.JFrame {
 
     ControladorPadre ctrl = new ControladorPadre();
-    Conexion con=new Conexion();
-    Padre p=new Padre();
+    Conexion con = new Conexion();
+    Padre p = new Padre();
     public static int idpadre;
 
     public GUI_Padre() {
@@ -44,12 +44,12 @@ public class GUI_Padre extends javax.swing.JFrame {
             } else {
                 lblfoto.updateUI();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        lblnombre.setText(lblnombre.getText()+" "+ControladorLogin.nombrepadre+" "+ControladorLogin.apellidopadre);
-        
+        lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombrepadre + " " + ControladorLogin.apellidopadre);
+
         txtid.setEditable(false);
         txtpnombre.setEditable(false);
         txtsnombre.setEditable(false);
@@ -65,7 +65,7 @@ public class GUI_Padre extends javax.swing.JFrame {
         txtusuario.setEditable(false);
         txtcontraseña.setEditable(false);
         btnModificar.setEnabled(false);
-       
+
         Conexion cn = new Conexion();
         try {
             cn.conectarme();
@@ -74,13 +74,11 @@ public class GUI_Padre extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
         }
-        
-        
+
     }
 
     public void mostrarprogramas() throws SQLException {
-        
-        
+
         String matriz[][] = new String[ctrl.listarpadre().size()][14];
         for (int i = 0; i < ctrl.listarpadre().size(); i++) {
             matriz[i][0] = String.valueOf(ctrl.listarpadre().get(i).getIdpadre());
@@ -100,10 +98,8 @@ public class GUI_Padre extends javax.swing.JFrame {
 
         }
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idPadre", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "edad", "direccion", "fecha_nacimiento", "estrato", "sexo", "identificacion", "email", "usuario", "contraseña"}));
-        
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -382,7 +378,6 @@ public class GUI_Padre extends javax.swing.JFrame {
         txtusuario.setEditable(true);
         txtcontraseña.setEditable(true);
         btnModificar.setEnabled(true);
-        
 
         int fila = tablaprograma.getSelectedRow();
         txtid.setText(tablaprograma.getValueAt(fila, 0).toString());
@@ -404,38 +399,47 @@ public class GUI_Padre extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         Padre pa = new Padre();
-        ControladorPadre cp=new ControladorPadre();
+        ControladorPadre cp = new ControladorPadre();
         Conexion cn = new Conexion();
-        pa.setIdpadre(Integer.parseInt(txtid.getText()));
-        pa.setPrimer_nombre(txtpnombre.getText());
-        pa.setSegundo_nombre(txtsnombre.getText());
-        pa.setPrimer_apellido(txtpapellido.getText());
-        pa.setSegundo_apellido(txtsapellido.getText());
-        pa.setEdad(Integer.parseInt(txtedad.getText()));
-        pa.setDireccion(txtdireccion.getText());
-        pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
-        pa.setEstrato(combo_estrato.getSelectedItem().toString());
-        pa.setSexo(combo_sexo.getSelectedItem().toString());
-        pa.setIdentificacion(txtidentificacion.getText());
-        pa.setEmail(txtemail.getText());
-        pa.setUsuario(txtusuario.getText());
-        String valorPass = new String(txtcontraseña.getPassword());
-        pa.setContraseña(valorPass);
 
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
+        if (txtid.getText().isEmpty() || txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
+                || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0
+                || txtidentificacion.getText().isEmpty() || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            pa.setIdpadre(Integer.parseInt(txtid.getText()));
+            pa.setPrimer_nombre(txtpnombre.getText());
+            pa.setSegundo_nombre(txtsnombre.getText());
+            pa.setPrimer_apellido(txtpapellido.getText());
+            pa.setSegundo_apellido(txtsapellido.getText());
+            pa.setEdad(Integer.parseInt(txtedad.getText()));
+            pa.setDireccion(txtdireccion.getText());
+            pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
+            pa.setEstrato(combo_estrato.getSelectedItem().toString());
+            pa.setSexo(combo_sexo.getSelectedItem().toString());
+            pa.setIdentificacion(txtidentificacion.getText());
+            pa.setEmail(txtemail.getText());
+            pa.setUsuario(txtusuario.getText());
+            String valorPass = new String(txtcontraseña.getPassword());
+            pa.setContraseña(valorPass);
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
+
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void txtsapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsapellidoActionPerformed
@@ -488,6 +492,12 @@ public class GUI_Padre extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length()==2) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
@@ -512,11 +522,17 @@ public class GUI_Padre extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length()==10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
-        GUI_MenuPadre mp=new GUI_MenuPadre();
+        GUI_MenuPadre mp = new GUI_MenuPadre();
         mp.setVisible(true);
         mp.setLocationRelativeTo(null);
         this.dispose();

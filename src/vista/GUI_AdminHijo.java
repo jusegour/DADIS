@@ -11,6 +11,7 @@ import controlador.ControladorHijo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Hijo;
@@ -22,11 +23,13 @@ import static vista.GUI_Hijo.idhijo;
  */
 public class GUI_AdminHijo extends javax.swing.JFrame {
 
-   ControladorAdministrador ctrl=new ControladorAdministrador();
-   Conexion cn=new Conexion();
-   
+    ControladorAdministrador ctrl = new ControladorAdministrador();
+    Conexion cn = new Conexion();
+    private static final ImageIcon icono = new ImageIcon(GUI_AdminHijo.class.getResource("/imagenes/jeringa.png"));
+
     public GUI_AdminHijo() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
         btnRegistro.setEnabled(false);
         txtid.setEditable(false);
@@ -74,6 +77,7 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion", "idpadre"}));
         System.out.println(ctrl.listarhijo().size());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,10 +131,10 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("GESTION DE HIJOS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 11, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel2.setText("Listado de Hijos");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 44, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -336,6 +340,11 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         jLabel5.setName("lblfondo"); // NOI18N
+        jLabel5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jLabel5KeyTyped(evt);
+            }
+        });
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 700));
 
         pack();
@@ -381,7 +390,6 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
     }//GEN-LAST:event_combobuscarActionPerformed
 
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
-        
 
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);
@@ -411,7 +419,6 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
         idhijo = Integer.parseInt(txtid.getText());
         System.out.println(idhijo);
 
-       
 
     }//GEN-LAST:event_tablaprogramaMouseClicked
 
@@ -423,32 +430,41 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
         Hijo pa = new Hijo();
         ControladorAdministrador cp = new ControladorAdministrador();
         Conexion cn = new Conexion();
-        pa.setIdhijo(Integer.parseInt(txtid.getText()));
-        pa.setPrimer_nombre(txtpnombre.getText());
-        pa.setSegundo_nombre(txtsnombre.getText());
-        pa.setPrimer_apellido(txtpapellido.getText());
-        pa.setSegundo_apellido(txtsapellido.getText());
-        pa.setEdad(txtedad.getText());
-        pa.setDireccion(txtdireccion.getText());
-        pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
-        pa.setEstrato(combo_estrato.getSelectedItem().toString());
-        pa.setSexo(combo_sexo.getSelectedItem().toString());
-        pa.setIdentificacion(txtidentificacion.getText());
 
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
+        if (txtid.getText().isEmpty() || txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty()
+                || txtsapellido.getText().isEmpty() || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty()
+                || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0 || txtidentificacion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            pa.setIdhijo(Integer.parseInt(txtid.getText()));
+            pa.setPrimer_nombre(txtpnombre.getText());
+            pa.setSegundo_nombre(txtsnombre.getText());
+            pa.setPrimer_apellido(txtpapellido.getText());
+            pa.setSegundo_apellido(txtsapellido.getText());
+            pa.setEdad(txtedad.getText());
+            pa.setDireccion(txtdireccion.getText());
+            pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
+            pa.setEstrato(combo_estrato.getSelectedItem().toString());
+            pa.setSexo(combo_sexo.getSelectedItem().toString());
+            pa.setIdentificacion(txtidentificacion.getText());
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
+
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     public void limpiartabla() {
@@ -548,6 +564,14 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+
+        if (validar < '0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length() == 2) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
@@ -572,6 +596,13 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+
+        if (validar < '0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length() == 10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
@@ -580,6 +611,10 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
         cr.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void jLabel5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel5KeyTyped
+
+    }//GEN-LAST:event_jLabel5KeyTyped
 
     /**
      * @param args the command line arguments

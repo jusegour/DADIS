@@ -30,8 +30,10 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
 
     FileInputStream fis;
     int longitudbytes;
+    private static final ImageIcon icono = new ImageIcon(GUI_AgregarPadre.class.getResource("/imagenes/jeringa.png"));
     public GUI_AgregarPadre() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
 
     }
@@ -374,6 +376,13 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length()==2) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtidentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentificacionKeyTyped
@@ -385,6 +394,12 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
             evt.consume();
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length()==10) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 

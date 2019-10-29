@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import modelo.Hijo;
 
 /**
@@ -195,7 +196,7 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
         getContentPane().add(lblregistros, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 680, 230, 20));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 1170, 700));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 1110, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -203,7 +204,9 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         Conexion cn = new Conexion();
-
+        if (txtidentificacion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Digite RC del Hijo");
+        }else{
         try {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
@@ -229,6 +232,8 @@ public class GUI_RegistroVacunas extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tabla_hijoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_hijoMouseClicked

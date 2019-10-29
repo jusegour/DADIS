@@ -30,9 +30,11 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
 
     FileInputStream fis;
     int longitudbytes;
+    private static final ImageIcon icono = new ImageIcon(GUI_AgregarDoctor.class.getResource("/imagenes/jeringa.png"));
 
     public GUI_AgregarDoctor() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
     }
 
@@ -254,6 +256,12 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length()==2) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
@@ -278,11 +286,24 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length()==10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Doctor pa = new Doctor();
 
+        if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
+                || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0
+                || txtidentificacion.getText().isEmpty() || combo_clinica.getSelectedIndex() == 0 || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty() || txttelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
+
+        }else{
         pa.setPrimer_nombre(txtpnombre.getText());
         pa.setSegundo_nombre(txtsnombre.getText());
         pa.setPrimer_apellido(txtpapellido.getText());
@@ -324,6 +345,8 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
+        }
+        
     }//GEN-LAST:event_btnregistrarActionPerformed
 
     private void txtsapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsapellidoActionPerformed

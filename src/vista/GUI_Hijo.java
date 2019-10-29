@@ -23,16 +23,16 @@ import modelo.RegistroVacuna;
  * @author JUAN S. GOMEZ URIBE
  */
 public class GUI_Hijo extends javax.swing.JFrame {
-    
+
     ControladorHijo ctrl = new ControladorHijo();
     ControladorRegistro_Vacuna rv = new ControladorRegistro_Vacuna();
     RegistroVacuna h = new RegistroVacuna();
     Conexion cn = new Conexion();
     Hijo hijo = new Hijo();
     public static int idhijo;
-    
+
     public GUI_Hijo() {
-        
+
         initComponents();
         this.setResizable(false);
         btnRegistro.setEnabled(false);
@@ -47,21 +47,21 @@ public class GUI_Hijo extends javax.swing.JFrame {
         combo_estrato.setEditable(false);
         combo_sexo.setEditable(false);
         txtidentificacion.setEditable(false);
-        
+
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
-        
+
         try {
             cn.conectarme();
             ctrl.setCon(cn.getCon());
             mostrarprogramas();
-            
+
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
         }
-        
+
     }
-    
+
     public void mostrarprogramas() throws SQLException {
         String matriz[][] = new String[ctrl.listarhijo().size()][12];
         for (int i = 0; i < ctrl.listarhijo().size(); i++) {
@@ -77,12 +77,12 @@ public class GUI_Hijo extends javax.swing.JFrame {
             matriz[i][9] = ctrl.listarhijo().get(i).getSexo();
             matriz[i][10] = ctrl.listarhijo().get(i).getIdentificacion();
             matriz[i][11] = String.valueOf(ctrl.listarhijo().get(i).getIdpadre());
-            
+
         }
         tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion", "idpadre"}));
         System.out.println(ctrl.listarhijo().size());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -336,13 +336,13 @@ public class GUI_Hijo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
         if (combobuscar.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Seleccione medoto de busqueda");
         } else {
-            
+
             Conexion cn = new Conexion();
-            
+
             try {
                 cn.conectarme();
                 ctrl.setCon(cn.getCon());
@@ -360,16 +360,16 @@ public class GUI_Hijo extends javax.swing.JFrame {
                     matriz[i][8] = ctrl.listarhijo().get(i).getEstrato();
                     matriz[i][9] = ctrl.listarhijo().get(i).getSexo();
                     matriz[i][10] = ctrl.listarhijo().get(i).getIdentificacion();
-                    
+
                 }
                 tablaprograma.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{"idHijo", "primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido", "Fecha_nacimiento", "Edad", "Direccion", "estrato", "sexo", "identificacion", "idpadre"}));
-                
+
             } catch (SQLException e) {
                 System.out.println(e);
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-    
+
     public void limpiartabla() {
         DefaultTableModel df = (DefaultTableModel) tablaprograma.getModel();
         int a = tablaprograma.getRowCount() - 1;
@@ -377,7 +377,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
             df.removeRow(df.getRowCount() - 1);
         }
     }
-    
+
     public void limpiar() {
         txtid.setText("");
         txtpnombre.setText("");
@@ -386,9 +386,9 @@ public class GUI_Hijo extends javax.swing.JFrame {
         txtsapellido.setText("");
         txtedad.setText("");
         txtdireccion.setText("");
-        
+
         txtidentificacion.setText("");
-        
+
     }
     private void combobuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobuscarActionPerformed
         // TODO add your handling code here:
@@ -396,9 +396,9 @@ public class GUI_Hijo extends javax.swing.JFrame {
 
     private void tablaprogramaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaprogramaMouseClicked
         btnRegistro.setEnabled(true);
-        int filah=tablaprograma.getSelectedRow();
+        int filah = tablaprograma.getSelectedRow();
         idhijo = Integer.parseInt(tablaprograma.getValueAt(filah, 0).toString());
-        
+
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);
         txtpapellido.setEditable(true);
@@ -409,10 +409,10 @@ public class GUI_Hijo extends javax.swing.JFrame {
         combo_estrato.setEditable(true);
         combo_sexo.setEditable(true);
         txtidentificacion.setEditable(true);
-        
+
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
-        
+
         int fila = tablaprograma.getSelectedRow();
         txtid.setText(tablaprograma.getValueAt(fila, 0).toString());
         txtpnombre.setText(tablaprograma.getValueAt(fila, 1).toString());
@@ -424,13 +424,13 @@ public class GUI_Hijo extends javax.swing.JFrame {
         combo_estrato.setSelectedItem(tablaprograma.getValueAt(fila, 8));
         combo_sexo.setSelectedItem(tablaprograma.getValueAt(fila, 9));
         txtidentificacion.setText(tablaprograma.getValueAt(fila, 10).toString());
-        
+
         System.out.println(idhijo);
-        
+
         try {
             cn.conectarme();
             rv.setCon(cn.getCon());
-            
+
             String matriz[][] = new String[rv.consultar().size()][7];
             for (int i = 0; i < rv.consultar().size(); i++) {
                 matriz[i][0] = rv.consultar().get(i).getIdregistro();
@@ -441,16 +441,15 @@ public class GUI_Hijo extends javax.swing.JFrame {
                 matriz[i][5] = rv.consultar().get(i).getIdvacuna();
                 matriz[i][6] = rv.consultar().get(i).getFecha_proxima();
             }
-            
+
             for (int i = 0; i < matriz.length; i++) {
                 System.out.println(Arrays.toString(matriz[i]));
             }
-            
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
 
     }//GEN-LAST:event_tablaprogramaMouseClicked
 
@@ -458,32 +457,41 @@ public class GUI_Hijo extends javax.swing.JFrame {
         Hijo pa = new Hijo();
         ControladorHijo cp = new ControladorHijo();
         Conexion cn = new Conexion();
-        pa.setIdhijo(Integer.parseInt(txtid.getText()));
-        pa.setPrimer_nombre(txtpnombre.getText());
-        pa.setSegundo_nombre(txtsnombre.getText());
-        pa.setPrimer_apellido(txtpapellido.getText());
-        pa.setSegundo_apellido(txtsapellido.getText());
-        pa.setEdad(txtedad.getText());
-        pa.setDireccion(txtdireccion.getText());
-        pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
-        pa.setEstrato(combo_estrato.getSelectedItem().toString());
-        pa.setSexo(combo_sexo.getSelectedItem().toString());
-        pa.setIdentificacion(txtidentificacion.getText());
-        
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
-            
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+
+        if (txtid.getText().isEmpty() || txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty()
+                || txtsapellido.getText().isEmpty() || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty()
+                || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0 || txtidentificacion.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
+
+        } else {
+            pa.setIdhijo(Integer.parseInt(txtid.getText()));
+            pa.setPrimer_nombre(txtpnombre.getText());
+            pa.setSegundo_nombre(txtsnombre.getText());
+            pa.setPrimer_apellido(txtpapellido.getText());
+            pa.setSegundo_apellido(txtsapellido.getText());
+            pa.setEdad(txtedad.getText());
+            pa.setDireccion(txtdireccion.getText());
+            pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
+            pa.setEstrato(combo_estrato.getSelectedItem().toString());
+            pa.setSexo(combo_sexo.getSelectedItem().toString());
+            pa.setIdentificacion(txtidentificacion.getText());
+
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
+
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -497,7 +505,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
             ctrl.eliminar(pa);
             limpiar();
             limpiartabla();
-            
+
             mostrarprogramas();
             JOptionPane.showMessageDialog(this, "REGISTRO ELIMINADO EXITOSAMENTE: ", "Gestion de programas academicos", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
@@ -507,7 +515,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        
+
         GUI_AgregarHijo apa = new GUI_AgregarHijo();
         apa.setVisible(true);
         this.hide();
@@ -519,73 +527,86 @@ public class GUI_Hijo extends javax.swing.JFrame {
 
     private void txtsapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsapellidoKeyTyped
         char validar = evt.getKeyChar();
-        
+
         if (Character.isDigit(validar)) {
-            
+
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo letras");
         }
     }//GEN-LAST:event_txtsapellidoKeyTyped
 
     private void txtsnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsnombreKeyTyped
         char validar = evt.getKeyChar();
-        
+
         if (Character.isDigit(validar)) {
-            
+
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo letras");
         }
     }//GEN-LAST:event_txtsnombreKeyTyped
 
     private void txtpapellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpapellidoKeyTyped
         char validar = evt.getKeyChar();
-        
+
         if (Character.isDigit(validar)) {
-            
+
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo letras");
         }
     }//GEN-LAST:event_txtpapellidoKeyTyped
 
     private void txtedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtedadKeyTyped
         char validar = evt.getKeyChar();
-        
+
         if (Character.isLetter(validar)) {
-            
+
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length()==2) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
         char validar = evt.getKeyChar();
-        
+
         if (Character.isDigit(validar)) {
-            
+
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo letras");
         }
+        
     }//GEN-LAST:event_txtpnombreKeyTyped
 
     private void txtidentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentificacionKeyTyped
         char validar = evt.getKeyChar();
-        
+
         if (Character.isLetter(validar)) {
-            
+
             getToolkit().beep();
             evt.consume();
-            
+
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length()==10) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
@@ -601,12 +622,12 @@ public class GUI_Hijo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        
+
         GUI_MenuPadre mp = new GUI_MenuPadre();
         mp.setVisible(true);
         mp.setLocationRelativeTo(null);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnMenuActionPerformed
 
     /**

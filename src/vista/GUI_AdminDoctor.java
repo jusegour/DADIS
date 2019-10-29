@@ -10,6 +10,7 @@ import controlador.ControladorAdministrador;
 import controlador.ControladorDoctor;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Doctor;
@@ -21,9 +22,11 @@ import modelo.Doctor;
 public class GUI_AdminDoctor extends javax.swing.JFrame {
 
     ControladorAdministrador ctrl = new ControladorAdministrador();
-
+    private static final ImageIcon icono = new ImageIcon(GUI_AdminDoctor.class.getResource("/imagenes/jeringa.png"));
+    
     public GUI_AdminDoctor() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
 
         txtid.setEditable(false);
@@ -329,6 +332,12 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
         jLabel5.setText("Telefono");
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 520, -1, -1));
+
+        txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txttelefonoKeyTyped(evt);
+            }
+        });
         jPanel5.add(txttelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 517, 103, -1));
 
         btnEliminar.setText("Eliminar");
@@ -457,40 +466,56 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
         los cambios
          */
 
+        if (txttelefono.getText().length() < 10) {
+            JOptionPane.showMessageDialog(null, "Numero de telefono debe tener 10 digitos");
+        }
+        if (txtidentificacion.getText().length() < 10) {
+            JOptionPane.showMessageDialog(null, "Numero de identificacion debe tener 10 digitos");
+        }
+
         Doctor pa = new Doctor();
         ControladorAdministrador cp = new ControladorAdministrador();
         Conexion cn = new Conexion();
-        pa.setIddoctor(txtid.getText());
-        pa.setPrimer_nombre(txtpnombre.getText());
-        pa.setSegundo_nombre(txtsnombre.getText());
-        pa.setPrimer_apellido(txtpapellido.getText());
-        pa.setSegundo_apellido(txtsapellido.getText());
-        pa.setEdad(txtedad.getText());
-        pa.setDireccion(txtdireccion.getText());
-        pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
-        pa.setEstrato(combo_estrato.getSelectedItem().toString());
-        pa.setSexo(combo_sexo.getSelectedItem().toString());
-        pa.setIdentificacion(txtidentificacion.getText());
-        pa.setClinica(combo_clinica.getSelectedItem().toString());
-        pa.setUsuario(txtusuario.getText());
-        String valorPass = new String(txtcontraseña.getPassword());
-        pa.setContraseña(valorPass);
-        pa.setTelefono(txttelefono.getText());
+        if (txtid.getText().isEmpty() || txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
+                || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0
+                || txtidentificacion.getText().isEmpty() || combo_clinica.getSelectedIndex() == 0 || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty() || txttelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
-        try {
-            cn.conectarme();
-            cp.setCon(cn.getCon());
-            cp.modificar(pa);
-            limpiar();
-            limpiartabla();
-            mostrarprogramas();
+        } else {
+            pa.setIddoctor(txtid.getText());
+            pa.setPrimer_nombre(txtpnombre.getText());
+            pa.setSegundo_nombre(txtsnombre.getText());
+            pa.setPrimer_apellido(txtpapellido.getText());
+            pa.setSegundo_apellido(txtsapellido.getText());
+            pa.setEdad(txtedad.getText());
+            pa.setDireccion(txtdireccion.getText());
+            pa.setFecha_nacimiento(fecha_nacimiento.getDate().toString());
+            pa.setEstrato(combo_estrato.getSelectedItem().toString());
+            pa.setSexo(combo_sexo.getSelectedItem().toString());
+            pa.setIdentificacion(txtidentificacion.getText());
+            pa.setClinica(combo_clinica.getSelectedItem().toString());
+            pa.setUsuario(txtusuario.getText());
+            String valorPass = new String(txtcontraseña.getPassword());
+            pa.setContraseña(valorPass);
+            pa.setTelefono(txttelefono.getText());
 
-            JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "DADIS", JOptionPane.INFORMATION_MESSAGE);
+            try {
+                cn.conectarme();
+                cp.setCon(cn.getCon());
+                cp.modificar(pa);
+                limpiar();
+                limpiartabla();
+                mostrarprogramas();
 
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "DADIS", JOptionPane.INFORMATION_MESSAGE);
-            e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "REGISTRO ACTUALIZADO EXITOSAMENTE: ", "DADIS", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "DADIS", JOptionPane.INFORMATION_MESSAGE);
+                e.printStackTrace();
+            }
+
         }
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -568,6 +593,9 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        if (validar <= '0') {
+            evt.consume();
+        }
 
 
     }//GEN-LAST:event_txtedadKeyTyped
@@ -596,7 +624,21 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        if (txtidentificacion.getText().length() == 10) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtidentificacionKeyTyped
+
+    private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
+        char validar = evt.getKeyChar();
+        if (validar <= '0') {
+            evt.consume();
+        }
+        if (txttelefono.getText().length() == 10) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txttelefonoKeyTyped
 
     public void limpiartabla() {
         DefaultTableModel df = (DefaultTableModel) tablaprograma.getModel();

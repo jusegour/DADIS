@@ -11,11 +11,14 @@ import controlador.ControladorAviso;
 import controlador.ControladorDoctor;
 import controlador.ControladorLogin;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import modelo.Aviso;
 import modelo.Hijo;
 import modelo.Padre;
@@ -29,6 +32,10 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     public static int idhijo, idpadre;
     Hijo h = new Hijo();
 
+    private Timer tiempo;
+    int contador;
+    public final static int TWO_SECONDS = 5;
+
     CargarCombos cc = new CargarCombos();
     Conexion con = new Conexion();
     ControladorAviso ca = new ControladorAviso();
@@ -38,6 +45,8 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
     public GUI_EnvioAviso() {
         initComponents();
+        lblaviso.setVisible(false);
+        btnEnviar.setEnabled(false);
         this.setResizable(false);
         txtmensaje.setLineWrap(true);
         lblnombre.setText(lblnombre.getText() + " " + ControladorLogin.nombredoctor + " " + ControladorLogin.apellidodoctor);
@@ -67,6 +76,10 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
         }
     }
 
+    
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,6 +89,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblaviso = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         combo_hijos = new javax.swing.JComboBox<>();
         txtemail = new javax.swing.JTextField();
@@ -93,6 +107,9 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblaviso.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(lblaviso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, 260, 20));
 
         jLabel1.setText("Hijos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
@@ -117,7 +134,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
                 btnEnviarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, -1, -1));
+        getContentPane().add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, -1));
 
         btnsalir.setText("Salir");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -170,10 +187,18 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
                 ca.consultaremail(idpadre);
                 txtemail.setText(ControladorAviso.email);
                 ca.consultarhijo(idhijo);
-                ca.consultarfechas(idhijo);
-                txtmensaje.setText("Le informamos que " + ControladorAviso.nombrehijo.toUpperCase() + " "
-                        + "" + ControladorAviso.apellidohijo.toUpperCase() + ", identificado con RC. " + ControladorAviso.registrocivil
-                        + ". Tendra su proxima vacuna el dia: " + ControladorAviso.fecha);
+                if (ca.consultarfechas(idhijo).isEmpty()) {
+                    lblaviso.setText("");
+                    txtmensaje.setText("Le informamos que " + ControladorAviso.nombrehijo.toUpperCase() + " "
+                            + "" + ControladorAviso.apellidohijo.toUpperCase() + ", identificado con RC. " + ControladorAviso.registrocivil
+                            + ". Tendra su proxima vacuna el dia: " + ControladorAviso.fecha);
+                    btnEnviar.setEnabled(true);
+                } else {
+                    lblaviso.setVisible(true);
+                    txtmensaje.setEditable(false);
+                    lblaviso.setText(ca.consultarfechas(idhijo));
+                }
+
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -245,6 +270,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblaviso;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblfoto;
     private javax.swing.JLabel lblnombre;

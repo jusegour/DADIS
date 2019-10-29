@@ -43,7 +43,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
             } else {
                 lblfoto.updateUI();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +64,7 @@ public class GUI_Doctor extends javax.swing.JFrame {
         txtcontraseña.setEditable(false);
         txttelefono.setEditable(false);
         btnModificar.setEnabled(false);
-        
+
         Conexion cn = new Conexion();
         try {
             cn.conectarme();
@@ -385,7 +385,6 @@ public class GUI_Doctor extends javax.swing.JFrame {
         txtcontraseña.setEditable(true);
         txttelefono.setEditable(true);
         btnModificar.setEnabled(true);
-        
 
         int fila = tablaprograma.getSelectedRow();
         txtid.setText(tablaprograma.getValueAt(fila, 0).toString());
@@ -412,6 +411,13 @@ public class GUI_Doctor extends javax.swing.JFrame {
         Doctor pa = new Doctor();
         ControladorDoctor cp = new ControladorDoctor();
         Conexion cn = new Conexion();
+
+        if (txtid.getText().isEmpty() || txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
+                || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0
+                || txtidentificacion.getText().isEmpty() || combo_clinica.getSelectedIndex() == 0 || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty() || txttelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
+
+        }else{
         pa.setIddoctor(txtid.getText());
         pa.setPrimer_nombre(txtpnombre.getText());
         pa.setSegundo_nombre(txtsnombre.getText());
@@ -443,6 +449,8 @@ public class GUI_Doctor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "NO SE REALIZÓ LA OPERACION ACTUALIZAR: " + e.toString(), "DADIS", JOptionPane.INFORMATION_MESSAGE);
             e.printStackTrace();
         }
+        }
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void txtsapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsapellidoActionPerformed
@@ -495,6 +503,12 @@ public class GUI_Doctor extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length()==2) {
+           evt.consume();
+        }
     }//GEN-LAST:event_txtedadKeyTyped
 
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
@@ -518,6 +532,12 @@ public class GUI_Doctor extends javax.swing.JFrame {
             evt.consume();
 
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtidentificacion.getText().length()==10) {
+            evt.consume();
         }
     }//GEN-LAST:event_txtidentificacionKeyTyped
 

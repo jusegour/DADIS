@@ -5,17 +5,18 @@
  */
 package vista;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Estudiante
  */
 public class GUI_Administrador extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUI_Administrador
-     */
+    private static final ImageIcon icono = new ImageIcon(GUI_Administrador.class.getResource("/imagenes/jeringa.png"));
     public GUI_Administrador() {
         initComponents();
+        this.setIconImage(icono.getImage());
         this.setResizable(false);
     }
 
