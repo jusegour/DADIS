@@ -8,7 +8,7 @@ package controlador;
 import java.sql.*;
 
 public class Conexion {
- private String driver = "com.mysql.jdbc.Driver";
+ private String driver = "com.mysql.cj.jdbc.Driver";
     private String url = "jdbc:mysql://localhost:3306/dadis?serverTimezone=UTC";
     private Connection con;
 
@@ -23,7 +23,7 @@ public class Conexion {
     public void conectarme() throws SQLException {
 
         try {
-            setCon(DriverManager.getConnection(url, "root", ""));
+            setCon(DriverManager.getConnection(url, "root", "1234"));
             Class.forName(driver);
         } catch (ClassNotFoundException cl) {
             System.out.println(cl.getMessage());
