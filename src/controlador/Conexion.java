@@ -23,7 +23,7 @@ public class Conexion {
     public void conectarme() throws SQLException {
 
         try {
-            setCon(DriverManager.getConnection(url, "root", "1234"));
+            setCon(DriverManager.getConnection(url, "root", ""));
             Class.forName(driver);
         } catch (ClassNotFoundException cl) {
             System.out.println(cl.getMessage());

@@ -211,6 +211,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
+        Conexion con = new Conexion();
+        ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
+
         if (combo_hijos.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un hijo");
         } else if (combo_vacunas.getSelectedIndex() == 0) {
@@ -218,6 +221,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         } else if (txtdosis.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite la dosis");
         } else {
+
             //SACAR EL id
             String hijo = combo_hijos.getSelectedItem().toString();
             String id = "";
@@ -228,6 +232,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             }
 
             int idhijo = Integer.parseInt(id);
+
             try {
                 con.conectarme();
                 cc.setCon(con.getCon());
@@ -242,13 +247,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                     idv += vacuna.charAt(i);
                 }
             }
-            System.out.println(idv);
 
             RegistroVacuna rg = new RegistroVacuna();
-            Conexion con = new Conexion();
-            ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
 
-            
             h.setIdhijo(idhijo);
             try {
                 con.conectarme();
