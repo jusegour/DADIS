@@ -9,18 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Doctor;
 import modelo.Hijo;
 import modelo.Padre;
 import modelo.RegistroVacuna;
 import modelo.Vacuna;
-import vista.GUI_Doctor;
+import vista.GUI_BuscarRegistro;
 import vista.GUI_Hijo;
-import vista.GUI_RegistroVacunas;
+
 
 public class ControladorRegistro_Vacuna extends Conexion {
 
@@ -38,7 +35,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
 
         try {
 
-            ps = this.getCon().prepareStatement("INSERT INTO registro_vacunas VALUES(?,?,?,?,?,?,?,?,?)");
+            ps = this.getCon().prepareStatement("INSERT INTO registro_vacunas VALUES(?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, null);
             ps.setString(2, rg.getFecha_aplicacion());
             ps.setString(3, rg.getIdhijo());
@@ -48,6 +45,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
             ps.setString(7, rg.getFecha_proxima());
             ps.setString(8, "No");
             ps.setString(9, rg.getDosis());
+            ps.setString(10, rg.getEdad());
             ps.executeUpdate();
             return true;
 
@@ -69,7 +67,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         try {
 
-            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima,dosis FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
+            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima,dosis,edad FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
             ps.setInt(1, GUI_Hijo.idhijo);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -80,9 +78,10 @@ public class ControladorRegistro_Vacuna extends Conexion {
                 int iddoctor = rs.getInt(5);
                 int idvacuna = rs.getInt(6);
                 String fecha_aplicacion = rs.getString(7);
-                String dosis=rs.getString(8);
+                String dosis = rs.getString(8);
+                String edad = rs.getString(9);
 
-                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion,dosis);
+                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion, dosis, edad);
 
                 lista.add(re);
 
@@ -96,16 +95,97 @@ public class ControladorRegistro_Vacuna extends Conexion {
         return lista;
 
     }
+    
+    
 
-    public ArrayList<RegistroVacuna> consultard() throws SQLException {
+    public ArrayList<Hijo> edades() throws SQLException {
+        ResultSet rs = null;
+        Hijo h;
+        PreparedStatement ps = null;
+        ArrayList<Hijo> lista = new ArrayList<Hijo>();
+        String sql = "SELECT edad from registro_vacunas where idhijo=?";
+        ps = this.getCon().prepareStatement(sql);
+        ps.setInt(1, GUI_Hijo.idhijo);
+
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String edad = rs.getString(1);
+            h = new Hijo(edad);
+            lista.add(h);
+        }
+        return lista;
+    }
+
+    public ArrayList<Vacuna> vacunas() throws SQLException {
+        ResultSet rs = null;
+        Vacuna v;
+        PreparedStatement ps = null;
+        ArrayList<Vacuna> lista = new ArrayList<Vacuna>();
+        String sql = "SELECT nombre from vacuna where idvacuna=?";
+        ps = this.getCon().prepareStatement(sql);
+        for (int i = 0; i < consultar().size(); i++) {
+            ps.setString(1, consultar().get(i).getIdvacuna());
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String nombre = rs.getString(1);
+                v = new Vacuna(nombre);
+                lista.add(v);
+            }
+        }
+        return lista;
+    }
+
+    public ArrayList<RegistroVacuna> dosis() throws SQLException {
+        ResultSet rs = null;
+        RegistroVacuna r;
+        PreparedStatement ps = null;
+        ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
+        String sql = "SELECT dosis from registro_vacunas where idhijo=?";
+        ps = this.getCon().prepareStatement(sql);
+        ps.setInt(1, GUI_Hijo.idhijo);
+
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String dosis = rs.getString(1);
+            r = new RegistroVacuna(dosis);
+            lista.add(r);
+        }
+        return lista;
+    }
+
+   
+    
+    
+    public int buscarHijo() throws SQLException{
+    PreparedStatement ps=null;
+    ResultSet rs=null;
+    String sql="SELECT idhijo from hijo where registro_civil=?";
+    int id=0;
+    
+    ps=this.getCon().prepareStatement(sql);
+    ps.setString(1, GUI_BuscarRegistro.identificacion);
+    rs=ps.executeQuery();
+    
+        if (rs.next()) {
+            id=rs.getInt(1);
+        }
+        
+        return id;
+    
+    
+    }
+    
+    public ArrayList<RegistroVacuna> consultarNuevo(){
+        
         ResultSet rs = null;
         PreparedStatement ps = null;
 
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         try {
 
-            ps = this.getCon().prepareStatement("SELECT idregistro_vacunas, Fecha,idhijo,idpadre,iddoctor,idvacuna,fecha_proxima,dosis FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
-            ps.setInt(1, GUI_RegistroVacunas.idhijo);
+            ps = this.getCon().prepareStatement("SELECT * FRoM registro_vacunas WHERE idhijo in (SELECT idhijo FROM registro_vacunas where idhijo=? GROUP BY idhijo HAVING count(*)>0)");
+            ps.setInt(1, buscarHijo());
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -116,17 +196,15 @@ public class ControladorRegistro_Vacuna extends Conexion {
                 int iddoctor = rs.getInt(5);
                 int idvacuna = rs.getInt(6);
                 String fecha_aplicacion = rs.getString(7);
-                String dosis=rs.getString(8);
-
-                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion,dosis);
+                String dosis = rs.getString(8);
+                String edad = rs.getString(9);
+                re = new RegistroVacuna(idreg, fecha, idhijo, idpadre, iddoctor, idvacuna, fecha_aplicacion, dosis, edad);
 
                 lista.add(re);
-                GUI_RegistroVacunas.lblregistros.setText("");
                 
+
             }
-            if (!rs.next()) {
-                GUI_RegistroVacunas.lblregistros.setText("No se encontraron registros");
-            }
+            
 
         } catch (SQLException s) {
             System.out.println(s);
@@ -134,391 +212,64 @@ public class ControladorRegistro_Vacuna extends Conexion {
         }
 
         return lista;
-
+    
     }
-
-    public ArrayList<Hijo> listarhijo() throws SQLException {
-
+    
+    public ArrayList<Hijo> edadesNuevo() throws SQLException {
         ResultSet rs = null;
+        Hijo h;
         PreparedStatement ps = null;
         ArrayList<Hijo> lista = new ArrayList<Hijo>();
-        for (int i = 0; i < consultar().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idhijo,primer_nombre,primer_apellido,registro_civil FROM hijo WHERE idhijo=? ");
+        String sql = "SELECT edad from registro_vacunas where idhijo=?";
+        ps = this.getCon().prepareStatement(sql);
+        ps.setInt(1, buscarHijo());
 
-                ps.setInt(1, Integer.parseInt(consultar().get(i).getIdhijo()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idhijo = rs.getInt(1);
-                    String pnombre = rs.getString(2);
-                    String papellido = rs.getString(3);
-                    String rc = rs.getString(4);
-                    h = new Hijo(idhijo, pnombre, papellido, rc);
-                    lista.add(h);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String edad = rs.getString(1);
+            h = new Hijo(edad);
+            lista.add(h);
         }
-//        System.out.println(h.getPrimer_nombre());
-//        System.out.println(h.getPrimer_apellido());
-//        System.out.println(h.getIdentificacion());
-
         return lista;
-
     }
 
-    public ArrayList<Hijo> listarhijod() throws SQLException {
-
+    public ArrayList<Vacuna> vacunasNuevo() throws SQLException {
         ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Hijo> lista = new ArrayList<Hijo>();
-        for (int i = 0; i < consultard().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idhijo,primer_nombre,primer_apellido,registro_civil FROM hijo WHERE idhijo=? ");
-
-                ps.setInt(1, GUI_RegistroVacunas.idhijo);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idhijo = rs.getInt(1);
-                    String pnombre = rs.getString(2);
-                    String papellido = rs.getString(3);
-                    String rc = rs.getString(4);
-                    h = new Hijo(idhijo, pnombre, papellido, rc);
-                    lista.add(h);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(h.getPrimer_nombre());
-//        System.out.println(h.getPrimer_apellido());
-//        System.out.println(h.getIdentificacion());
-
-        return lista;
-
-    }
-
-    public ArrayList<Padre> listarpadre() throws SQLException {
-
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Padre> lista = new ArrayList<Padre>();
-        for (int i = 0; i < consultar().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idpadre,primer_nombre,primer_apellido,identificacion FROM padre WHERE idpadre=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultar().get(i).getIdpadre()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idpadre = rs.getInt(1);
-                    String pnombre = rs.getString(2), papellido = rs.getString(3), identificacion = rs.getString(4);
-                    p = new Padre(idpadre, pnombre, papellido, identificacion);
-                    lista.add(p);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(p.getPrimer_nombre());
-//        System.out.println(p.getPrimer_apellido());
-//        System.out.println(p.getIdentificacion());
-        return lista;
-
-    }
-
-    public ArrayList<Padre> listarpadred() throws SQLException {
-
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Padre> lista = new ArrayList<Padre>();
-        for (int i = 0; i < consultard().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idpadre,primer_nombre,primer_apellido,identificacion FROM padre WHERE idpadre=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultard().get(i).getIdpadre()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idpadre = rs.getInt(1);
-                    String pnombre = rs.getString(2), papellido = rs.getString(3), identificacion = rs.getString(4);
-                    p = new Padre(idpadre, pnombre, papellido, identificacion);
-                    lista.add(p);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(p.getPrimer_nombre());
-//        System.out.println(p.getPrimer_apellido());
-//        System.out.println(p.getIdentificacion());
-        return lista;
-
-    }
-
-    public ArrayList<Doctor> listardoctor() throws SQLException {
-
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Doctor> lista = new ArrayList<Doctor>();
-        for (int i = 0; i < consultar().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT iddoctor,primer_nombre,primer_apellido,identificacion,clinica FROM doctor WHERE iddoctor=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultar().get(i).getIddoctor()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int iddoctor = rs.getInt(1);
-                    String pnombre = rs.getString(2), papellido = rs.getString(3), identificacion = rs.getString(4);
-                    d = new Doctor(iddoctor, pnombre, papellido, identificacion);
-                    lista.add(d);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(d.getPrimer_nombre());
-//        System.out.println(d.getPrimer_apellido());
-//        System.out.println(d.getIdentificacion());
-        return lista;
-
-    }
-
-    public ArrayList<Doctor> listardoctord() throws SQLException {
-
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Doctor> lista = new ArrayList<Doctor>();
-        for (int i = 0; i < consultard().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT iddoctor,primer_nombre,primer_apellido,identificacion,clinica FROM doctor WHERE iddoctor=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultard().get(i).getIddoctor()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int iddoctor = rs.getInt(1);
-                    String pnombre = rs.getString(2), papellido = rs.getString(3), identificacion = rs.getString(4);
-                    d = new Doctor(iddoctor, pnombre, papellido, identificacion);
-                    lista.add(d);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(d.getPrimer_nombre());
-//        System.out.println(d.getPrimer_apellido());
-//        System.out.println(d.getIdentificacion());
-        return lista;
-
-    }
-
-    public ArrayList<Vacuna> listarvacuna() throws SQLException {
-
-        ResultSet rs = null;
+        Vacuna v;
         PreparedStatement ps = null;
         ArrayList<Vacuna> lista = new ArrayList<Vacuna>();
-        for (int i = 0; i < consultar().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idvacuna,nombre FROM vacuna WHERE idvacuna=? ");
+        String sql = "SELECT nombre from vacuna where idvacuna=?";
+        ps = this.getCon().prepareStatement(sql);
+        for (int i = 0; i < consultarNuevo().size(); i++) {
+            ps.setString(1, consultarNuevo().get(i).getIdvacuna());
 
-                ps.setInt(1, Integer.parseInt(consultar().get(i).getIdvacuna()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idvacuna = rs.getInt(1);
-                    String nombre = rs.getString(2);
-                    v = new Vacuna(idvacuna, nombre);
-                    lista.add(v);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String nombre = rs.getString(1);
+                v = new Vacuna(nombre);
+                lista.add(v);
             }
         }
-//        System.out.println(v.getNombre());
         return lista;
-
     }
 
-    public ArrayList<Vacuna> listarvacunad() throws SQLException {
-
+    public ArrayList<RegistroVacuna> dosisNuevo() throws SQLException {
         ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<Vacuna> lista = new ArrayList<Vacuna>();
-        for (int i = 0; i < consultard().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idvacuna,nombre FROM vacuna WHERE idvacuna=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultard().get(i).getIdvacuna()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idvacuna = rs.getInt(1);
-                    String nombre = rs.getString(2);
-                    v = new Vacuna(idvacuna, nombre);
-                    lista.add(v);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(v.getNombre());
-        return lista;
-
-    }
-
-    public ArrayList<RegistroVacuna> listarfechas() throws SQLException {
-
-        ResultSet rs = null;
+        RegistroVacuna r;
         PreparedStatement ps = null;
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
-        for (int i = 0; i < consultar().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima,dosis FROM registro_vacunas WHERE idregistro_vacunas=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultar().get(i).getIdregistro()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idregistro = rs.getInt(1);
-                    String fecha = rs.getString(2);
-                    String fecha_proxima = rs.getString(3);
-                    String dosis=rs.getString(4);
-                    r = new RegistroVacuna(idregistro, fecha, fecha_proxima,dosis);
-                    lista.add(r);
+        String sql = "SELECT dosis from registro_vacunas where idhijo=?";
+        ps = this.getCon().prepareStatement(sql);
+        ps.setInt(1, buscarHijo());
 
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            String dosis = rs.getString(1);
+            r = new RegistroVacuna(dosis);
+            lista.add(r);
         }
-//        System.out.println(r.getFecha_aplicacion());
-//        System.out.println(r.getFecha_proxima());
-
         return lista;
-
     }
 
-    public ArrayList<RegistroVacuna> listarfechasd() throws SQLException {
-
-        ResultSet rs = null;
-        PreparedStatement ps = null;
-        ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
-        for (int i = 0; i < consultard().size(); i++) {
-            try {
-                ps = this.getCon().prepareStatement("SELECT idregistro_vacunas,Fecha,fecha_proxima,dosis FROM registro_vacunas WHERE idregistro_vacunas=? ");
-                consultar();
-                ps.setInt(1, Integer.parseInt(consultard().get(i).getIdregistro()));
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    int idreg = rs.getInt(1);
-                    String fecha_ap = rs.getString(2), fecha_pro = rs.getString(3),dosis=rs.getString(4);
-                    r = new RegistroVacuna(idreg, fecha_ap, fecha_pro,dosis);
-                    lista.add(r);
-
-                }
-
-            } catch (SQLException Ignore) {
-
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-
-            }
-        }
-//        System.out.println(r.getFecha_aplicacion());
-//        System.out.println(r.getFecha_proxima());
-
-        return lista;
-
-    }
 
 }

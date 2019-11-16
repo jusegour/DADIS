@@ -139,7 +139,7 @@ public class GUI_MenuDoctor extends javax.swing.JFrame {
 
     private void btnconsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnconsultarActionPerformed
         // TODO add your handling code here:
-        GUI_RegistroVacunas rv=new GUI_RegistroVacunas();
+        GUI_BuscarRegistro rv=new GUI_BuscarRegistro();
         rv.setVisible(true);
         rv.setLocationRelativeTo(null);
         this.dispose();

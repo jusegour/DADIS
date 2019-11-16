@@ -55,14 +55,13 @@ public class ControladorAviso extends Conexion {
             t.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
             t.close();
             JOptionPane.showMessageDialog(null, "Enviado Correctamente");
-            
 
         } catch (AddressException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         } catch (MessagingException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
 
     }
@@ -118,18 +117,21 @@ public class ControladorAviso extends Conexion {
     public String consultarfechas(int i) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String respuesta="";
-        String sql = "select fecha_proxima from registro_vacunas where idhijo=? and Aviso=?";
+        String respuesta = "";
+        String sql = "SELECT fecha_proxima,aviso FROM registro_vacunas where idhijo=? ORDER BY fecha_proxima DESC";
         try {
             ps = this.getCon().prepareStatement(sql);
             ps.setInt(1, i);
-            ps.setString(2, "No");
+            String aviso = "";
             rs = ps.executeQuery();
             if (rs.next()) {
                 fecha = rs.getString(1);
-                
-            } else {
-               respuesta="Este niño tiene sus vacunas al dia"; 
+                aviso = rs.getString(2);
+                if (aviso.equalsIgnoreCase("No")) {
+                    respuesta = "";
+                } else {
+                    respuesta = "Este niño tiene sus vacunas al dia";
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorAviso.class.getName()).log(Level.SEVERE, null, ex);

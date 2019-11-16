@@ -14,6 +14,9 @@ public class Hijo {
     public Hijo(){
     
     }
+    public Hijo(String edad){
+    this.edad=edad;
+    }
     public Hijo(int idhijo,String pnombre,String papellido,String rc){
     this.idhijo=idhijo;
     this.primer_nombre=pnombre;

@@ -116,16 +116,17 @@ public class GUI_MenuPadre extends javax.swing.JFrame {
     }//GEN-LAST:event_lblinstruccionesMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Login l=null;
         try {
-           l = new Login();
+            Login l=new Login();
+            l.setVisible(true);
+            l.setLocationRelativeTo(null);
+            this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(GUI_MenuPadre.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(GUI_MenuPadre.class.getName()).log(Level.SEVERE, null, ex);
         }
-       l.setVisible(true);
-       l.setLocationRelativeTo(null);
+        
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**

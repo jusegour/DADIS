@@ -25,6 +25,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         initComponents();
         this.setIconImage(icono.getImage());
         this.setResizable(false);
+        
     }
 
     public void limpiar() {
@@ -33,7 +34,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         txtsnombre.setText("");
         txtpapellido.setText("");;
         txtsapellido.setText("");
-        txtedad.setText("");
+       
         txtdireccion.setText("");
 
         txtidentificacion.setText("");
@@ -48,7 +49,6 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         txtsnombre = new javax.swing.JTextField();
         txtpapellido = new javax.swing.JTextField();
         txtdireccion = new javax.swing.JTextField();
-        txtedad = new javax.swing.JTextField();
         txtpnombre = new javax.swing.JTextField();
         combo_sexo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -60,7 +60,6 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -98,14 +97,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtpapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 103, -1));
-        getContentPane().add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 293, 103, -1));
-
-        txtedad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtedadKeyTyped(evt);
-            }
-        });
-        getContentPane().add(txtedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 255, 103, -1));
+        getContentPane().add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 103, -1));
 
         txtpnombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -142,16 +134,13 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 144, -1, -1));
 
         jLabel11.setText("Direccion");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 293, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jLabel12.setText("Segundo Apellido");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 211, -1, -1));
 
         jLabel13.setText("Primer Apellido");
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 173, -1, -1));
-
-        jLabel14.setText("Edad");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 258, -1, -1));
 
         jLabel15.setText("Estrato");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 144, -1, -1));
@@ -185,7 +174,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         getContentPane().add(fecha_nacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 110, -1, -1));
 
         lblfond.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfond, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 440));
+        getContentPane().add(lblfond, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -230,25 +219,6 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtpapellidoKeyTyped
 
-    private void txtedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtedadKeyTyped
-        char validar = evt.getKeyChar();
-
-        if (Character.isLetter(validar)) {
-
-            getToolkit().beep();
-            evt.consume();
-
-            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
-        }
-
-        if (validar < '0') {
-            evt.consume();
-        }
-        if (txtedad.getText().length() == 2) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtedadKeyTyped
-
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
         char validar = evt.getKeyChar();
 
@@ -284,7 +254,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
         Hijo pa = new Hijo();
 
         if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty()
-                || txtsapellido.getText().isEmpty() || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty()
+                || txtsapellido.getText().isEmpty() || txtdireccion.getText().isEmpty()
                 || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0 || txtidentificacion.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
@@ -293,7 +263,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
             pa.setSegundo_nombre(txtsnombre.getText());
             pa.setPrimer_apellido(txtpapellido.getText());
             pa.setSegundo_apellido(txtsapellido.getText());
-            pa.setEdad(txtedad.getText());
+            
             pa.setDireccion(txtdireccion.getText());
             String fecha = "";
 
@@ -383,7 +353,6 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
@@ -392,7 +361,6 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblfond;
     private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtedad;
     private javax.swing.JTextField txtidentificacion;
     private javax.swing.JTextField txtpapellido;
     private javax.swing.JTextField txtpnombre;

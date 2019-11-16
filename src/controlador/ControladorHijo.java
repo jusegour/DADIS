@@ -199,4 +199,16 @@ public class ControladorHijo extends Conexion {
         return lista;
     }
 
+    public void actualizaredad(Hijo h) {
+        PreparedStatement ps = null;
+        String sql = "update hijo set edad=? where idhijo=?";
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setString(1, h.getEdad());
+            ps.setInt(2, h.getIdhijo());
+            ps.execute();
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
 }

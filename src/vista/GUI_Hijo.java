@@ -246,6 +246,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
         jPanel1.add(txtpapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 376, 103, -1));
         jPanel1.add(txtdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 501, 103, -1));
 
+        txtedad.setEditable(false);
         txtedad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtedadKeyTyped(evt);
@@ -401,6 +402,7 @@ public class GUI_Hijo extends javax.swing.JFrame {
         btnRegistro.setEnabled(true);
         int filah = tablaprograma.getSelectedRow();
         idhijo = Integer.parseInt(tablaprograma.getValueAt(filah, 0).toString());
+        
 
         txtpnombre.setEditable(true);
         txtsnombre.setEditable(true);
@@ -444,10 +446,11 @@ public class GUI_Hijo extends javax.swing.JFrame {
                 matriz[i][5] = rv.consultar().get(i).getIdvacuna();
                 matriz[i][6] = rv.consultar().get(i).getFecha_proxima();
             }
+            
+            
+            
 
-            for (int i = 0; i < matriz.length; i++) {
-                System.out.println(Arrays.toString(matriz[i]));
-            }
+            
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -564,24 +567,6 @@ public class GUI_Hijo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtpapellidoKeyTyped
 
-    private void txtedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtedadKeyTyped
-        char validar = evt.getKeyChar();
-
-        if (Character.isLetter(validar)) {
-
-            getToolkit().beep();
-            evt.consume();
-
-            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
-        }
-        if (validar<'0') {
-            evt.consume();
-        }
-        if (txtedad.getText().length()==2) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtedadKeyTyped
-
     private void txtpnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpnombreKeyTyped
         char validar = evt.getKeyChar();
 
@@ -618,9 +603,9 @@ public class GUI_Hijo extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaprogramaMouseEntered
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        GUI_ConsultarRegistro cr = new GUI_ConsultarRegistro();
-        cr.setVisible(true);
-        cr.setLocationRelativeTo(null);
+        GUI_Nuevo v=new GUI_Nuevo();
+        v.setVisible(true);
+        v.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnRegistroActionPerformed
 
@@ -632,6 +617,24 @@ public class GUI_Hijo extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void txtedadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtedadKeyTyped
+        char validar = evt.getKeyChar();
+
+        if (Character.isLetter(validar)) {
+
+            getToolkit().beep();
+            evt.consume();
+
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+        if (validar<'0') {
+            evt.consume();
+        }
+        if (txtedad.getText().length()==2) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtedadKeyTyped
 
     /**
      * @param args the command line arguments

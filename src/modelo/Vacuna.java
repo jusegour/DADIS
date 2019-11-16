@@ -13,6 +13,10 @@ public class Vacuna {
     this.idvacuna=idvacuna;
     this.nombre=nombre;
     }
+    
+    public Vacuna(String nombre){
+    this.nombre=nombre;
+    }
 
     private int idvacuna;
     private String nombre, dosis;

@@ -606,7 +606,7 @@ public class GUI_AdminHijo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtidentificacionKeyTyped
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        GUI_ConsultarRegistro cr = new GUI_ConsultarRegistro();
+        GUI_BuscarRegistro cr = new GUI_BuscarRegistro();
         cr.setVisible(true);
         cr.setLocationRelativeTo(null);
         this.dispose();
