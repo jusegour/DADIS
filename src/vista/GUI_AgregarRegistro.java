@@ -27,10 +27,12 @@ import modelo.RegistroVacuna;
 public class GUI_AgregarRegistro extends javax.swing.JFrame {
 
     ControladorDoctor ctrl = new ControladorDoctor();
+    ControladorRegistro_Vacuna ctrlv = new ControladorRegistro_Vacuna();
     ControladorHijo ch = new ControladorHijo();
     Conexion con = new Conexion();
     CargarCombos cc = new CargarCombos();
     Hijo h = new Hijo();
+    int idhijo = 0;
     private static final ImageIcon icono = new ImageIcon(GUI_AgregarRegistro.class.getResource("/imagenes/jeringa.png"));
 
     public GUI_AgregarRegistro() {
@@ -201,6 +203,11 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 460));
 
         combo_edad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recien Nacido", "2 meses", "4 meses", "6 meses", "7 meses", "12 meses", "18 meses ", "5 años" }));
+        combo_edad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                combo_edadItemStateChanged(evt);
+            }
+        });
         getContentPane().add(combo_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, -1, -1));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
@@ -214,6 +221,26 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         Conexion con = new Conexion();
         ControladorRegistro_Vacuna ctrl = new ControladorRegistro_Vacuna();
 
+        //SACAR EL id
+        String hijo = combo_hijos.getSelectedItem().toString();
+        String id = "";
+        for (int i = 0; i < hijo.length(); i++) {
+            if (isNumeric(String.valueOf(hijo.charAt(i)))) {
+                id += hijo.charAt(i);
+            }
+        }
+
+        idhijo = Integer.parseInt(id);
+
+        try {
+            con.conectarme();
+            ctrl.setCon(con.getCon());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_AgregarRegistro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String edad = combo_edad.getSelectedItem().toString();
+
         if (combo_hijos.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Seleccione un hijo");
         } else if (combo_vacunas.getSelectedIndex() == 0) {
@@ -221,17 +248,6 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         } else if (txtdosis.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite la dosis");
         } else {
-
-            //SACAR EL id
-            String hijo = combo_hijos.getSelectedItem().toString();
-            String id = "";
-            for (int i = 0; i < hijo.length(); i++) {
-                if (isNumeric(String.valueOf(hijo.charAt(i)))) {
-                    id += hijo.charAt(i);
-                }
-            }
-
-            int idhijo = Integer.parseInt(id);
 
             try {
                 con.conectarme();
@@ -271,9 +287,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                     ctrl.setCon(con.getCon());
                     ch.setCon(con.getCon());
                     ch.actualizaredad(h);
-                    ctrl.registrar(rg);
+                    if (ctrl.registrar(rg)) {
+                        JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
+                    }
 
-                    JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE");
                 } catch (SQLException e) {
                     System.out.println(e.toString());
                 }
@@ -291,6 +308,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         rv.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void combo_edadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_edadItemStateChanged
+
+    }//GEN-LAST:event_combo_edadItemStateChanged
 
     /**
      * @param args the command line arguments

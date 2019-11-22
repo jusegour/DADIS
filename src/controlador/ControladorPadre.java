@@ -236,5 +236,26 @@ public class ControladorPadre extends Conexion {
         return icono;
 
     }
+    
+    public boolean validarRegistro(String identificacion){
+    PreparedStatement ps=null;
+    ResultSet rs=null;
+    boolean existe=false;
+    String sql="SELECT identificacion from padre";
+    try{
+    ps=this.getCon().prepareStatement(sql);
+    rs=ps.executeQuery();
+    while(rs.next()){
+        if (rs.getString(1).equals(identificacion)) {
+            existe=true;
+            break;
+        }
+    }
+    
+    }catch(SQLException e){
+        System.out.println(e.toString());
+    }
+    return existe;
+    }
 
 }

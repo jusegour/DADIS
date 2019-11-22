@@ -133,6 +133,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
         txttelefono = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
 
@@ -355,6 +356,14 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
             }
         });
         jPanel5.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 120, -1, -1));
+
+        btnRegistrar.setText("Registrar Doctor");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 120, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 630));
@@ -640,6 +649,13 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txttelefonoKeyTyped
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        GUI_AgregarDoctor ad=new GUI_AgregarDoctor();
+        ad.setVisible(true);
+        ad.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     public void limpiartabla() {
         DefaultTableModel df = (DefaultTableModel) tablaprograma.getModel();
         int a = tablaprograma.getRowCount() - 1;
@@ -706,6 +722,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> combo_clinica;
     private javax.swing.JComboBox<String> combo_estrato;
     private javax.swing.JComboBox<String> combo_sexo;

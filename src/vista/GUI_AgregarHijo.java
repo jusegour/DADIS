@@ -10,6 +10,8 @@ import controlador.ControladorHijo;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Hijo;
@@ -252,12 +254,22 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Hijo pa = new Hijo();
+        ControladorHijo ctrl = new ControladorHijo();
+            Conexion con = new Conexion();
+        try {
+            con.conectarme();
+            ctrl.setCon(con.getCon());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_AgregarHijo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty()
                 || txtsapellido.getText().isEmpty() || txtdireccion.getText().isEmpty()
                 || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0 || txtidentificacion.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
+        }else if(ctrl.validarRegistro(txtidentificacion.getText())){
+        JOptionPane.showMessageDialog(null, "Este registro civil, se encuentra registrado!");
         } else {
             pa.setPrimer_nombre(txtpnombre.getText());
             pa.setSegundo_nombre(txtsnombre.getText());
@@ -282,8 +294,7 @@ public class GUI_AgregarHijo extends javax.swing.JFrame {
             pa.setSexo(combo_sexo.getSelectedItem().toString());
             pa.setIdentificacion(txtidentificacion.getText());
 
-            ControladorHijo ctrl = new ControladorHijo();
-            Conexion con = new Conexion();
+            
 
             try {
                 con.conectarme();

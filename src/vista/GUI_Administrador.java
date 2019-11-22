@@ -82,7 +82,7 @@ public class GUI_Administrador extends javax.swing.JFrame {
                 btnVacunasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
+        getContentPane().add(btnVacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/blue-wallpaper-24.jpg"))); // NOI18N
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 300));

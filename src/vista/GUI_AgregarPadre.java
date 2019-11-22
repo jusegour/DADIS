@@ -223,7 +223,7 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 161, 189));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 610, 660));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 680, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -249,6 +249,14 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Padre pa = new Padre();
         ValidarEmail v = new ValidarEmail();
+        ControladorPadre ctrl = new ControladorPadre();
+        Conexion con = new Conexion();
+        try {
+            con.conectarme();
+            ctrl.setCon(con.getCon());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_AgregarPadre.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
@@ -261,6 +269,8 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Sexo o Estrato incorrectos");
         }else if(!v.esEmail(txtemail.getText())){
         JOptionPane.showMessageDialog(null, "Correo invalido");
+        }else if(ctrl.validarRegistro(txtidentificacion.getText())){
+        JOptionPane.showMessageDialog(null, "Esta identificacion se encuentra registrada");
         }else{
         pa.setPrimer_nombre(txtpnombre.getText());
         pa.setSegundo_nombre(txtsnombre.getText());
@@ -289,8 +299,8 @@ public class GUI_AgregarPadre extends javax.swing.JFrame {
         String valorPass = new String(txtcontraseña.getPassword());
         pa.setContraseña(valorPass);
         pa.setIdusuario("2");
-        ControladorPadre ctrl = new ControladorPadre();
-        Conexion con = new Conexion();
+        
+        
         Login l=null;
             try {
                 l = new Login();

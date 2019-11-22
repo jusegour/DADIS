@@ -211,4 +211,26 @@ public class ControladorHijo extends Conexion {
             System.err.println(e);
         }
     }
+    
+    public boolean validarRegistro(String identificacion){
+    PreparedStatement ps=null;
+    ResultSet rs=null;
+    boolean existe=false;
+    String sql="SELECT registro_civil from hijo";
+    try{
+    ps=this.getCon().prepareStatement(sql);
+    rs=ps.executeQuery();
+    while(rs.next()){
+        if (rs.getString(1).equals(identificacion)) {
+            existe=true;
+            break;
+        }
+    }
+    
+    }catch(SQLException e){
+        System.out.println(e.toString());
+    }
+    return existe;
+    }
+
 }

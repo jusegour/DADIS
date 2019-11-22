@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -297,12 +299,23 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         Doctor pa = new Doctor();
+        ControladorDoctor ctrl = new ControladorDoctor();
+        Conexion con = new Conexion();
+        
+        try {
+            con.conectarme();
+            ctrl.setCon(con.getCon());
+        } catch (SQLException ex) {
+            Logger.getLogger(GUI_AgregarDoctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (txtpnombre.getText().isEmpty() || txtsnombre.getText().isEmpty() || txtpapellido.getText().isEmpty() || txtsapellido.getText().isEmpty()
                 || txtedad.getText().isEmpty() || txtdireccion.getText().isEmpty() || combo_estrato.getSelectedIndex() == 0 || combo_sexo.getSelectedIndex() == 0
                 || txtidentificacion.getText().isEmpty() || combo_clinica.getSelectedIndex() == 0 || txtusuario.getText().isEmpty() || txtcontraseña.getText().isEmpty() || txttelefono.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos");
 
+        }else if(ctrl.validarRegistro(txtidentificacion.getText())){
+        JOptionPane.showMessageDialog(null, "Esta identificacion se encuentra registrada");
         }else{
         pa.setPrimer_nombre(txtpnombre.getText());
         pa.setSegundo_nombre(txtsnombre.getText());
@@ -332,8 +345,7 @@ public class GUI_AgregarDoctor extends javax.swing.JFrame {
         String valorPass = new String(txtcontraseña.getPassword());
         pa.setContraseña(valorPass);
         pa.setIdusuario("1");
-        ControladorDoctor ctrl = new ControladorDoctor();
-        Conexion con = new Conexion();
+        
 
         try {
             con.conectarme();
