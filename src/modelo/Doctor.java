@@ -15,9 +15,16 @@ public class Doctor {
     this.primer_apellido=papellido;
     this.identificacion=identificacion;
     }
+    
+   
 
     private String iddoctor, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, edad,
             fecha_nacimiento, sexo, direccion, estrato, telefono, clinica, usuario, contraseña, identificacion, idusuario;
+    
+    public Doctor(String nombre,String apellido){
+    this.primer_nombre=nombre;
+    this.primer_apellido=apellido;
+    }
 
     public String getIdusuario() {
         return idusuario;

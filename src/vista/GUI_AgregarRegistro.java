@@ -118,12 +118,18 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         txtdosis = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         lblfoto = new javax.swing.JLabel();
         lblnombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         combo_edad = new javax.swing.JComboBox<>();
+        txtlaboratorio = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        txtlote = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        txtips = new javax.swing.JTextField();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,7 +182,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, -1, -1));
+        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 590, -1, -1));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +190,10 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, -1, -1));
+
+        jLabel14.setText("Laboratorio");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, -1, -1));
 
         jLabel12.setText("Dosis");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
@@ -200,7 +209,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 160, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 460));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 640));
 
         combo_edad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recien Nacido", "2 meses", "4 meses", "6 meses", "7 meses", "12 meses", "18 meses ", "5 años" }));
         combo_edad.addItemListener(new java.awt.event.ItemListener() {
@@ -209,9 +218,18 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(combo_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, -1, -1));
+        getContentPane().add(txtlaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, 130, 20));
+
+        jLabel15.setText("Numero de Lote");
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, -1, -1));
+        getContentPane().add(txtlote, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 130, 20));
+
+        jLabel16.setText("IPS");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 490, -1, -1));
+        getContentPane().add(txtips, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, 120, -1));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 630, 460));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 630, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -247,6 +265,12 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una vacuna");
         } else if (txtdosis.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Digite la dosis");
+        } else if(txtlaboratorio.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Ingrese el Laboratorio");
+        } else if(txtlote.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Digite el numero de lote");
+        } else if(txtips.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Digite la IPS");
         } else {
 
             try {
@@ -281,6 +305,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
                 rg.setEdad(combo_edad.getSelectedItem().toString());
                 h.setIdhijo(idhijo);
                 h.setEdad(combo_edad.getSelectedItem().toString());
+                rg.setLaboratorio(txtlaboratorio.getText());
+                rg.setNum_lote(txtlote.getText());
+                rg.setIps(txtips.getText());
                 try {
 
                     con.conectarme();
@@ -362,6 +389,9 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -377,5 +407,8 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     private com.toedter.calendar.JMonthChooser mes_prox;
     private com.toedter.components.JSpinField spin_dia;
     private javax.swing.JTextField txtdosis;
+    private javax.swing.JTextField txtips;
+    private javax.swing.JTextField txtlaboratorio;
+    private javax.swing.JTextField txtlote;
     // End of variables declaration//GEN-END:variables
 }

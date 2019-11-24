@@ -7,11 +7,11 @@ package modelo;
 
 public class RegistroVacuna {
 
-    private String idpadre, idhijo, idvacuna, iddoctor, fecha_aplicacion, fecha_proxima, idregistro,dosis,edad;
+    private String idpadre, idhijo, idvacuna, iddoctor, fecha_aplicacion, fecha_proxima, idregistro,dosis,edad,laboratorio,num_lote,ips;
 
     
     
-    public RegistroVacuna(int idreg,String fecha,int idhijo,int idpadre,int iddoctor,int idvacuna,String fecha_aplicacion,String dosis,String edad){
+    public RegistroVacuna(int idreg,String fecha,int idhijo,int idpadre,int iddoctor,int idvacuna,String fecha_aplicacion,String dosis,String edad,String lab,String nlote,String ips){
     this.idregistro=String.valueOf(idreg);
     this.fecha_aplicacion=fecha;
     this.idhijo=String.valueOf(idhijo);
@@ -21,6 +21,20 @@ public class RegistroVacuna {
     this.fecha_proxima=fecha_aplicacion;
     this.dosis=dosis;
     this.edad=edad;
+    this.laboratorio=lab;
+    this.num_lote=nlote;
+    this.ips=ips;
+    }
+    
+    public RegistroVacuna(String lab,String numlote,String ips){
+    
+    this.laboratorio=lab;
+    this.num_lote=numlote;
+    this.ips=ips;
+    }
+    public RegistroVacuna(String fecha,String fecha_proxima){
+    this.fecha_aplicacion=fecha;
+    this.fecha_proxima=fecha_proxima;
     }
     public RegistroVacuna(){
     
@@ -35,6 +49,32 @@ public class RegistroVacuna {
     public RegistroVacuna(String dosis){
     this.dosis=dosis;
     }
+
+    public String getLaboratorio() {
+        return laboratorio;
+    }
+
+    public void setLaboratorio(String laboratorio) {
+        this.laboratorio = laboratorio;
+    }
+
+    public String getNum_lote() {
+        return num_lote;
+    }
+
+    public void setNum_lote(String num_lote) {
+        this.num_lote = num_lote;
+    }
+
+    public String getIps() {
+        return ips;
+    }
+
+    public void setIps(String ips) {
+        this.ips = ips;
+    }
+    
+    
 
     public String getEdad() {
         return edad;
