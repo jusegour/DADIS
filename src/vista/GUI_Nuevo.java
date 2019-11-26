@@ -10,6 +10,7 @@ import controlador.ControladorRegistro_Vacuna;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -22,6 +23,51 @@ public class GUI_Nuevo extends javax.swing.JFrame {
 
     public GUI_Nuevo() {
         initComponents();
+        tabla_edad.setOpaque(false);
+        tabla_vacuna.setOpaque(false);
+        tabla_dosis.setOpaque(false);
+        fecha_aplicacion.setOpaque(false);
+        laboratorios.setOpaque(false);
+        lotes.setOpaque(false);
+        ips.setOpaque(false);
+        fecha_proxima.setOpaque(false);
+        vacunador.setOpaque(false);
+        ((DefaultTableCellRenderer) tabla_edad.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) tabla_vacuna.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) tabla_dosis.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) fecha_aplicacion.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) laboratorios.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) lotes.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) ips.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) fecha_proxima.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) vacunador.getDefaultRenderer(Object.class)).setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+
+        jScrollPane2.setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+
+        jScrollPane3.setOpaque(false);
+        jScrollPane3.getViewport().setOpaque(false);
+
+        jScrollPane5.setOpaque(false);
+        jScrollPane5.getViewport().setOpaque(false);
+
+        jScrollPane6.setOpaque(false);
+        jScrollPane6.getViewport().setOpaque(false);
+
+        jScrollPane7.setOpaque(false);
+        jScrollPane7.getViewport().setOpaque(false);
+
+        jScrollPane8.setOpaque(false);
+        jScrollPane8.getViewport().setOpaque(false);
+
+        jScrollPane9.setOpaque(false);
+        jScrollPane9.getViewport().setOpaque(false);
+
+        jScrollPane10.setOpaque(false);
+        jScrollPane10.getViewport().setOpaque(false);
+
         try {
             con.conectarme();
             ctrl.setCon(con.getCon());
@@ -39,50 +85,51 @@ public class GUI_Nuevo extends javax.swing.JFrame {
         }
 
     }
-    
-    public void laboratorios() throws SQLException{
-    String matriz[][]=new String[ctrl.lab_lote_ips().size()][1];
+
+    public void laboratorios() throws SQLException {
+        String matriz[][] = new String[ctrl.lab_lote_ips().size()][1];
         for (int i = 0; i < ctrl.lab_lote_ips().size(); i++) {
-            matriz[i][0]=ctrl.lab_lote_ips().get(i).getLaboratorio();
+            matriz[i][0] = ctrl.lab_lote_ips().get(i).getLaboratorio();
         }
         laboratorios.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{""}));
     }
-    
-    public void vacunador() throws SQLException{
-    String matriz[][]=new String[ctrl.vacunador().size()][1];
-        for (int i = 0; i <ctrl.vacunador().size(); i++) {
-            matriz[i][0]=ctrl.vacunador().get(i).getPrimer_nombre()+" "+ctrl.vacunador().get(i).getPrimer_apellido();
+
+    public void vacunador() throws SQLException {
+        String matriz[][] = new String[ctrl.vacunador().size()][1];
+        for (int i = 0; i < ctrl.vacunador().size(); i++) {
+            matriz[i][0] = ctrl.vacunador().get(i).getPrimer_nombre() + " " + ctrl.vacunador().get(i).getPrimer_apellido();
         }
-        vacunador.setModel(new javax.swing.table.DefaultTableModel(matriz,new String[]{""}));
+        vacunador.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{""}));
     }
-    
-    public void n_lotes() throws SQLException{
-    String matriz[][]=new String[ctrl.lab_lote_ips().size()][1];
+
+    public void n_lotes() throws SQLException {
+        String matriz[][] = new String[ctrl.lab_lote_ips().size()][1];
         for (int i = 0; i < ctrl.lab_lote_ips().size(); i++) {
-            matriz[i][0]=ctrl.lab_lote_ips().get(i).getNum_lote();
+            matriz[i][0] = ctrl.lab_lote_ips().get(i).getNum_lote();
         }
         lotes.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{""}));
     }
-    public void ips() throws SQLException{
-    String matriz[][]=new String[ctrl.lab_lote_ips().size()][1];
+
+    public void ips() throws SQLException {
+        String matriz[][] = new String[ctrl.lab_lote_ips().size()][1];
         for (int i = 0; i < ctrl.lab_lote_ips().size(); i++) {
-            matriz[i][0]=ctrl.lab_lote_ips().get(i).getIps();
+            matriz[i][0] = ctrl.lab_lote_ips().get(i).getIps();
         }
         ips.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{""}));
     }
 
-    public void cargarfecha_aplicacion() throws SQLException{
-    String matriz[][]=new String[ctrl.fechas().size()][1];
+    public void cargarfecha_aplicacion() throws SQLException {
+        String matriz[][] = new String[ctrl.fechas().size()][1];
         for (int i = 0; i < ctrl.fechas().size(); i++) {
-            matriz[i][0]=ctrl.fechas().get(i).getFecha_aplicacion();
+            matriz[i][0] = ctrl.fechas().get(i).getFecha_aplicacion();
         }
         fecha_aplicacion.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{""}));
     }
-    
-    public void cargarfecha_proxima() throws SQLException{
-    String matriz[][]=new String[ctrl.fechas().size()][1];
+
+    public void cargarfecha_proxima() throws SQLException {
+        String matriz[][] = new String[ctrl.fechas().size()][1];
         for (int i = 0; i < ctrl.fechas().size(); i++) {
-            matriz[i][0]=ctrl.fechas().get(i).getFecha_proxima();
+            matriz[i][0] = ctrl.fechas().get(i).getFecha_proxima();
         }
         fecha_proxima.setModel(new javax.swing.table.DefaultTableModel(matriz, new String[]{""}));
     }
@@ -153,13 +200,15 @@ public class GUI_Nuevo extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1366, 768));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 30, 490));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 0, 490));
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 20, 500));
@@ -198,7 +247,7 @@ public class GUI_Nuevo extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Me protege de");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,6 +322,7 @@ public class GUI_Nuevo extends javax.swing.JFrame {
 
             }
         ));
+        tabla_edad.setOpaque(false);
         jScrollPane1.setViewportView(tabla_edad);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 90, 440));
@@ -387,7 +437,7 @@ public class GUI_Nuevo extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -398,6 +448,9 @@ public class GUI_Nuevo extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/negro.jpg"))); // NOI18N
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 810, 50));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/niños.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -448,6 +501,7 @@ public class GUI_Nuevo extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JTable fecha_aplicacion;
     private javax.swing.JTable fecha_proxima;
+    private javax.swing.JLabel fondo;
     private javax.swing.JTable ips;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

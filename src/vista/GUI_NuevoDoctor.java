@@ -10,6 +10,7 @@ import controlador.ControladorRegistro_Vacuna;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -22,6 +23,52 @@ public class GUI_NuevoDoctor extends javax.swing.JFrame {
 
     public GUI_NuevoDoctor() {
         initComponents();
+        
+        tabla_edad.setOpaque(false);
+        tabla_vacuna.setOpaque(false);
+        tabla_dosis.setOpaque(false);
+        fecha_aplicacion.setOpaque(false);
+        laboratorios.setOpaque(false);
+        lotes.setOpaque(false);
+        ips.setOpaque(false);
+        fecha_proxima.setOpaque(false);
+        vacunador.setOpaque(false);
+        ((DefaultTableCellRenderer) tabla_edad.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) tabla_vacuna.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) tabla_dosis.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) fecha_aplicacion.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) laboratorios.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) lotes.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) ips.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) fecha_proxima.getDefaultRenderer(Object.class)).setOpaque(false);
+        ((DefaultTableCellRenderer) vacunador.getDefaultRenderer(Object.class)).setOpaque(false);
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
+
+        jScrollPane2.setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+
+        jScrollPane3.setOpaque(false);
+        jScrollPane3.getViewport().setOpaque(false);
+
+        jScrollPane5.setOpaque(false);
+        jScrollPane5.getViewport().setOpaque(false);
+
+        jScrollPane6.setOpaque(false);
+        jScrollPane6.getViewport().setOpaque(false);
+
+        jScrollPane7.setOpaque(false);
+        jScrollPane7.getViewport().setOpaque(false);
+
+        jScrollPane8.setOpaque(false);
+        jScrollPane8.getViewport().setOpaque(false);
+
+        jScrollPane9.setOpaque(false);
+        jScrollPane9.getViewport().setOpaque(false);
+
+        jScrollPane10.setOpaque(false);
+        jScrollPane10.getViewport().setOpaque(false);
+
         try {
             con.conectarme();
             ctrl.setCon(con.getCon());
@@ -153,6 +200,7 @@ public class GUI_NuevoDoctor extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -378,7 +426,7 @@ public class GUI_NuevoDoctor extends javax.swing.JFrame {
         ));
         jScrollPane9.setViewportView(vacunador);
 
-        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 50, 140, 440));
+        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 50, 130, 440));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -386,7 +434,7 @@ public class GUI_NuevoDoctor extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 500, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -396,7 +444,10 @@ public class GUI_NuevoDoctor extends javax.swing.JFrame {
         jLabel10.setBackground(new java.awt.Color(0, 0, 0));
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/negro.jpg"))); // NOI18N
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 810, 50));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, 800, 50));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/niños.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -448,6 +499,7 @@ public class GUI_NuevoDoctor extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JTable fecha_aplicacion;
     private javax.swing.JTable fecha_proxima;
+    private javax.swing.JLabel fondo;
     private javax.swing.JTable ips;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -75,6 +75,12 @@ public class GUI_BuscarRegistro extends javax.swing.JFrame {
 
         jLabel1.setText("Digite Identificacion del Niño: ");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, -1));
+
+        txtidentificacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtidentificacionKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtidentificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 186, -1));
 
         btnBuscar.setText("Buscar");
@@ -83,23 +89,24 @@ public class GUI_BuscarRegistro extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, -1, -1));
-        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 170));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
+        getContentPane().add(lblfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 150, 170));
 
         lblnombre.setText("Dr");
-        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 370));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 370));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
+        if (!txtidentificacion.getText().isEmpty()) {
+            try {
             identificacion = txtidentificacion.getText();
             con.conectarme();
             ctrl.setCon(con.getCon());
@@ -115,7 +122,20 @@ public class GUI_BuscarRegistro extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(GUI_BuscarRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }else{
+        JOptionPane.showMessageDialog(this.getRootPane(), "Digite el registro civil del niño!");
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtidentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidentificacionKeyTyped
+        if (Character.isLetter(evt.getKeyChar())) {
+            JOptionPane.showMessageDialog(this.getRootPane(), "No se admiten letras");
+            evt.consume();
+        }
+        if (evt.getKeyChar()<'0') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtidentificacionKeyTyped
 
     /**
      * @param args the command line arguments
