@@ -211,7 +211,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 640));
 
-        combo_edad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recien Nacido", "2 meses", "4 meses", "6 meses", "7 meses", "12 meses", "18 meses ", "5 años" }));
+        combo_edad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Recien Nacido", "2 meses", "4 meses", "6 meses", "7 meses", "12 meses", "18 meses ", "5 años" }));
         combo_edad.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combo_edadItemStateChanged(evt);
@@ -271,6 +271,8 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Digite el numero de lote");
         } else if(txtips.getText().isEmpty()){
         JOptionPane.showMessageDialog(null, "Digite la IPS");
+        }else if(combo_edad.getSelectedIndex()==0){
+        JOptionPane.showMessageDialog(this.getRootPane(), "Seleccione la edad");
         } else {
 
             try {
@@ -337,7 +339,7 @@ public class GUI_AgregarRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void combo_edadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_edadItemStateChanged
-
+      
     }//GEN-LAST:event_combo_edadItemStateChanged
 
     /**

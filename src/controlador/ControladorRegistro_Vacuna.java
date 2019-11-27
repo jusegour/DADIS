@@ -29,6 +29,33 @@ public class ControladorRegistro_Vacuna extends Conexion {
     RegistroVacuna re;
     public static int contador = 0;
 
+    public boolean verificarReciennacido(String edad, int idhijo) {
+        boolean hecho = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "select edad from registro_vacunas where idhijo=?";
+        int cont = 0;
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, idhijo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cont++;
+            }
+            if (cont == 2) {
+                hecho = true;
+            } else if (cont < 2) {
+                hecho = false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return hecho;
+
+    }
+
     public boolean registrar(RegistroVacuna rg) throws SQLException {
 
         boolean hecho = false;
@@ -298,7 +325,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         }
         return lista;
     }
-    
+
     public ArrayList<RegistroVacuna> fechas_nuevo() {
         ArrayList<RegistroVacuna> lista = new ArrayList<RegistroVacuna>();
         PreparedStatement ps = null;
@@ -321,8 +348,8 @@ public class ControladorRegistro_Vacuna extends Conexion {
         }
         return lista;
     }
-    
-       public ArrayList<RegistroVacuna> lab_lote_ips() throws SQLException {
+
+    public ArrayList<RegistroVacuna> lab_lote_ips() throws SQLException {
         ResultSet rs = null;
         RegistroVacuna r;
         PreparedStatement ps = null;
@@ -390,6 +417,7 @@ public class ControladorRegistro_Vacuna extends Conexion {
         return lista;
 
     }
+
     public ArrayList<Doctor> vacunador_nuevo() throws SQLException {
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -414,174 +442,172 @@ public class ControladorRegistro_Vacuna extends Conexion {
         return lista;
 
     }
-    
-    
 
-//    public int validarVacunasReciennacido(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas2meses(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas4meses(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas6meses(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas7meses(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas12meses(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas18meses(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
-//
-//    public int validarVacunas5anos(int id, String edad) {
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad=?";
-//        Stack edades = new Stack();
-//
-//        try {
-//            ps = this.getCon().prepareStatement(sql);
-//            ps.setInt(1, id);
-//            ps.setString(2, edad);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                edades.push(rs.getString(1));
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e.toString());
-//        }
-//
-//        return edades.size();
-//    }
+    public int validarVacunasReciennacido(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='Recien Nacido'";
+        int cont = 0;
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cont++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return cont;
+    }
+
+    public int validarVacunas2meses(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='2 meses'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+           
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
+
+    public int validarVacunas4meses(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='4 meses'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+           
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
+
+    public int validarVacunas6meses(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='6 meses'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
+
+    public int validarVacunas7meses(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='7 meses'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
+
+    public int validarVacunas12meses(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='12 meses'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
+
+    public int validarVacunas18meses(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='18 meses'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+           
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
+
+    public int validarVacunas5anos(int id) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "SELECT edad from registro_vacunas where idhijo=? and edad='5 años'";
+        Stack edades = new Stack();
+
+        try {
+            ps = this.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                edades.push(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+        return edades.size();
+    }
 }

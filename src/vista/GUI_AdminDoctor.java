@@ -23,7 +23,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
 
     ControladorAdministrador ctrl = new ControladorAdministrador();
     private static final ImageIcon icono = new ImageIcon(GUI_AdminDoctor.class.getResource("/imagenes/jeringa.png"));
-    
+
     public GUI_AdminDoctor() {
         initComponents();
         this.setIconImage(icono.getImage());
@@ -650,7 +650,7 @@ public class GUI_AdminDoctor extends javax.swing.JFrame {
     }//GEN-LAST:event_txttelefonoKeyTyped
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        GUI_AgregarDoctor ad=new GUI_AgregarDoctor();
+        GUI_AgregarDoctor ad = new GUI_AgregarDoctor();
         ad.setVisible(true);
         ad.setLocationRelativeTo(null);
         this.dispose();

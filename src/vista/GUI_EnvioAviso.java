@@ -31,6 +31,9 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
     public static int idhijo, idpadre;
     Hijo h = new Hijo();
+    private Timer tiempo;
+    int cont;
+    public final static int TWO_SECOND = 5;
 
     private static final ImageIcon icono = new ImageIcon(GUI_EnvioAviso.class.getResource("/imagenes/jeringa.png"));
 
@@ -75,10 +78,6 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
         }
     }
 
-    
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,6 +101,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
         lblfoto = new javax.swing.JLabel();
         lblnombre = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        barra = new javax.swing.JProgressBar();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -167,6 +167,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fotomurales-ilustracion-de-fondo-suave-de-color-abstracto.jpg.jpg"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 450));
+        getContentPane().add(barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 210, 20));
 
         lblfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Fondo Blanco.jpg"))); // NOI18N
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 450));
@@ -174,6 +175,27 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    class TimerListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            cont++;
+            barra.setValue(cont);
+            if (cont == 100) {
+                tiempo.stop();
+
+                a.setDestinatario(txtemail.getText());
+                a.setMensaje(txtmensaje.getText());
+                ca.enviar(a);
+                ca.cambiarestado(idhijo);
+
+            }
+        }
+
+    }
+
+    public void activar() {
+        tiempo.start();
+    }
     private void combo_hijosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_hijosItemStateChanged
         if (combo_hijos.getSelectedIndex() > 0) {
             try {
@@ -205,10 +227,11 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_hijosItemStateChanged
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        a.setDestinatario(txtemail.getText());
-        a.setMensaje(txtmensaje.getText());
-        ca.enviar(a);
-        ca.cambiarestado(idhijo);
+        cont = -1;
+        barra.setValue(0);
+        barra.setStringPainted(true);
+        tiempo = new Timer(TWO_SECOND, new TimerListener());
+        activar();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void btnmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuActionPerformed
@@ -260,6 +283,7 @@ public class GUI_EnvioAviso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar barra;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnmenu;
     private javax.swing.JButton btnsalir;
